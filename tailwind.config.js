@@ -199,7 +199,7 @@ module.exports = {
                "&::after": {
                   content: '""',
                   position: "absolute",
-                  insetInlineStart: "-1.5rem",
+                  insetInlineStart: "-1.8rem",
                   top: "50%",
                   aspectRatio: "1",
                   width: "2.4rem", // Converted 14 to rem as Tailwind uses rem units
