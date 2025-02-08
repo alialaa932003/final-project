@@ -37,19 +37,14 @@ const Sidebar = ({ className }: { className?: string }) => {
       {
          name: t("dashboard"),
          icon: <LuLayoutDashboard />,
-         to: `/dashboard`,
+         to: `/t`,
          type: "single",
       },
       {
          name: t("dashboard"),
          icon: <LuLayoutDashboard />,
-         type: "multi",
-         items: [
-            {
-               name: t("dashboard"),
-               to: "/dashboard",
-            },
-         ],
+         to: `/dashboard`,
+         type: "single",
       },
    ];
    const { pathname } = useLocation();
@@ -100,7 +95,7 @@ const Sidebar = ({ className }: { className?: string }) => {
                            key={index}
                         >
                            <AccordionTrigger
-                              className={`px-6 py-0 text-sm capitalize text-primary-200 hover:text-white 2xl:text-base [&.active]:text-white [&>svg]:text-inherit [&[data-state=open]]:text-white ${
+                              className={`item-active-circle px-6 py-0 text-sm capitalize text-white hover:opacity-60 2xl:text-base [&.active]:text-white [&>svg]:text-inherit [&[data-state=open]]:text-white ${
                                  link?.items?.some((route) =>
                                     pathname.includes(route.to),
                                  )
@@ -123,7 +118,7 @@ const Sidebar = ({ className }: { className?: string }) => {
                                           key={index}
                                           to={item.to}
                                           className={
-                                             "relative rounded-2xl px-2 py-4 text-sm text-white before:bg-gray-400 [&.active]:bg-primary-700"
+                                             "relative rounded-2xl px-2 py-4 text-sm text-white before:bg-gray-400 hover:opacity-60 [&.active]:bg-primary-700"
                                           }
                                        >
                                           <div className="relative ms-5 ps-5 before:absolute before:-start-[4px] before:top-1/2 before:size-2.5 before:-translate-y-1/2 before:rounded-full before:bg-[#06ACEC]">
@@ -141,7 +136,7 @@ const Sidebar = ({ className }: { className?: string }) => {
                         <NavLink
                            key={index}
                            to={link.to || ""}
-                           className={`px-6 py-5 text-sm text-primary-200 transition-all hover:text-white 2xl:text-base [&.active]:bg-primary-700 [&.active]:text-white`}
+                           className={`item-active-circle px-6 py-5 text-sm text-white transition-all hover:opacity-60 2xl:text-base [&.active]:bg-primary-700 [&.active]:text-white`}
                         >
                            <div className="flex items-center gap-2">
                               <span className="text-tertiary-500 text-[1.5em]">

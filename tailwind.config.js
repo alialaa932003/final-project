@@ -193,7 +193,26 @@ module.exports = {
       },
 
       function ({ addUtilities }) {
-         addUtilities({});
+         addUtilities({
+            ".item-active-circle": {
+               position: "relative",
+               "&::after": {
+                  content: '""',
+                  position: "absolute",
+                  insetInlineStart: "-1.5rem",
+                  top: "50%",
+                  aspectRatio: "1",
+                  width: "2.4rem", // Converted 14 to rem as Tailwind uses rem units
+                  transform: "translateY(-50%)",
+                  borderRadius: "9999px", // Full rounding
+                  backgroundColor: "white",
+                  opacity: "0",
+               },
+               "&.active::after": {
+                  opacity: "1",
+               },
+            },
+         });
       },
    ],
 };
