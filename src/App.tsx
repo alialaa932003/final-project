@@ -9,7 +9,7 @@ import i18n from "./i18n";
 import { PageDeitalsProvider } from "./context/PageDeitalsContext";
 import Unauthorized from "@/pages/Unauthorized";
 import LanguageWrapper from "@/components/LanguageWrapper";
-import Login from "@/pages/auth/login";
+import Login from "@/pages/auth/Login";
 import AppLayout from "./components/layouts/AppLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AuthLayout from "./components/layouts/AuthLayout";
@@ -34,13 +34,12 @@ function App() {
                <QueryClientProvider client={queryClient}>
                   <ReactQueryDevtools initialIsOpen={false} />
                   <Routes>
-                     
                      <Route path="/" element={<Navigate to={"/dashboard"} />} />
                      <Route
                         element={
-                           <LanguageWrapper>
-                              <AppLayout />
-                           </LanguageWrapper>
+                           // <LanguageWrapper>
+                           <AppLayout />
+                           // </LanguageWrapper>
                         }
                      >
                         <Route element={<AuthLayout />}>
@@ -55,11 +54,7 @@ function App() {
                               }
                            >
                               <Route path="/dashboard">
-                                 <Route
-                                    index
-                                    element={<Dashboard />}
-                                 />
-                              
+                                 <Route index element={<Dashboard />} />
                               </Route>
                            </Route>
                         </Route>

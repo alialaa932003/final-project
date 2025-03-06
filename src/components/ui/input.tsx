@@ -10,7 +10,7 @@ export interface InputProps
 }
 
 const baseInputStyles =
-   "bg-primary-50/80 z-0 flex w-full rounded-2xl px-3 py-3 font-light text-gray-900 ring-1 ring-transparent file:border-0 file:bg-transparent placeholder:text-gray-200 focus-visible:outline-none focus-visible:ring-primary-500 focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 ";
+   "bg-primary-50 z-0 flex w-full rounded-2xl px-5 py-3 h-14 font-light text-gray-900 ring-1 ring-transparent file:border-0 file:bg-transparent placeholder:text-gray-200 focus-visible:outline-none focus-visible:ring-primary-500 focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 ";
 
 const iconButtonStyles =
    "absolute bottom-0 start-3 top-0 z-10 flex items-center justify-center text-[1.4em] text-primary-200";
@@ -60,7 +60,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
                      !isPassword &&
                         !iconAction &&
                         "pointer-events-none cursor-default",
-                     iconPosition === "end" ? "end-3 start-auto" : "start-3",
+                     iconPosition === "end" ? "end-5 start-auto" : "start-5",
                   )}
                   onClick={handleIconClick}
                >

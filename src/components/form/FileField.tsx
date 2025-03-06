@@ -6,7 +6,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
    label?: string;
    name: string;
 }
-const FormFileInput = ({ name, label, placeholder, disabled }: Props) => {
+const FileField = ({ name, label, placeholder, disabled }: Props) => {
    return (
       <Field name={name}>
          {({ field }: any) => (
@@ -45,4 +45,4 @@ const FormFileInput = ({ name, label, placeholder, disabled }: Props) => {
    );
 };
 
-export default FormFileInput;
+export default FileField;

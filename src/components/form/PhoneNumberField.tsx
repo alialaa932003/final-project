@@ -3,11 +3,11 @@ import React from "react";
 import { CiMobile2 } from "react-icons/ci";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
-interface PhoneNumberFormProps {
+interface PhoneNumberFieldProps {
    name: string;
    placeholder: string;
 }
-const PhoneNumberForm = ({ name, placeholder }: PhoneNumberFormProps) => {
+const PhoneNumberField = ({ name, placeholder }: PhoneNumberFieldProps) => {
    return (
       <Field name={name}>
          {({ field, form }: any) => (
@@ -37,4 +37,4 @@ const PhoneNumberForm = ({ name, placeholder }: PhoneNumberFormProps) => {
    );
 };
 
-export default PhoneNumberForm;
+export default PhoneNumberField;

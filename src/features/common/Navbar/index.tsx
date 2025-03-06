@@ -1,4 +1,4 @@
-import FormInput from "@/components/form/FormInput";
+import FormInput from "@/components/form/InputField";
 import MobileGlobalSearch from "@/components/MobileGlobalSearch";
 import { usePageDeitals } from "@/context/PageDeitalsContext";
 import { Form, Formik } from "formik";
@@ -25,7 +25,7 @@ const Navbar = ({
                <span className="text-2xl font-bold 2xl:text-4xl">
                   {pageName}
                </span>
-               <div className="hidden flex-1 xl:block">
+               {/* <div className="hidden flex-1 xl:block">
                   <Formik
                      enableReinitialize
                      initialValues={{ q: searchParams.get("q") || "" }}
@@ -49,7 +49,7 @@ const Navbar = ({
                         </Form>
                      )}
                   </Formik>
-               </div>
+               </div> */}
             </div>
 
             <div className="relative flex flex-auto flex-row-reverse items-center justify-end gap-3 md:gap-6 lg:flex-row">
@@ -63,7 +63,7 @@ const Navbar = ({
                   </div>
                </button>
 
-               <ChangeLanguageBtn />
+               {/* <ChangeLanguageBtn /> */}
                <MobileGlobalSearch className="block lg:block xl:hidden" />
             </div>
          </div>

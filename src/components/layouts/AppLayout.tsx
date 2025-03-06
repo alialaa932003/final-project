@@ -1,7 +1,7 @@
 import React from "react";
 import Loading from "../Loading";
 import { Outlet } from "react-router-dom";
-import { useMe } from "@/features/Auth/Login/useMe";
+import { useMe } from "@/features/Auth/useMe";
 import { useTranslation } from "react-i18next";
 
 const AppLayout = () => {

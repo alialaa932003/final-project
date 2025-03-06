@@ -2,7 +2,8 @@ import React from "react";
 import { ErrorMessage, Field, FieldProps } from "formik";
 import { Input } from "../ui/input";
 
-interface FormInputProps {
+interface InputFieldProps {
+   id?: string;
    label?: string;
    name: string;
    placeholder?: string;
@@ -15,7 +16,8 @@ interface FormInputProps {
    iconPosition?: "start" | "end";
 }
 
-const FormInput: React.FC<FormInputProps> = ({
+const InputField: React.FC<InputFieldProps> = ({
+   id,
    label,
    name,
    placeholder,
@@ -31,12 +33,13 @@ const FormInput: React.FC<FormInputProps> = ({
       {({ field }: FieldProps) => (
          <div className="w-full">
             {label && (
-               <label className="mb-3 block font-medium text-gray-600">
+               <label className="mb-2 block font-medium text-gray-600">
                   {label}
                </label>
             )}
             <Input
                {...field}
+               id={id}
                type={type}
                placeholder={placeholder}
                icon={icon}
@@ -56,4 +59,4 @@ const FormInput: React.FC<FormInputProps> = ({
    </Field>
 );
 
-export default FormInput;
+export default InputField;

@@ -13,41 +13,47 @@ interface Props {
    placeholder?: string;
    multiple?: boolean;
    isDisabled?: boolean;
+   labelKey?: string;
    valueKey?: string;
    optionValue?: string;
    optionLabel?: string;
+   onChangeSelect?: (value: any) => void;
 }
 
-const FormSelectSearch = ({
+const SelectSearchField = ({
    label,
-   options,
+   options = [],
    name,
    placeholder,
    multiple = false,
    isDisabled = false,
+   labelKey = "label",
    valueKey = "value",
    optionValue = "value",
    optionLabel = "label",
+   onChangeSelect,
 }: Props) => {
    const transformedOptions = useMemo(
       () =>
          options.map((option) => ({
             label: option[optionLabel],
             value: option[optionValue],
-            originalData: option,
+            originalData: {
+               [valueKey]: option[optionValue],
+               [labelKey]: option[optionLabel],
+            },
          })),
       [options, optionLabel, optionValue],
    );
 
    const compareValues = (fieldValue: any, optionValue: any) => {
       if (!fieldValue) return false;
-      return fieldValue[valueKey] === optionValue || fieldValue === optionValue;
+      return fieldValue[valueKey] == optionValue || fieldValue == optionValue;
    };
 
    return (
       <Field name={name}>
          {({ field }: { field: any }) => {
-            console.log(field.value);
             const getCurrentValue = () => {
                if (!field.value) return multiple ? [] : null;
 
@@ -65,6 +71,8 @@ const FormSelectSearch = ({
             };
 
             const handleChange = (value: any) => {
+               onChangeSelect && onChangeSelect(value?.originalData);
+
                if (multiple) {
                   const selectedValues =
                      value?.map((item: any) => ({
@@ -117,4 +125,4 @@ const FormSelectSearch = ({
    );
 };
 
-export default FormSelectSearch;
+export default SelectSearchField;
