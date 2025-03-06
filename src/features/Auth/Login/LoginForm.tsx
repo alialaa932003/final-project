@@ -8,7 +8,7 @@ import { Formik, Form } from "formik";
 import InputField from "@/components/form/InputField";
 const LoginForm = () => {
    return (
-      <section className="flex w-full max-w-[40rem] flex-col items-center justify-center gap-12 rounded-[1.5rem] bg-gray-0 px-12 py-12 lg:max-w-none lg:py-[15%]">
+      <section className="flex w-full max-w-[40rem] flex-col items-center justify-center gap-12 rounded-[1.5rem] bg-gray-0 px-5 py-12 md:px-8 lg:max-w-none lg:py-[15%] xl:px-12">
          <img
             className="absolute end-0 top-0 hidden w-full max-w-[6rem] lg:block"
             src="/images/auth/dots.svg"
