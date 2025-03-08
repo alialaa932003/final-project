@@ -14,6 +14,7 @@ import AppLayout from "./components/layouts/AppLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AuthLayout from "./components/layouts/AuthLayout";
 import Dashboard from "./pages/Dashboard";
+import Doctors from "./pages/staff-management/doctors";
 
 function App() {
    const queryClient = new QueryClient({
@@ -55,6 +56,13 @@ function App() {
                            >
                               <Route path="/dashboard">
                                  <Route index element={<Dashboard />} />
+                              </Route>
+                              <Route path="/staff-management">
+                                 <Route
+                                    index
+                                    path="doctors"
+                                    element={<Doctors />}
+                                 />
                               </Route>
                            </Route>
                         </Route>
