@@ -14,6 +14,8 @@ import FullPageLoading from "@/components/FullPageLoading";
 import { useTranslation } from "react-i18next";
 import { useLogout } from "../Auth/useLogout";
 import { cn } from "@/lib/utils";
+import { IoIosPeople } from "react-icons/io";
+import { FaPeopleGroup } from "react-icons/fa6";
 
 const Sidebar = ({ className }: { className?: string }) => {
    const { t } = useTranslation("global");
@@ -35,15 +37,26 @@ const Sidebar = ({ className }: { className?: string }) => {
          ],
       },
       {
-         name: t("dashboard"),
-         icon: <LuLayoutDashboard />,
-         to: `/t`,
-         type: "single",
+         name: t("staff-management"),
+         icon: <IoIosPeople />,
+         type: "multi",
+         items: [
+            {
+               name: t("doctors"),
+               to: "/staff-management/doctors",
+            },
+         ],
       },
       {
          name: t("dashboard"),
          icon: <LuLayoutDashboard />,
          to: `/dashboard`,
+         type: "single",
+      },
+      {
+         name: t("doctors"),
+         icon: <FaPeopleGroup />,
+         to: "/staff-management/doctors",
          type: "single",
       },
    ];
@@ -95,7 +108,7 @@ const Sidebar = ({ className }: { className?: string }) => {
                            key={index}
                         >
                            <AccordionTrigger
-                              className={`item-active-circle px-6 py-0 text-sm capitalize text-white hover:opacity-60 2xl:text-base [&.active]:text-white [&>svg]:text-inherit [&[data-state=open]]:text-white ${
+                              className={`px-6 py-0 text-sm capitalize text-white item-active-circle hover:opacity-60 2xl:text-base [&.active]:text-white [&>svg]:text-inherit [&[data-state=open]]:text-white ${
                                  link?.items?.some((route) =>
                                     pathname.includes(route.to),
                                  )
@@ -104,7 +117,7 @@ const Sidebar = ({ className }: { className?: string }) => {
                               } `}
                            >
                               <div className="flex items-center gap-2">
-                                 <span className="text-tertiary-500 text-[1.5em]">
+                                 <span className="text-[1.5em] text-tertiary-500">
                                     {link.icon}
                                  </span>
                                  {link.name}
@@ -136,10 +149,10 @@ const Sidebar = ({ className }: { className?: string }) => {
                         <NavLink
                            key={index}
                            to={link.to || ""}
-                           className={`item-active-circle px-6 py-5 text-sm text-white transition-all hover:opacity-60 2xl:text-base [&.active]:bg-primary-700 [&.active]:text-white`}
+                           className={`px-6 py-5 text-sm text-white transition-all item-active-circle hover:opacity-60 2xl:text-base [&.active]:bg-primary-700 [&.active]:text-white`}
                         >
                            <div className="flex items-center gap-2">
-                              <span className="text-tertiary-500 text-[1.5em]">
+                              <span className="text-[1.5em] text-tertiary-500">
                                  {link.icon}
                               </span>
                               {link.name}
@@ -158,7 +171,7 @@ const Sidebar = ({ className }: { className?: string }) => {
                   logout({});
                }}
             >
-               <span className="text-tertiary-500 text-[1.4em]">
+               <span className="text-[1.4em] text-tertiary-500">
                   <MdLogout />
                </span>
                {t("sign-out")}
