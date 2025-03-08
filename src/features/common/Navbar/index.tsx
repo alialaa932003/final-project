@@ -1,6 +1,6 @@
 import FormInput from "@/components/form/InputField";
 import MobileGlobalSearch from "@/components/MobileGlobalSearch";
-import { usePageDeitals } from "@/context/PageDeitalsContext";
+import { usePageDetails } from "@/context/PageDetailsProvider";
 import { Form, Formik } from "formik";
 import { IoIosSearch } from "react-icons/io";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -15,7 +15,7 @@ const Navbar = ({
    setOpenRespomsiveSidebar: (open: boolean) => void;
 }) => {
    const { t } = useTranslation("global");
-   const { pageName } = usePageDeitals();
+   const { pageName } = usePageDetails();
    const [searchParams, setSearchParams] = useSearchParams();
 
    return (

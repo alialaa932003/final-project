@@ -1,4 +1,4 @@
-import { usePageDeitals } from "@/context/PageDeitalsContext";
+import { usePageDetails } from "@/context/PageDetailsProvider";
 import { cn } from "@/lib/utils";
 import React, { useEffect } from "react";
 interface PageLayoutProps {
@@ -12,7 +12,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
    className,
    pageName,
 }) => {
-   const { setPageName } = usePageDeitals();
+   const { setPageName } = usePageDetails();
 
    useEffect(() => {
       setPageName(pageName || "");

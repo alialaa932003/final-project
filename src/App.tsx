@@ -6,10 +6,10 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import DashboardLayout from "./components/layouts/DashboardLayout";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./i18n";
-import { PageDeitalsProvider } from "./context/PageDeitalsContext";
+import { PageDetailsProvider } from "./context/PageDetailsProvider";
 import Unauthorized from "@/pages/Unauthorized";
-import LanguageWrapper from "@/components/LanguageWrapper";
-import Login from "@/pages/auth/Login";
+// import LanguageWrapper from "@/components/LanguageWrapper";
+import Login from "@/pages/auth/login";
 import AppLayout from "./components/layouts/AppLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AuthLayout from "./components/layouts/AuthLayout";
@@ -29,7 +29,7 @@ function App() {
    return (
       <>
          <I18nextProvider i18n={i18n}>
-            <PageDeitalsProvider>
+            <PageDetailsProvider>
                {/* <DarkModeProvider> */}
                <QueryClientProvider client={queryClient}>
                   <ReactQueryDevtools initialIsOpen={false} />
@@ -69,7 +69,7 @@ function App() {
                   <ToastContainer theme="colored" />
                </QueryClientProvider>
                {/* </DarkModeProvider> */}
-            </PageDeitalsProvider>
+            </PageDetailsProvider>
          </I18nextProvider>
       </>
    );
