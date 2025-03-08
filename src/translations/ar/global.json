@@ -1,1 +1,9 @@
-{}
+{
+   "staff-management": "إدارة الموظفين",
+   "doctors": "الأطباء",
+   "doctor-list": "قائمة الأطباء",
+   "add-doctor": "إضافة طبيب",
+   "search-here": "ابحث عن هنا...",
+   "profile": "الملف الشخصي",
+   "appointment": "موعد"
+}
