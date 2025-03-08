@@ -52,7 +52,7 @@ export default function SearchInput({
             className="absolute end-2 top-1/2 z-10 -translate-y-1/2 rounded-2xl sm:end-6"
             size="icon"
          >
-            <IoIosSearch className="text-lg sm:text-2xl" />
+            <IoIosSearch className="size-6" />
          </Button>
       </form>
    );
