@@ -15,6 +15,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import AuthLayout from "./components/layouts/AuthLayout";
 import Dashboard from "./pages/Dashboard";
 import Doctors from "./pages/staff-management/doctors";
+import AllAppointments from "./pages/appointments/AllAppointments";
 
 function App() {
    const queryClient = new QueryClient({
@@ -63,6 +64,9 @@ function App() {
                                     path="doctors"
                                     element={<Doctors />}
                                  />
+                              </Route>
+                              <Route path="/appointments">
+                                 <Route index element={<AllAppointments />} />
                               </Route>
                            </Route>
                         </Route>

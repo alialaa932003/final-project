@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-   "inline-flex gap-4 items-center justify-center rounded-xl whitespace-nowrap  text-sm font-medium transition-colors [&_svg]:text-[1.2em]  focus-visible:outline-none  disabled:pointer-events-none disabled:opacity-50   border border-transparent",
+   "inline-flex gap-4 items-center justify-center rounded-xl whitespace-nowrap  text-sm font-medium transition-colors  focus-visible:outline-none  disabled:pointer-events-none disabled:opacity-50   border-2 border-transparent",
    {
       variants: {
          variant: {
@@ -22,14 +22,14 @@ const buttonVariants = cva(
             destructive:
                "bg-[#F13B3B] text-neutral-50 shadow-sm hover:bg-red-900/90  dark:text-neutral-50 dark:hover:bg-red-900/90 ",
             outline:
-               "border border-primary-500 bg-primary-50 text-primary-500 hover:bg-primary-500 hover:text-white dark:bg-transparent dark:border-white dark:text-white dark:hover:bg-primary-500 dark:hover:border-primary-500",
+               "border-2 border-primary-500  text-primary-500 hover:bg-primary-500 hover:text-white dark:bg-transparent dark:border-white dark:text-white dark:hover:bg-primary-500 dark:hover:border-primary-500",
 
             ghost: "hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-50",
             link: "text-neutral-900 underline-offset-4 hover:underline dark:text-neutral-50",
          },
          size: {
-            lg: "h-16 py-4 text-lg  px-8",
-            default: "h-14 px-4 py-4 2xl:px-6",
+            lg: "h-16 py-3.5 text-lg  px-7",
+            default: "h-14 px-4 py-3.5 2xl:px-4",
             sm: "h-9 px-4 text-sm",
             icon: "size-11",
          },

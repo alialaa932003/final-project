@@ -4,14 +4,14 @@ import Loading from "./Loading";
 interface WithLoadingAndErrorProps {
    isLoading: boolean;
    errorText?: string;
-   error?: boolean;
+   hasError?: boolean;
    children: React.ReactNode;
 }
 const WithLoadingAndError = ({
    children,
    isLoading,
    errorText,
-   error,
+   hasError,
 }: WithLoadingAndErrorProps) => {
    return (
       <div>
@@ -19,7 +19,7 @@ const WithLoadingAndError = ({
             <Loading />
          ) : (
             <>
-               {error ? (
+               {hasError ? (
                   <p className="my-10 text-center text-xl font-medium text-red-500">
                      {errorText}
                   </p>

@@ -6,7 +6,8 @@ import { useTranslation } from "react-i18next";
 
 const AppLayout = () => {
    const { i18n } = useTranslation();
-   const { isPending } = useMe(i18n.language);
+   // const { isPending } = useMe(i18n.language);
+   const isPending = false;
    if (isPending)
       return (
          <div className="flex h-screen w-full items-center justify-center">

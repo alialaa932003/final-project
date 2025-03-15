@@ -1,9 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-input:-internal-autofill-selected {
-   background: red !important;
-}
 
 :root {
    --gray-0: 255, 255, 255;
@@ -66,7 +63,7 @@ a {
    display: inline-block;
 }
 form {
-   padding: 0.5rem;
+   padding: 0.25rem;
 }
 
 body {
@@ -93,7 +90,7 @@ div[role="dialog"] .flatpickr-calendar {
    top: auto !important;
 }
 ::-webkit-scrollbar {
-   @apply h-4 w-4;
+   @apply h-2.5 w-2.5;
 }
 
 ::-webkit-scrollbar-track {
@@ -112,41 +109,4 @@ div[role="dialog"] .flatpickr-calendar {
 }
 svg {
    min-width: fit-content;
-}
-.dark input[type="time"]::-webkit-calendar-picker-indicator {
-   background: url(/images/darkClock.svg) no-repeat;
-}
-.dark input[type="date"]::-webkit-calendar-picker-indicator {
-   background: url(/images/darkCalendar.svg) no-repeat;
-}
-
-/*** schedule global styles *****/
-.fc-h-event {
-   border: none;
-   background: none;
-}
-.fc-daygrid-day-bottom {
-   display: none;
-}
-
-.fc-daygrid-day-bg {
-   display: none;
-}
-.fc-daygrid-day-frame {
-   display: flex;
-   flex-direction: column;
-   justify-content: space-between;
-}
-.fc-daygrid-event-harness {
-   height: 100%;
-}
-.fc-daygrid-day-events::after,
-.fc-daygrid-day-events::before {
-   display: none;
-}
-.fc-daygrid-day-events {
-   height: 100%;
-   display: grid;
-   flex: 1;
-   margin: 0.5rem;
 }
