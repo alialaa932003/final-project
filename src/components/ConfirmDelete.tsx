@@ -29,19 +29,19 @@ const ConfirmDelete = ({
    const { t } = useTranslation("global");
    return (
       <Dialog open={openDelete} onOpenChange={setOpenDelete}>
-         <DialogContent className="max-w-[70rem]">
+         <DialogContent className="max-w-[50rem]">
             <DialogHeader>
                <DialogTitle className="text-start text-2xl text-gray-800">
                   {title}
                </DialogTitle>
             </DialogHeader>
             <p className="text-lg text-red-500">
-               {t("delete-confirmation-message")} "{name}"?
+               Are you sure you want to delete "{name}"?
             </p>
             <DialogFooter className="gap-6">
                <DialogClose asChild>
                   <Button variant={"outline"}>
-                     {t("cancel")}
+                     Cancel
                      <FaXmark />
                   </Button>
                </DialogClose>
@@ -52,7 +52,7 @@ const ConfirmDelete = ({
                   type="submit"
                   disabled={isPending}
                >
-                  {isPending ? `${t("deleting")}...` : t("delete")}
+                  {isPending ? `${"Deleting"}...` : "Delete"}
                   <FaRegSave />
                </Button>
             </DialogFooter>

@@ -179,11 +179,6 @@ module.exports = {
             "accordion-up": "accordion-up 0.2s ease-out",
             "bar-loading": "bar-loading .7s linear infinite",
          },
-         borderRadius: {
-            lg: "var(--radius)",
-            md: "calc(var(--radius) - 2px)",
-            sm: "calc(var(--radius) - 4px)",
-         },
       },
    },
 

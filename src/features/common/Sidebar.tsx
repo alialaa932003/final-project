@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { LuLayoutDashboard } from "react-icons/lu";
+import { LuCalendarRange, LuLayoutDashboard } from "react-icons/lu";
 import { MdLogout } from "react-icons/md";
 
 import {
@@ -16,29 +16,27 @@ import { useLogout } from "../Auth/useLogout";
 import { cn } from "@/lib/utils";
 import { IoIosPeople } from "react-icons/io";
 import { FaPeopleGroup } from "react-icons/fa6";
+import { LucideUsersRound } from "lucide-react";
 
 const Sidebar = ({ className }: { className?: string }) => {
    const { t } = useTranslation("global");
    const { logout, isPending } = useLogout();
    const links = [
       {
-         name: t("dashboard"),
+         name: "Dashboard",
          icon: <LuLayoutDashboard />,
-         type: "multi",
-         items: [
-            {
-               name: t("dashboard"),
-               to: "/dashboard",
-            },
-            {
-               name: t("test"),
-               to: "/test",
-            },
-         ],
+         to: `/dashboard`,
+         type: "single",
       },
       {
-         name: t("staff-management"),
-         icon: <IoIosPeople />,
+         name: "Appointments",
+         icon: <LuCalendarRange />,
+         to: `/appointments`,
+         type: "single",
+      },
+      {
+         name: "Staff management",
+         icon: <LucideUsersRound />,
          type: "multi",
          items: [
             {
@@ -46,18 +44,6 @@ const Sidebar = ({ className }: { className?: string }) => {
                to: "/staff-management/doctors",
             },
          ],
-      },
-      {
-         name: t("dashboard"),
-         icon: <LuLayoutDashboard />,
-         to: `/dashboard`,
-         type: "single",
-      },
-      {
-         name: t("doctors"),
-         icon: <FaPeopleGroup />,
-         to: "/staff-management/doctors",
-         type: "single",
       },
    ];
    const { pathname } = useLocation();

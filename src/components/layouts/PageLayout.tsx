@@ -18,7 +18,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
       setPageName(pageName || "");
    }, [setPageName]);
    return (
-      <div className={cn("h-full px-7 py-7 2xl:px-10", className)}>
+      <div className={cn("h-full px-5 py-5 2xl:px-7", className)}>
          {children}
       </div>
    );

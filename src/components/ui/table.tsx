@@ -9,7 +9,7 @@ const Table = React.forwardRef<
    HTMLTableElement,
    React.HTMLAttributes<HTMLTableElement>
 >(({ className, ...props }, ref) => (
-   <div className="relative flex w-full flex-1 animate-fade-in overflow-auto rounded-xl border border-gray-50 p-4">
+   <div className="relative flex w-full flex-1 animate-fade-in overflow-auto rounded-xl border border-gray-50 p-2.5">
       <table
          ref={ref}
          className={cn(
@@ -26,11 +26,7 @@ const TableHeader = React.forwardRef<
    HTMLTableSectionElement,
    React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
-   <thead
-      ref={ref}
-      className={cn("sticky -top-1 z-10", className)}
-      {...props}
-   />
+   <thead ref={ref} className={cn("", className)} {...props} />
 ));
 TableHeader.displayName = "TableHeader";
 
@@ -68,7 +64,7 @@ const TableRow = React.forwardRef<
    <tr
       ref={ref}
       className={cn(
-         "border-primary-500 bg-gray-0 transition-colors even:bg-[#f5f5f7] data-[state=selected]:bg-primary-500/5 dark:even:bg-[#5F666A] dark:hover:bg-neutral-800/50 dark:data-[state=selected]:bg-neutral-800",
+         "border-primary-500 bg-gray-0 transition-colors even:bg-[#eff6ff] data-[state=selected]:bg-primary-500/5 dark:even:bg-[#5F666A] dark:hover:bg-neutral-800/50 dark:data-[state=selected]:bg-neutral-800",
          className,
       )}
       {...props}
@@ -86,7 +82,7 @@ const TableHead = React.forwardRef<HTMLTableCellElement, TableHeadProps>(
          <th
             ref={ref}
             className={cn(
-               `h-20 border border-primary-100 bg-primary-50 px-6 text-start align-middle font-medium text-[#245469] dark:border-gray-300 [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] ${sortBy ? "cursor-pointer" : ""}`,
+               `h-14 border border-primary-100 bg-primary-50 px-4 text-start align-middle font-medium text-[#245469] dark:border-gray-300 [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px] ${sortBy ? "cursor-pointer" : ""}`,
                className,
             )}
             onClick={() => {
@@ -105,7 +101,7 @@ const TableHead = React.forwardRef<HTMLTableCellElement, TableHeadProps>(
             }}
             {...props}
          >
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2.5">
                {props.children}
                {sortBy && <BiSort className="text-xl" />}
             </div>
@@ -122,7 +118,7 @@ const TableCell = React.forwardRef<
    <td
       ref={ref}
       className={cn(
-         "border border-gray-50 p-6 align-top first:border-s-0 last:border-e-0 [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+         "border border-gray-50 p-4 align-top first:border-s-0 last:border-e-0 [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
          className,
       )}
       {...props}

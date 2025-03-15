@@ -13,7 +13,7 @@ const DashboardLayout = () => {
 
    return (
       <>
-         <div className="grid h-screen animate-fade-in grid-rows-[auto_1fr_30px] bg-gray-20 lg:grid-cols-[300px_1fr] lg:grid-rows-[auto_1fr_0rem]">
+         <div className="grid h-screen animate-fade-in grid-rows-[auto_1fr] bg-gray-20 lg:grid-cols-[270px_1fr] lg:grid-rows-[auto_1fr_0rem] 2xl:grid-cols-[300px_1fr]">
             <Navbar
                openResponsiveSidebar={openResponsiveSidebar}
                setOpenRespomsiveSidebar={setOpenRespomsiveSidebar}
