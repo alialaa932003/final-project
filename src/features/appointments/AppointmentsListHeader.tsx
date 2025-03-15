@@ -4,32 +4,32 @@ import { Button } from "@/components/ui/button";
 import Filter from "@/assets/icons/Filter";
 import { PiExport } from "react-icons/pi";
 import { FiPlus } from "react-icons/fi";
+import MainHeader from "@/components/MainHeader";
 
 const AppointmentsListHeader = () => {
    return (
-      <div className="space-y-5 rounded-2xl bg-gray-0 p-5 shadow-md">
-         <div className="flex flex-wrap items-center justify-center gap-8 max-md:flex-col max-md:text-center">
-            <div className="flex-1">
-               <h2 className="mb-2 text-2xl font-bold">Appointments List</h2>
-               <p className="text-sm text-gray-200">
-                  Here You will find the list of appointments{" "}
-               </p>
-            </div>
-            <div className="flex flex-wrap items-center gap-4">
+      <MainHeader>
+         <MainHeader.TopSection>
+            <MainHeader.Title
+               title="Appointments List"
+               description="Here You will find the list of appointments"
+            />
+            <MainHeader.Actions>
                <Button
-                  variant={"outline"}
+                  variant="outline"
                   className="flex w-44 items-center gap-2"
                >
                   <PiExport className="text-2xl" />
                   Export
-               </Button>{" "}
+               </Button>
                <Button className="flex items-center gap-2">
                   <FiPlus className="text-2xl" />
                   Add Appointments
                </Button>
-            </div>
-         </div>
-         <div className="flex flex-wrap items-center gap-[30px]">
+            </MainHeader.Actions>
+         </MainHeader.TopSection>
+
+         <MainHeader.Filters>
             <SearchInput searchKey="search" />
             <Button
                variant="ghost"
@@ -37,8 +37,8 @@ const AppointmentsListHeader = () => {
             >
                <Filter /> Filter
             </Button>
-         </div>
-      </div>
+         </MainHeader.Filters>
+      </MainHeader>
    );
 };
 
