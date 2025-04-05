@@ -1,6 +1,5 @@
 export const supportedLanguages = ["ar", "en"];
 
-export const API_URL = "https://example.com/api/";
-// export const API_URL = "http://192.168.1.88:80/api/";
+export const API_URL = "http://164.92.241.46/";
 export const LIMIT = 20;
 export const DEFAULT_LOCALE = "en";
