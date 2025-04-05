@@ -1,6 +1,13 @@
+import { UserResponse } from "@/types/auth";
+import { useQueryClient } from "@tanstack/react-query";
 import React from "react";
 
 const UserInfo = () => {
+   const queryClient = useQueryClient();
+   const data = queryClient.getQueryData<{ data: UserResponse }>([
+      "current-user",
+   ]);
+   const user = data?.data;
    return (
       <div className="flex items-center gap-3">
          <span className="h-12 w-12 overflow-hidden rounded-full">
@@ -11,9 +18,11 @@ const UserInfo = () => {
             />
          </span>
          <div>
-            <h3 className="font-medium text-gray-500">Ali Alaa Eldin</h3>
+            <h3 className="font-medium text-gray-500">
+               {user?.firstName} {user?.lastName}
+            </h3>
             <span className="rounded-full bg-secondary-500 px-3 py-1 text-[.7rem] text-white">
-               Super admin
+               {user?.role}
             </span>
          </div>
       </div>

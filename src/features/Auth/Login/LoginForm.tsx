@@ -6,9 +6,21 @@ import { Link } from "react-router-dom";
 import { FiLogIn } from "react-icons/fi";
 import { Formik, Form } from "formik";
 import InputField from "@/components/form/InputField";
+import { useLogin } from "./useLogin";
+import FullPageLoading from "@/components/FullPageLoading";
+import * as Yup from "yup";
 const LoginForm = () => {
+   const validationSchema = Yup.object().shape({
+      email: Yup.string()
+         .email("Invalid email address")
+         .required("Email is required"),
+      password: Yup.string().required("Password is required"),
+   });
+
+   const { login, isPending } = useLogin();
    return (
       <section className="flex w-full max-w-[40rem] flex-col items-center justify-center gap-12 rounded-[1.5rem] bg-gray-0 px-5 py-12 md:px-8 lg:max-w-none lg:py-[15%] xl:px-12">
+         {isPending && <FullPageLoading />}
          <img
             className="absolute end-0 top-0 hidden w-full max-w-[6rem] lg:block"
             src="/images/auth/dots.svg"
@@ -26,9 +38,13 @@ const LoginForm = () => {
          />
          <Formik
             onSubmit={(values) => {
-               console.log(values);
+               login(values);
             }}
-            initialValues={{}}
+            initialValues={{
+               email: "",
+               password: "",
+            }}
+            validationSchema={validationSchema}
          >
             <Form className="w-full max-w-[80rem] animate-fade-up space-y-12">
                <div className="mx-auto flex w-full max-w-[30rem] items-center justify-center gap-4">

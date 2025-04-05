@@ -14,7 +14,7 @@ export const useLogin = () => {
          localStorage.setItem("token", data.data.token);
          toast.success(data.message);
          await queryClient.invalidateQueries({
-            queryKey: ["current-user", i18n.language],
+            queryKey: ["current-user"],
          });
 
          navigate("/dashboard");

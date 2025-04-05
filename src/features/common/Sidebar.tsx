@@ -11,15 +11,11 @@ import {
 } from "@/components/ui/accordion";
 
 import FullPageLoading from "@/components/FullPageLoading";
-import { useTranslation } from "react-i18next";
 import { useLogout } from "../Auth/useLogout";
 import { cn } from "@/lib/utils";
-import { IoIosPeople } from "react-icons/io";
-import { FaPeopleGroup } from "react-icons/fa6";
 import { LucideUsersRound } from "lucide-react";
 
 const Sidebar = ({ className }: { className?: string }) => {
-   const { t } = useTranslation("global");
    const { logout, isPending } = useLogout();
    const links = [
       {
@@ -40,7 +36,7 @@ const Sidebar = ({ className }: { className?: string }) => {
          type: "multi",
          items: [
             {
-               name: t("doctors"),
+               name: "Doctors",
                to: "/staff-management/doctors",
             },
          ],
@@ -160,7 +156,7 @@ const Sidebar = ({ className }: { className?: string }) => {
                <span className="text-[1.4em] text-tertiary-500">
                   <MdLogout />
                </span>
-               {t("sign-out")}
+               Logout
             </button>
          </div>
       </div>

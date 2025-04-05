@@ -29,7 +29,7 @@ const Navbar = ({
                </button>
                <UserInfo />
             </div>
-            <div className="relative flex flex-auto flex-row-reverse items-center justify-end gap-3 md:gap-6 lg:hidden lg:flex-row">
+            <div className="relative flex flex-row-reverse items-center justify-end gap-3 md:gap-6 lg:hidden lg:flex-row">
                <button
                   onClick={() => {
                      setOpenRespomsiveSidebar(true);
