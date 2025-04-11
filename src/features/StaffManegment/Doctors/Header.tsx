@@ -1,34 +1,38 @@
 import Filter from "@/assets/icons/Filter";
+import MainHeader from "@/components/MainHeader";
 import { Button } from "@/components/ui/button";
 import SearchInput from "@/features/common/SearchInput";
-import { Plus } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { FiPlus } from "react-icons/fi";
 
 function Header() {
-   const { t } = useTranslation("global");
+   const { t } = useTranslation(["global", "staff"]);
 
    return (
-      <header className="flex flex-wrap items-center justify-between gap-6 py-5">
-         <h2 className="text-[2rem] font-semibold text-gray-800">
-            {t("doctor-list")}
-         </h2>
+      <MainHeader>
+         <MainHeader.TopSection>
+            <MainHeader.Title
+               title={t("staff:doctors")}
+               description="Here You will find the list of appointments"
+            />
+            <MainHeader.Actions>
+               <Button className="flex items-center gap-2">
+                  <FiPlus className="text-2xl" />
+                  {t("global:add")} {t("staff:doctor")}
+               </Button>
+            </MainHeader.Actions>
+         </MainHeader.TopSection>
 
-         <div className="flex flex-wrap items-center justify-center gap-[30px] md:justify-end">
+         <MainHeader.Filters>
             <SearchInput searchKey="search" />
             <Button
                variant="ghost"
                className="flex w-full gap-4 border-gray-400 max-sm:w-full sm:max-w-[143px]"
             >
-               <Filter /> Filter
+               <Filter /> {t("global:filter")}
             </Button>
-            <Button
-               variant="outline"
-               className="flex items-center gap-4 max-sm:w-full"
-            >
-               <Plus /> {t("add-doctor")}
-            </Button>
-         </div>
-      </header>
+         </MainHeader.Filters>
+      </MainHeader>
    );
 }
 

@@ -1,35 +1,32 @@
-import DefaultUserImage from "@/../public/images/default-user.png";
+import {
+   Avatar as AvatarContainer,
+   AvatarFallback,
+   AvatarImage,
+} from "@/components/ui/avatar";
+import { cn } from "@/lib/utils";
 
-type AvatarProps = {
-   src?: string;
-   alt?: string;
-   size?: number;
+type Props = {
+   avatar: string;
+   name: string;
    className?: string;
+   fallbackClassName?: string;
 };
 
-function Avatar({ src, alt, size = 80, className }: AvatarProps) {
-   const preparedSize = src ? size : size * 0.8;
+function Avatar({ avatar, name, className, fallbackClassName }: Props) {
+   const fallback = name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase();
+   const avatarName = fallback.length > 2 ? fallback.slice(0, 2) : fallback;
 
    return (
-      <div
-         className="grid aspect-square place-content-center overflow-hidden rounded-full bg-gray-100"
-         style={{
-            width: size + "px",
-            height: size + "px",
-         }}
-      >
-         <img
-            src={src || DefaultUserImage}
-            alt={alt}
-            className="rounded-full object-cover"
-            width={preparedSize}
-            height={preparedSize}
-            style={{
-               width: preparedSize + "px",
-               height: preparedSize + "px",
-            }}
-         />
-      </div>
+      <AvatarContainer className={cn("h-8 w-8 rounded-full", className)}>
+         <AvatarImage src={avatar} alt={name} />
+         <AvatarFallback className={fallbackClassName}>
+            {avatarName}
+         </AvatarFallback>
+      </AvatarContainer>
    );
 }
 
