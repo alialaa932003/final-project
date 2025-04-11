@@ -5,5 +5,7 @@
    "add-doctor": "Add Doctor",
    "search-here": "Search here...",
    "profile": "Profile",
-   "appointment": "Appointment"
+   "appointment": "Appointment",
+   "add": "Add",
+   "filter": "Filter"
 }
