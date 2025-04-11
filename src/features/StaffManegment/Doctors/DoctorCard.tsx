@@ -4,37 +4,35 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { BsThreeDots } from "react-icons/bs";
+import ActionsMenu from "./ActionsMenu";
 
 type DoctorCardProps = {
-   data: {
-      id: number;
-      name: string;
-      position: {
-         name: string;
-         color: "green" | "yellow" | "sky" | "purple";
-      };
-      avatar: string;
-   };
+   data: Doctor;
 };
 
 function DoctorCard({ data }: DoctorCardProps) {
    const { t } = useTranslation("global");
+   const fullName = `${data.first_name} ${data.last_name}`;
 
    return (
       <div className="flex flex-col items-center gap-5 rounded-2xl px-4 py-[30px] shadow-[0px_0px_20px_0px_rgba(12,21,38,0.1)]">
          <div className="flex w-full justify-end">
-            <Button variant="ghost" size="sm">
-               <BsThreeDots className="size-7 text-secondary-500" />
-            </Button>
+            <ActionsMenu id={data.id} />
          </div>
 
          <figure className="flex flex-col items-center">
             <div className="mb-4">
-               <Avatar src={data.avatar} alt={data.name} size={80} />
+               <Avatar
+                  avatar={data.profile_picture}
+                  name={fullName}
+                  className="size-20"
+                  fallbackClassName="text-2xl"
+               />
             </div>
-            <h4 className="mb-2 text-xl font-semibold">{data.name}</h4>
-            <Badge colorTheme={data.position.color}>{data.position.name}</Badge>
+            <h4 className="mb-2 text-xl font-semibold">{fullName}</h4>
+            <Badge colorTheme={data.specialization?.color}>
+               {data.specialization?.name}
+            </Badge>
          </figure>
 
          <div className="flex flex-wrap justify-center gap-4">
