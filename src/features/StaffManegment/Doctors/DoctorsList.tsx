@@ -1,18 +1,42 @@
 import UserAvatar1 from "@/../public/images/user.jpg";
 import UserAvatar2 from "@/../public/images/user-2.png";
 import DoctorCard from "./DoctorCard";
+import { useCustomQuery } from "@/hooks/useCustomQuery";
+import { getAllDoctors } from "@/services/staff/doctors/getAllDoctors";
+import WithLoadingAndError from "@/components/WithLoadingAndError";
+import { useTranslation } from "react-i18next";
+import TableWrapper from "@/components/TableWrapper";
+import { useSearchParams } from "react-router-dom";
 
-type DoctorsListProps = {};
+function DoctorsList() {
+   const { t } = useTranslation("staff");
+   const searchParams = useSearchParams()[0];
+   const page = searchParams.get("page") || "1";
+   const { data, isLoading, isError } = useCustomQuery(
+      ["doctors"],
+      getAllDoctors({ page }),
+   );
 
-function DoctorsList({}: DoctorsListProps) {
    return (
-      <ul className="3xl:grid-cols-4 grid grid-cols-1 gap-[30px] md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
-         {DUMMY_DATA.map((doctor) => (
-            <li key={doctor.id}>
-               <DoctorCard data={doctor} />
-            </li>
-         ))}
-      </ul>
+      <WithLoadingAndError
+         isLoading={isLoading}
+         hasError={isError}
+         errorText={t("no-doctors-found")}
+      >
+         <TableWrapper
+            totalPages={data?.data.meta.last_page}
+            noContainerStyle
+            className="space-y-8"
+         >
+            <ul className="grid grid-cols-1 gap-[30px] md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4">
+               {data?.data.items.map((doctor) => (
+                  <li key={doctor.id}>
+                     <DoctorCard data={doctor} />
+                  </li>
+               ))}
+            </ul>
+         </TableWrapper>
+      </WithLoadingAndError>
    );
 }
 
