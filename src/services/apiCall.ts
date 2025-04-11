@@ -19,23 +19,25 @@ export async function apiCall<
    url: string,
    options?: ApiCallOptions<TBody>,
    isJson: boolean = true,
-): Promise<ApiResponse<TResponse>> {
+): Promise<TResponse> {
    const {
       contentType = "application/json",
       body,
       ...restOptions
    } = options || {};
+   const isFormData = body instanceof FormData;
+   const token = localStorage.getItem("token");
+   const lang = localStorage.getItem("lang") || DEFAULT_LOCALE;
 
    const headers: HeadersInit = {
-      accept: "application/json",
-      authorization: `Bearer ${localStorage.getItem("token")}`,
-      "accept-language": localStorage.getItem("lang") || DEFAULT_LOCALE,
-      ...(contentType === "application/json" && {
-         "Content-Type": "application/json",
-      }),
-      ...(contentType === "multipart/form-data" && body instanceof FormData
+      "accept-language": lang,
+      ...(token && { Authorization: `Bearer ${token}` }),
+      // ...(contentType === "application/json" && {
+      //    "Content-Type": "application/json",
+      // }),
+      ...(isFormData
          ? {} // Let the browser set the correct headers for FormData
-         : { "Content-Type": contentType }),
+         : { "Content-Type": "application/json", Accept: "application/json" }),
    };
 
    const response = await fetch(`${API_URL}${url}`, {
