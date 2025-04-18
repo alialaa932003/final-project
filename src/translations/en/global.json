@@ -7,5 +7,8 @@
    "profile": "Profile",
    "appointment": "Appointment",
    "add": "Add",
-   "filter": "Filter"
+   "filter": "Filter",
+   "something-went-wrong": "Something went wrong",
+   "the-action-done-successfully": "The action done successfully",
+   "no-data-found": "No data found"
 }
