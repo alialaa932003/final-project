@@ -4,5 +4,5 @@ interface DoctorRequest {
    email: string;
    phone: string;
    specialization_id: string;
-   profile_picture?: File;
+   // profile_picture?: File;
 }

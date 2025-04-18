@@ -7,5 +7,8 @@
    "profile": "الملف الشخصي",
    "appointment": "موعد",
    "add": "إضافة",
-   "filter": "تصفية"
+   "filter": "تصفية",
+   "something-went-wrong": "حدث خطأ ما",
+   "the-action-done-successfully": "تم تنفيذ الإجراء بنجاح",
+   "no-data-found": "لا توجد بيانات"
 }
