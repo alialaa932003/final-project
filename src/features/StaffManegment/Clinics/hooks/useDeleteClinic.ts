@@ -6,17 +6,15 @@ export const useDeleteClinic = () => {
    const [searchParams] = useSearchParams();
    const page = searchParams.get("page") || "1";
    const search = searchParams.get("search") || "";
-   const { optimisticMutate, isPending } = useOptimisticMutation(
-      ({ id }: { id: number }) => deleteClinic({ id }),
-      ["clinics", page, search],
-      ["data", "items"],
-      "id",
-      {
-         onSuccess: () => {},
-      },
-   );
+
+   const { mutate, isPending } = useOptimisticMutation({
+      mutationFn: ({ id }: { id: number }) => deleteClinic({ id }),
+      queryKey: ["clinics", page, search],
+      dataPath: ["data", "items"],
+   });
+
    return {
-      deleteClinic: optimisticMutate,
+      deleteClinic: mutate,
       isDeleting: isPending,
    };
 };
