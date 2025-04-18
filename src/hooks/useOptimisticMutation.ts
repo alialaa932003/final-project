@@ -3,20 +3,45 @@ import useCustomMutation from "./useCustomMutation";
 import { toast } from "react-toastify";
 import { debounce } from "@/utils/debounce";
 
-export const useOptimisticMutation = (
-   mutationFn: (mutationData: any) => Promise<any>, // The mutation function (API call)
-   queryKey: string[], // Query key for the data to be updated
-   dataPath: string[] = ["data", "data"], // Path to the data inside the query cache
-   filterKey: string = "id", // Key to identify items for deletion or updating
-   options?: any,
-   mutationType: "add" | "edit" | "delete" = "delete", // Type of mutation
-) => {
+interface UseOptimisticMutationParams<TData = unknown, TVariables = unknown> {
+   mutationFn: (mutationData: TVariables) => Promise<TData>; // The mutation function (API call)
+   queryKey: string[]; // Query key for the data to be updated
+   dataPath?: string[]; // Path to the data inside the query cache
+   filterKey?: string; // Key to identify items for deletion or updating
+   options?: {
+      onSuccess?: (data: TData) => void; // Optional success callback
+      onError?: (error: Error) => void; // Optional error callback
+   };
+   mutationType?: "add" | "edit" | "delete"; // Type of mutation
+}
+
+// Add a type for expected response that includes message
+interface ResponseWithMessage {
+   message?: string;
+}
+
+// Define a Record type for items that can be indexed with string keys
+interface IndexableItem {
+   [key: string]: any;
+}
+
+export const useOptimisticMutation = <
+   TData extends ResponseWithMessage = ResponseWithMessage,
+   TVariables extends IndexableItem = IndexableItem,
+>({
+   mutationFn,
+   queryKey,
+   mutationType = "delete",
+   dataPath = ["data"],
+   filterKey = "id",
+   options,
+}: UseOptimisticMutationParams<TData, TVariables>) => {
    const queryClient = useQueryClient();
 
-   const { mutate: optimisticMutate, isPending } = useCustomMutation(
-      (mutationData: any) => mutationFn(mutationData),
+   const mutationResult = useCustomMutation<TData, TVariables>(
+      (mutationData: TVariables) => mutationFn(mutationData),
       {
-         onMutate: async (mutationData: any) => {
+         onMutate: async (mutationData: TVariables) => {
             // Cancel ongoing queries to avoid race conditions
             await queryClient.cancelQueries({
                queryKey: queryKey,
@@ -48,7 +73,7 @@ export const useOptimisticMutation = (
                      // Edit existing item
                      nested[dataPath[dataPath.length - 1]] = nested[
                         dataPath[dataPath.length - 1]
-                     ].map((item: any) =>
+                     ].map((item: IndexableItem) =>
                         item[filterKey] === mutationData[filterKey]
                            ? { ...item, ...mutationData }
                            : item,
@@ -60,7 +85,7 @@ export const useOptimisticMutation = (
                      nested[dataPath[dataPath.length - 1]] = nested[
                         dataPath[dataPath.length - 1]
                      ].filter(
-                        (item: any) =>
+                        (item: IndexableItem) =>
                            item[filterKey] !== mutationData[filterKey],
                      );
                      break;
@@ -78,14 +103,15 @@ export const useOptimisticMutation = (
             // Return the previous snapshot for rollback in case of error
             return { previousData };
          },
-         onError: (error) => {
-            toast.error(error.message);
+         onError: (error: Error) => {
+            toast.error(error.message || "An error occurred");
+            options?.onError?.(error);
          },
-         onSuccess: (data) => {
-            toast.success(data.message);
-            if (options?.onSuccess) {
-               options.onSuccess(data);
+         onSuccess: (data: TData) => {
+            if (data.message) {
+               toast.success(data.message);
             }
+            options?.onSuccess?.(data);
          },
          onSettled: () => {
             debounce(() => {
@@ -97,5 +123,5 @@ export const useOptimisticMutation = (
       },
    );
 
-   return { optimisticMutate, isPending };
+   return mutationResult;
 };
