@@ -3,5 +3,5 @@
    "doctors": "Doctors",
    "no-doctors-found": "No doctors found",
    "doctor-deleted-successfully": "Doctor deleted successfully",
-   "doctor-deleted-failed": "Doctor deleted failed"
+   "doctor-deletion-failed": "Doctor deletion failed"
 }

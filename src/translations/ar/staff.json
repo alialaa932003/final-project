@@ -3,5 +3,5 @@
    "doctors": "أطباء",
    "no-doctors-found": "لم يتم العثور على أطباء",
    "doctor-deleted-successfully": "تم حذف الطبيب بنجاح",
-   "doctor-deleted-failed": "فشل حذف الطبيب"
+   "doctor-deletion-failed": "فشل حذف الطبيب"
 }
