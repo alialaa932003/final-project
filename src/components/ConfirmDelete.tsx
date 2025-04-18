@@ -38,9 +38,9 @@ const ConfirmDelete = ({
             <p className="text-lg text-red-500">
                Are you sure you want to delete "{name}"?
             </p>
-            <DialogFooter className="gap-6">
+            <DialogFooter className="gap-2">
                <DialogClose asChild>
-                  <Button variant={"outline"}>
+                  <Button size={"lg"} variant={"outline"}>
                      Cancel
                      <FaXmark />
                   </Button>
@@ -51,6 +51,7 @@ const ConfirmDelete = ({
                   onClick={action}
                   type="submit"
                   disabled={isPending}
+                  size={"lg"}
                >
                   {isPending ? `${"Deleting"}...` : "Delete"}
                   <FaRegSave />

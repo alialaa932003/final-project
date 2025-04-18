@@ -8,14 +8,14 @@ import { I18nextProvider } from "react-i18next";
 import i18n from "./i18n";
 import { PageDetailsProvider } from "./context/PageDetailsProvider";
 import Unauthorized from "@/pages/Unauthorized";
-// import LanguageWrapper from "@/components/LanguageWrapper";
-import Login from "@/pages/auth/login";
 import AppLayout from "./components/layouts/AppLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AuthLayout from "./components/layouts/AuthLayout";
 import Dashboard from "./pages/Dashboard";
 import Doctors from "./pages/staff-management/doctors";
 import AllAppointments from "./pages/appointments/AllAppointments";
+import Clinics from "./pages/staff-management/clinics";
+import Login from "./pages/auth/Login";
 
 function App() {
    const queryClient = new QueryClient({
@@ -64,6 +64,7 @@ function App() {
                                     path="doctors"
                                     element={<Doctors />}
                                  />
+                                 <Route path="clinics" element={<Clinics />} />
                               </Route>
                               <Route path="/appointments">
                                  <Route index element={<AllAppointments />} />
