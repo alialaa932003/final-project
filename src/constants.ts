@@ -8,3 +8,10 @@ export const BACKEND_SERVICES_BASE_ROUTES = {
    STAFF: "/staff/api/v1",
    AUTH: "/auth",
 };
+
+export const QUERY_KEYS = {
+   DOCTOR: "doctor",
+   DOCTORS: "doctors",
+   CLINIC: "clinic",
+   CLINICS: "clinics",
+};
