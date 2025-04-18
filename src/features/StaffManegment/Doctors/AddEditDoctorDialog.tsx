@@ -17,7 +17,6 @@ import { Form, Formik } from "formik";
 import { useCustomQuery } from "@/hooks/useCustomQuery";
 import { getOneDoctors } from "@/services/staff/doctors/getOneDoctor";
 import InputField from "@/components/form/InputField";
-import SelectSearchField from "@/components/form/SelectSearchField";
 import SelectField from "@/components/fields/SelectField";
 
 const DEFAULT_INITIAL_VALUES: DoctorRequest = {
