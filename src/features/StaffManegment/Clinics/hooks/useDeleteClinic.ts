@@ -1,3 +1,4 @@
+import { QUERY_KEYS } from "@/constants";
 import { useOptimisticMutation } from "@/hooks/useOptimisticMutation";
 import { deleteClinic } from "@/services/staff/clinics/deleteClinic";
 import { useSearchParams } from "react-router-dom";
@@ -9,7 +10,7 @@ export const useDeleteClinic = () => {
 
    const { mutate, isPending } = useOptimisticMutation({
       mutationFn: ({ id }: { id: number }) => deleteClinic({ id }),
-      queryKey: ["clinics", page, search],
+      queryKey: [QUERY_KEYS.CLINICS, page, search],
       dataPath: ["data", "items"],
    });
 
