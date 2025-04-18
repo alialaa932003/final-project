@@ -28,14 +28,17 @@ export default function SearchInput({
 
    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      setSearchParams((prevSearchParams) => {
-         if (!searchValue) {
-            prevSearchParams.delete(searchKey);
-            return prevSearchParams;
-         }
+      // setSearchParams((prevSearchParams) => {
+      //    if (!searchValue) {
+      //       prevSearchParams.delete(searchKey);
+      //       return prevSearchParams;
+      //    }
 
-         prevSearchParams.set(searchKey, searchValue);
-         return prevSearchParams;
+      //    prevSearchParams.set(searchKey, searchValue);
+      //    return prevSearchParams;
+      // });
+      setSearchParams({
+         [searchKey]: searchValue,
       });
    };
 
