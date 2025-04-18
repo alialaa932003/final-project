@@ -5,14 +5,17 @@ import { debounce } from "@/utils/debounce";
 
 interface UseOptimisticMutationParams<TData = unknown, TVariables = unknown> {
    mutationFn: (mutationData: TVariables) => Promise<TData>; // The mutation function (API call)
+   mutationType?: "add" | "edit" | "delete"; // Type of mutation
    queryKey: string[]; // Query key for the data to be updated
    dataPath?: string[]; // Path to the data inside the query cache
    filterKey?: string; // Key to identify items for deletion or updating
    options?: {
       onSuccess?: (data: TData) => void; // Optional success callback
+      successMessage?: string; // Optional success message
       onError?: (error: Error) => void; // Optional error callback
+      errorMessage?: string; // Optional error message
+      onSettled?: () => void; // Optional settled callback
    };
-   mutationType?: "add" | "edit" | "delete"; // Type of mutation
 }
 
 // Add a type for expected response that includes message
@@ -30,8 +33,8 @@ export const useOptimisticMutation = <
    TVariables extends IndexableItem = IndexableItem,
 >({
    mutationFn,
-   queryKey,
    mutationType = "delete",
+   queryKey,
    dataPath = ["data"],
    filterKey = "id",
    options,
@@ -104,13 +107,13 @@ export const useOptimisticMutation = <
             return { previousData };
          },
          onError: (error: Error) => {
-            toast.error(error.message || "An error occurred");
+            toast.error(
+               options?.errorMessage || error.message || "An error occurred",
+            );
             options?.onError?.(error);
          },
          onSuccess: (data: TData) => {
-            if (data.message) {
-               toast.success(data.message);
-            }
+            toast.success(options?.successMessage || data.message);
             options?.onSuccess?.(data);
          },
          onSettled: () => {
@@ -119,6 +122,7 @@ export const useOptimisticMutation = <
                   queryKey: queryKey,
                });
             }, 500);
+            options?.onSettled?.();
          },
       },
    );
