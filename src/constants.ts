@@ -14,4 +14,6 @@ export const QUERY_KEYS = {
    DOCTORS: "doctors",
    CLINIC: "clinic",
    CLINICS: "clinics",
+   SPECIALIZATIONS: "specializations",
+   SPECIALIZATION: "specialization",
 };
