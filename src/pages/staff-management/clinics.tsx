@@ -5,7 +5,7 @@ import React from "react";
 
 const Clinics = () => {
    return (
-      <PageLayout pageName="Appointments" className="animate-fade-in space-y-6">
+      <PageLayout pageName="Clinics" className="animate-fade-in space-y-6">
          <ClinicsListHeader />
          <ClinicsList />
       </PageLayout>

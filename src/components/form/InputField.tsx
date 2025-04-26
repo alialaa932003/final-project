@@ -31,7 +31,7 @@ const InputField: React.FC<InputFieldProps> = ({
 }) => (
    <Field name={name}>
       {({ field }: FieldProps) => (
-         <div className="w-full">
+         <div className="relative mb-3 w-full pb-1">
             {label && (
                <label className="mb-2 block font-medium text-gray-600">
                   {label}
@@ -50,9 +50,9 @@ const InputField: React.FC<InputFieldProps> = ({
                iconPosition={iconPosition}
             />
             <ErrorMessage
+               className="absolute top-full z-10 text-xs text-red-600"
+               component={"p"}
                name={name}
-               component="p"
-               className="mt-1 text-red-600"
             />
          </div>
       )}

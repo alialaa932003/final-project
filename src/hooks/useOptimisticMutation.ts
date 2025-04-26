@@ -76,11 +76,12 @@ export const useOptimisticMutation = <
                   // Edit existing item
                   nested[dataPath[dataPath.length - 1]] = nested[
                      dataPath[dataPath.length - 1]
-                  ].map((item: IndexableItem) =>
-                     item[filterKey] === mutationData[filterKey]
-                        ? { ...item, ...mutationData }
-                        : item,
-                  );
+                  ].map((item: IndexableItem) => {
+                     console.log(item, mutationData);
+                     return item[filterKey] === mutationData[filterKey]
+                        ? { ...item, ...mutationData.newData }
+                        : item;
+                  });
                   break;
 
                case "delete":
