@@ -19,8 +19,8 @@ export function useCustomQuery<TResponse>(
    if (queryResult.error && (queryResult.error as any)?.status === 401) {
       localStorage.removeItem("token");
       queryClient.clear();
-      // toast.error(queryResult.error.message);
-      // navigate("/login");
+      toast.error(queryResult.error.message);
+      navigate("/login");
    }
    if (queryResult.error && (queryResult.error as any)?.status === 403) {
       toast.error(queryResult.error.message);
