@@ -10,7 +10,6 @@ export const createSpecialization = async (
          method: "POST",
          body: JSON.stringify({
             ...specialization,
-            color: specialization.color?.value,
          }),
       },
    );

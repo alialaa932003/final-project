@@ -7,7 +7,7 @@ export const useLogout = () => {
    const queryClient = useQueryClient();
    const navigate = useNavigate();
    const { mutate: logout, isPending } = useCustomMutation(() => logoutApi(), {
-      onSuccess: (data) => {
+      onSuccess: (data: { message: string }) => {
          queryClient.clear();
          toast.success(data?.message);
          localStorage.removeItem("token");
