@@ -2,11 +2,12 @@ export const createSelectStyles = (isDarkMode: boolean) => ({
    control: (provided: any, state: any) => ({
       ...provided,
       width: "100%",
-      background: isDarkMode ? "#5F666A" : "#fff",
       padding: "1rem",
       borderRadius: "1rem",
-      fontSize: "1.6rem",
+      height: "3.2rem",
+      fontSize: "1rem",
       color: "rgb(var(--text-gray-500))",
+      background: "rgb(var(--primary-50))",
       border: "1px solid rgb(var(--gray-100)) !important",
       boxShadow: state.isFocused ? "0 0 0 1px rgb(var(--primary-500))" : "none",
       outline: "none !important",
@@ -16,6 +17,9 @@ export const createSelectStyles = (isDarkMode: boolean) => ({
    placeholder: (provided: any) => ({
       ...provided,
       color: "rgb(var(--gray-200))",
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap !important",
+      overflow: "hidden",
    }),
    menu: (provided: any) => ({
       ...provided,
@@ -52,6 +56,12 @@ export const createSelectStyles = (isDarkMode: boolean) => ({
       ...provided,
       color: "rgb(var(--text-gray-500))",
       overflow: "auto",
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap !important",
+   }),
+   multiValueRemove: (styles: any) => ({
+      ...styles,
+      color: "white",
    }),
    input: (provided: any) => ({
       ...provided,

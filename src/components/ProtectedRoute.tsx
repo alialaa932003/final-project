@@ -12,12 +12,12 @@ const ProtectedRoute = ({ allowedRoles }: ProtectedRouteProps) => {
       "current-user",
    ]);
    const user = data?.data;
-   if (!user) {
-      return <Navigate replace={true} to="/login" />;
-   }
-   if (user.role.toLocaleLowerCase() !== "admin") {
-      return <Navigate replace={true} to="/unauthorized" />;
-   }
+   // if (!user) {
+   //    return <Navigate replace={true} to="/login" />;
+   // }
+   // if (user.role.toLocaleLowerCase() !== "admin") {
+   //    return <Navigate replace={true} to="/unauthorized" />;
+   // }
    return (
       <div>
          <Outlet />

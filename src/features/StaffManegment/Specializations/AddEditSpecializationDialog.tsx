@@ -17,14 +17,7 @@ import BarLoading from "@/components/BarLoading";
 import { useGetOneSpecialization } from "./hooks/useGetOneSpecialization";
 import { useCreateSpecialization } from "./hooks/useCreateSpecialization";
 import { useUpdateSpecialization } from "./hooks/useUpdateSpecialization";
-import {
-   Select,
-   SelectContent,
-   SelectItem,
-   SelectTrigger,
-   SelectValue,
-} from "@/components/ui/select";
-import { Label } from "@/components/ui/label";
+import SelectSearchField from "@/components/form/SelectSearchField";
 
 type AddEditSpecializationProps = {
    id?: number;
@@ -69,12 +62,18 @@ function AddEditSpecializationDialog({
             initialValues={{
                name: specialization?.name || "",
                description: specialization?.description || "",
-               color: specialization?.color || "green",
+               color: specialization?.color || {
+                  value: "green",
+                  label: "Green",
+               },
             }}
             onSubmit={(values, { resetForm }) => {
                if (id) {
                   updateSpecializationMutate(
-                     { id, newData: values },
+                     {
+                        id,
+                        newData: values,
+                     },
                      {
                         onSuccess: () => {
                            resetForm();
@@ -123,7 +122,15 @@ function AddEditSpecializationDialog({
                         placeholder="Enter the specialization description"
                         disabled={isPending}
                      />
-                     <div className="space-y-2">
+                     <SelectSearchField
+                        placeholder="Select a color"
+                        label="Color"
+                        name="color"
+                        options={colorOptions}
+                        optionLabel="label"
+                        optionValue="value"
+                     />
+                     {/* <div className="space-y-2">
                         <Label htmlFor="color">Color</Label>
                         <Select
                            value={values.color}
@@ -146,7 +153,7 @@ function AddEditSpecializationDialog({
                               ))}
                            </SelectContent>
                         </Select>
-                     </div>
+                     </div> */}
                   </Form>
 
                   <DialogFooter>

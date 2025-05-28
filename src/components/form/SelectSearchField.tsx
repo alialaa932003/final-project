@@ -92,16 +92,16 @@ const SelectSearchField = ({
                   field.onChange({
                      target: {
                         name: name,
-                        value: value?.originalData || null,
+                        value: value?.originalData || "",
                      },
                   });
                }
             };
 
             return (
-               <div>
+               <div className="relative mb-3 w-full pb-2">
                   {label && (
-                     <label className="mb-3 block font-medium text-gray-400">
+                     <label className="mb-2 block font-medium text-gray-600">
                         {label}
                      </label>
                   )}
@@ -114,8 +114,8 @@ const SelectSearchField = ({
                      placeholder={placeholder}
                   />
                   <ErrorMessage
-                     className="mt-4 text-red-600"
-                     component="p"
+                     className="absolute top-full z-10 text-xs text-red-600"
+                     component={"p"}
                      name={name}
                   />
                </div>
