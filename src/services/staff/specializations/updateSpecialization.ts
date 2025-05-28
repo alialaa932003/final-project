@@ -14,7 +14,10 @@ export const updateSpecialization = async ({
       `${BACKEND_SERVICES_BASE_ROUTES.STAFF}/specializations/${id}`,
       {
          method: "PATCH",
-         body: JSON.stringify(newData),
+         body: JSON.stringify({
+            ...newData,
+            color: newData.color?.value,
+         }),
       },
    );
 

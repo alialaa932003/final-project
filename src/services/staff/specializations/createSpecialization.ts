@@ -8,7 +8,10 @@ export const createSpecialization = async (
       `${BACKEND_SERVICES_BASE_ROUTES.STAFF}/specializations`,
       {
          method: "POST",
-         body: JSON.stringify(specialization),
+         body: JSON.stringify({
+            ...specialization,
+            color: specialization.color?.value,
+         }),
       },
    );
 
