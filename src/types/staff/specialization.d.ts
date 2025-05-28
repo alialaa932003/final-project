@@ -2,10 +2,7 @@ interface Specialization {
    id: number;
    name: string;
    description: string;
-   color: {
-      value: SpecializationColor;
-      label: string;
-   };
+   color: SpecializationColor;
    createdAt: string;
    updatedAt: string;
 }

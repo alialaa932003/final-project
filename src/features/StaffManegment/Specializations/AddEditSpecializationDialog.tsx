@@ -33,6 +33,17 @@ const colorOptions: { value: SpecializationColor; label: string }[] = [
    { value: "purple", label: "Purple" },
 ];
 
+interface FormValues {
+   name: string;
+   description: string;
+   color:
+      | SpecializationColor
+      | {
+           value: SpecializationColor;
+           label: string;
+        };
+}
+
 function AddEditSpecializationDialog({
    id,
    triggerButton,
@@ -62,17 +73,21 @@ function AddEditSpecializationDialog({
             initialValues={{
                name: specialization?.name || "",
                description: specialization?.description || "",
-               color: specialization?.color || {
-                  value: "green",
-                  label: "Green",
-               },
+               color: specialization?.color || "green",
             }}
-            onSubmit={(values, { resetForm }) => {
+            onSubmit={(values: FormValues, { resetForm }) => {
+               const colorValue =
+                  typeof values.color === "string"
+                     ? values.color
+                     : (values.color as { value: SpecializationColor }).value;
                if (id) {
                   updateSpecializationMutate(
                      {
                         id,
-                        newData: values,
+                        newData: {
+                           ...values,
+                           color: colorValue,
+                        },
                      },
                      {
                         onSuccess: () => {
@@ -82,12 +97,15 @@ function AddEditSpecializationDialog({
                      },
                   );
                } else {
-                  createSpecializationMutate(values, {
-                     onSuccess: () => {
-                        resetForm();
-                        onOpenChange(false);
+                  createSpecializationMutate(
+                     { ...values, color: colorValue },
+                     {
+                        onSuccess: () => {
+                           resetForm();
+                           onOpenChange(false);
+                        },
                      },
-                  });
+                  );
                }
             }}
             validationSchema={specializationFormValidation}

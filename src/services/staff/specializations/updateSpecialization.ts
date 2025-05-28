@@ -16,7 +16,6 @@ export const updateSpecialization = async ({
          method: "PATCH",
          body: JSON.stringify({
             ...newData,
-            color: newData.color?.value,
          }),
       },
    );
