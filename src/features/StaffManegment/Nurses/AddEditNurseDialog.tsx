@@ -19,56 +19,62 @@ import { getOneDoctors } from "@/services/staff/doctors/getOneDoctor";
 import InputField from "@/components/form/InputField";
 import SelectField from "@/components/fields/SelectField";
 import { getAllSpecializations } from "@/services/staff/specializations/getAllSpecializations";
+import { getOneNurse } from "@/services/staff/nurses/getOneNurse";
+import { getAllClinics } from "@/services/staff/clinics/getAllClinics";
+import { createNurse } from "@/services/staff/nurses/createNurse";
+import { updateNurse } from "@/services/staff/nurses/updateNurse";
 import { useTranslation } from "react-i18next";
+import { Switch } from "@/components/ui/switch";
 
-const DEFAULT_INITIAL_VALUES: DoctorRequest = {
+const DEFAULT_INITIAL_VALUES: NurseRequest = {
    first_name: "",
    last_name: "",
    email: "",
    phone: "",
-   specialization_id: -1,
+   clinic_id: -1,
+   is_active: true,
 };
 
-type AddEditDoctorProps = {
+type AddEditNurseProps = {
    id?: number | string;
    triggerButton: ReactNode;
 };
 
-function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
+function AddEditNurseDialog({ id, triggerButton }: AddEditNurseProps) {
    const { t } = useTranslation("staff");
-   const { data: doctor, isLoading: isGettingDoctor } = useCustomQuery(
+   const { data: nurse, isLoading: isGettingNurse } = useCustomQuery(
       [QUERY_KEYS.DOCTORS, id],
-      getOneDoctors({ id }),
+      getOneNurse({ id }),
       {
          enabled: !!id,
       },
    );
-   const { data: specializations, isLoading: isGettingSpecializations } =
-      useCustomQuery([QUERY_KEYS.SPECIALIZATIONS], getAllSpecializations());
-   const specializationOptions = specializations?.data.items.map((spec) => ({
+   const { data: clinics, isLoading: isGettingSpecializations } =
+      useCustomQuery([QUERY_KEYS.SPECIALIZATIONS], getAllClinics());
+   const clinicOptions = clinics?.data.items.map((spec) => ({
       label: spec.name,
       value: spec.id,
    }));
 
-   const { mutate: createDoctorMutate, isPending: isCreatePending } =
+   const { mutate: createNurseMutate, isPending: isCreatePending } =
       useOptimisticMutation({
-         mutationFn: createDoctor,
+         mutationFn: createNurse,
          queryKey: [QUERY_KEYS.DOCTORS],
          mutationType: "add",
       });
-   const { mutate: updateDoctorMutate, isPending: isUpdatePending } =
+   const { mutate: updateNurseMutate, isPending: isUpdatePending } =
       useOptimisticMutation({
-         mutationFn: updateDoctor,
+         mutationFn: updateNurse,
          queryKey: [QUERY_KEYS.DOCTORS],
          mutationType: "edit",
       });
-   const isPending = isCreatePending || isUpdatePending || isGettingDoctor;
+   const isPending = isCreatePending || isUpdatePending || isGettingNurse;
 
-   const handleSubmit = (values: DoctorRequest) => {
+   const handleSubmit = (values: NurseRequest) => {
       if (id) {
-         updateDoctorMutate({ id, newData: values });
+         updateNurseMutate({ id, newData: values });
       } else {
-         createDoctorMutate(values);
+         createNurseMutate(values);
       }
    };
 
@@ -79,11 +85,22 @@ function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
             initialValues={
                id
                   ? {
-                       first_name: doctor?.data?.first_name || "",
-                       last_name: doctor?.data?.last_name || "",
-                       email: doctor?.data?.email || "",
-                       phone: doctor?.data?.phone || "",
-                       specialization_id: doctor?.data?.specialization.id || -1,
+                       first_name:
+                          nurse?.data?.first_name ||
+                          DEFAULT_INITIAL_VALUES.first_name,
+                       last_name:
+                          nurse?.data?.last_name ||
+                          DEFAULT_INITIAL_VALUES.last_name,
+                       email:
+                          nurse?.data?.email || DEFAULT_INITIAL_VALUES.email,
+                       phone:
+                          nurse?.data?.phone || DEFAULT_INITIAL_VALUES.phone,
+                       clinic_id:
+                          nurse?.data?.clinic.id ||
+                          DEFAULT_INITIAL_VALUES.clinic_id,
+                       is_active:
+                          Boolean(nurse?.data?.is_active) ||
+                          DEFAULT_INITIAL_VALUES.is_active,
                     }
                   : DEFAULT_INITIAL_VALUES
             }
@@ -94,12 +111,12 @@ function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
                <DialogContent className="sm:max-w-3xl">
                   <DialogHeader>
                      <DialogTitle>
-                        {id ? t("edit") : t("add")} {t("doctor")}
+                        {id ? t("edit") : t("add")} {t("nurse")}
                      </DialogTitle>
                      <DialogDescription>
                         {id
-                           ? "Edit the details of the doctor."
-                           : "Add a new doctor to the system."}
+                           ? "Edit the details of the nurse."
+                           : "Add a new nurse to the system."}
                      </DialogDescription>
                   </DialogHeader>
 
@@ -138,20 +155,27 @@ function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
                         disabled={isPending}
                      />
 
+                     <div className="flex items-center gap-2">
+                        <h3>Is active?</h3>
+                        <Switch
+                           checked={values.is_active}
+                           onCheckedChange={(checked) =>
+                              setFieldValue("is_active", checked)
+                           }
+                        />
+                     </div>
+
                      <SelectField
                         isUseSearchParam={false}
-                        label="Specialization"
-                        placeholder="Select specialization"
+                        label="Clinic"
+                        placeholder="Select Clinic"
                         value={
-                           values.specialization_id &&
-                           values.specialization_id !== -1
-                              ? `${values.specialization_id}`
+                           values.clinic_id && values.clinic_id !== -1
+                              ? `${values.clinic_id}`
                               : ""
                         }
-                        options={specializationOptions || []}
-                        onChange={(value) =>
-                           setFieldValue("specialization_id", value)
-                        }
+                        options={clinicOptions || []}
+                        onChange={(value) => setFieldValue("clinic_id", value)}
                         disabled={isPending}
                      />
                   </Form>
@@ -168,4 +192,4 @@ function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
    );
 }
 
-export default AddEditDoctorDialog;
+export default AddEditNurseDialog;

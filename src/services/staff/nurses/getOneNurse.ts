@@ -2,7 +2,7 @@ import { BACKEND_SERVICES_BASE_ROUTES } from "@/constants";
 import { apiCall } from "@/services/apiCall";
 
 type GetOneNurseParams = {
-   id?: number;
+   id?: number | string;
 };
 
 export const getOneNurse =

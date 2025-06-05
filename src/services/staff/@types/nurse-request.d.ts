@@ -3,6 +3,6 @@ interface NurseRequest {
    last_name: string;
    email: string;
    phone: string;
-   is_active?: number;
+   is_active?: boolean;
    clinic_id: number;
 }

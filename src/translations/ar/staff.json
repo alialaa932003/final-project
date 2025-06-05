@@ -1,7 +1,14 @@
 {
    "doctor": "دكتور",
    "doctors": "أطباء",
+   "doctor-header-description": "هنا ستجد قائمة المواعيد",
    "no-doctors-found": "لم يتم العثور على أطباء",
    "doctor-deleted-successfully": "تم حذف الطبيب بنجاح",
-   "doctor-deletion-failed": "فشل حذف الطبيب"
+   "doctor-deletion-failed": "فشل حذف الطبيب",
+   "nurse": "ممرض",
+   "nurses": "ممرضات",
+   "nurse-header-description": "هنا ستجد قائمة الممرضات",
+   "no-nurses-found": "لم يتم العثور على ممرضات",
+   "nurse-deleted-successfully": "تم حذف الممرض بنجاح",
+   "nurse-deletion-failed": "فشل حذف الممرض"
 }
