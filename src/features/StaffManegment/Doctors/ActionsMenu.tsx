@@ -7,6 +7,7 @@ import {
 import { BsThreeDots } from "react-icons/bs";
 import { useDeleteDoctor } from "./hooks/useDeleteDoctor";
 import { MdDelete, MdModeEdit } from "react-icons/md";
+import AddEditDoctorDialog from "./AddEditDoctorDialog";
 
 type ActionsMenuProps = {
    id: number;
@@ -27,14 +28,19 @@ function ActionsMenu({ id }: ActionsMenuProps) {
             </Button>
          </DropdownMenuTrigger>
          <DropdownMenuContent className="flex min-w-fit flex-col gap-2">
-            <Button
-               variant="secondary"
-               size="sm"
-               className="size-9"
-               title="Update Doctor"
-            >
-               <MdModeEdit className="size-5" />
-            </Button>
+            <AddEditDoctorDialog
+               id={id}
+               triggerButton={
+                  <Button
+                     variant="secondary"
+                     size="sm"
+                     className="size-9"
+                     title="Update Doctor"
+                  >
+                     <MdModeEdit className="size-5" />
+                  </Button>
+               }
+            />
 
             <Button
                variant="destructive"

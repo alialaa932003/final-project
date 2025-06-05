@@ -18,13 +18,14 @@ import { useCustomQuery } from "@/hooks/useCustomQuery";
 import { getOneDoctors } from "@/services/staff/doctors/getOneDoctor";
 import InputField from "@/components/form/InputField";
 import SelectField from "@/components/fields/SelectField";
+import { getAllSpecializations } from "@/services/staff/specializations/getAllSpecializations";
 
 const DEFAULT_INITIAL_VALUES: DoctorRequest = {
    first_name: "",
    last_name: "",
    email: "",
    phone: "",
-   specialization_id: "",
+   specialization_id: -1,
 };
 
 type AddEditDoctorProps = {
@@ -33,13 +34,19 @@ type AddEditDoctorProps = {
 };
 
 function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
-   const { data } = useCustomQuery(
+   const { data: doctor, isLoading: isGettingDoctor } = useCustomQuery(
       [QUERY_KEYS.DOCTORS, id],
       getOneDoctors({ id }),
       {
          enabled: !!id,
       },
    );
+   const { data: specializations, isLoading: isGettingSpecializations } =
+      useCustomQuery([QUERY_KEYS.SPECIALIZATIONS], getAllSpecializations());
+   const specializationOptions = specializations?.data.items.map((spec) => ({
+      label: spec.name,
+      value: spec.id,
+   }));
 
    const { mutate: createDoctorMutate, isPending: isCreatePending } =
       useOptimisticMutation({
@@ -53,7 +60,7 @@ function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
          queryKey: [QUERY_KEYS.DOCTORS],
          mutationType: "edit",
       });
-   const isPending = isCreatePending || isUpdatePending;
+   const isPending = isCreatePending || isUpdatePending || isGettingDoctor;
 
    const handleSubmit = (values: DoctorRequest) => {
       if (id) {
@@ -70,18 +77,19 @@ function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
             initialValues={
                id
                   ? {
-                       first_name: data.data?.first_name || "",
-                       last_name: data.data?.last_name || "",
-                       email: data.data?.email || "",
-                       phone: data.data?.phone || "",
-                       specialization_id: data.data?.specialization.id || "",
+                       first_name: doctor?.data?.first_name || "",
+                       last_name: doctor?.data?.last_name || "",
+                       email: doctor?.data?.email || "",
+                       phone: doctor?.data?.phone || "",
+                       specialization_id: doctor?.data?.specialization.id || -1,
                     }
                   : DEFAULT_INITIAL_VALUES
             }
             onSubmit={handleSubmit}
+            enableReinitialize
          >
             {({ values, setFieldValue, submitForm }) => (
-               <DialogContent className="sm:max-w-[425px]">
+               <DialogContent className="sm:max-w-3xl">
                   <DialogHeader>
                      <DialogTitle>
                         {id ? "Edit Doctor" : "Add Doctor"}
@@ -94,7 +102,7 @@ function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
                   </DialogHeader>
 
                   <Form>
-                     <div className="flex flex-wrap gap-2">
+                     <div className="flex gap-2 max-sm:flex-col">
                         <InputField
                            id="first_name"
                            name="first_name"
@@ -132,8 +140,13 @@ function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
                         isUseSearchParam={false}
                         label="Specialization"
                         placeholder="Select specialization"
-                        value={values.specialization_id}
-                        options={[]}
+                        value={
+                           values.specialization_id &&
+                           values.specialization_id !== -1
+                              ? `${values.specialization_id}`
+                              : ""
+                        }
+                        options={specializationOptions || []}
                         onChange={(value) =>
                            setFieldValue("specialization_id", value)
                         }
@@ -143,7 +156,7 @@ function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
 
                   <DialogFooter>
                      <Button type="submit" onClick={submitForm}>
-                        Save changes
+                        {id ? "Edit" : "Add"}
                      </Button>
                   </DialogFooter>
                </DialogContent>
