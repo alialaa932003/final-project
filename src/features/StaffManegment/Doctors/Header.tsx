@@ -30,12 +30,12 @@ function Header() {
 
          <MainHeader.Filters>
             <SearchInput searchKey="search" />
-            <Button
+            {/* <Button
                variant="ghost"
                className="flex w-full gap-4 border-gray-400 max-sm:w-full sm:max-w-[143px]"
             >
                <Filter /> {t("global:filter")}
-            </Button>
+            </Button> */}
          </MainHeader.Filters>
       </MainHeader>
    );
