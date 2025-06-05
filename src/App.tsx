@@ -15,7 +15,7 @@ import Dashboard from "./pages/Dashboard";
 import Doctors from "./pages/staff-management/doctors";
 import AllAppointments from "./pages/appointments/AllAppointments";
 import Clinics from "./pages/staff-management/clinics";
-import Login from "./pages/auth/Login";
+import Login from "./pages/auth/login";
 import Specializations from "./pages/staff-management/specializations";
 
 function App() {
