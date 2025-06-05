@@ -5,16 +5,16 @@ import {
    DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { BsThreeDots } from "react-icons/bs";
-import { useDeleteDoctor } from "./hooks/useDeleteDoctor";
+import { useDeleteNurse } from "./hooks/useDeleteNurse";
 import { MdDelete, MdModeEdit } from "react-icons/md";
-import AddEditDoctorDialog from "./AddEditDoctorDialog";
+import AddEditNurseDialog from "./AddEditNurseDialog";
 
 type ActionsMenuProps = {
-   id: string | number;
+   id: number | string;
 };
 
 function ActionsMenu({ id }: ActionsMenuProps) {
-   const { mutate } = useDeleteDoctor();
+   const { mutate } = useDeleteNurse();
 
    const handleDeleteDoctor = () => {
       mutate({ id });
@@ -28,7 +28,7 @@ function ActionsMenu({ id }: ActionsMenuProps) {
             </Button>
          </DropdownMenuTrigger>
          <DropdownMenuContent className="flex min-w-fit flex-col gap-2">
-            <AddEditDoctorDialog
+            <AddEditNurseDialog
                id={id}
                triggerButton={
                   <Button

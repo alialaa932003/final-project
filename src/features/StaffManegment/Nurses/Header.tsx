@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import SearchInput from "@/features/common/SearchInput";
 import { useTranslation } from "react-i18next";
 import { FiPlus } from "react-icons/fi";
-import AddEditDoctorDialog from "./AddEditDoctorDialog";
+import AddEditNurseDialog from "./AddEditNurseDialog";
 
 function Header() {
    const { t } = useTranslation(["global", "staff"]);
@@ -13,15 +13,15 @@ function Header() {
       <MainHeader>
          <MainHeader.TopSection>
             <MainHeader.Title
-               title={t("staff:doctors")}
-               description={t("staff:doctor-header-description")}
+               title={t("staff:nurses")}
+               description={t("staff:nurse-header-description")}
             />
             <MainHeader.Actions>
-               <AddEditDoctorDialog
+               <AddEditNurseDialog
                   triggerButton={
                      <Button className="flex items-center gap-2">
                         <FiPlus className="text-2xl" />
-                        {t("global:add")} {t("staff:doctor")}
+                        {t("global:add")} {t("staff:nurse")}
                      </Button>
                   }
                />

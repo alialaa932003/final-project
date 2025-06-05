@@ -17,6 +17,7 @@ import AllAppointments from "./pages/appointments/AllAppointments";
 import Clinics from "./pages/staff-management/clinics";
 import Login from "./pages/auth/login";
 import Specializations from "./pages/staff-management/specializations";
+import Nurses from "./pages/staff-management/nurses";
 
 function App() {
    const queryClient = new QueryClient({
@@ -64,6 +65,11 @@ function App() {
                                     index
                                     path="doctors"
                                     element={<Doctors />}
+                                 />
+                                 <Route
+                                    index
+                                    path="nurses"
+                                    element={<Nurses />}
                                  />
                                  <Route path="clinics" element={<Clinics />} />
                                  <Route

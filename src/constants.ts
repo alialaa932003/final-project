@@ -12,6 +12,8 @@ export const BACKEND_SERVICES_BASE_ROUTES = {
 export const QUERY_KEYS = {
    DOCTOR: "doctor",
    DOCTORS: "doctors",
+   NURSE: "nurse",
+   NURSES: "nurses",
    CLINIC: "clinic",
    CLINICS: "clinics",
    SPECIALIZATIONS: "specializations",

@@ -1,7 +1,14 @@
 {
    "doctor": "Doctor",
    "doctors": "Doctors",
+   "doctor-header-description": "Here You will find the list of appointments",
    "no-doctors-found": "No doctors found",
    "doctor-deleted-successfully": "Doctor deleted successfully",
-   "doctor-deletion-failed": "Doctor deletion failed"
+   "doctor-deletion-failed": "Doctor deletion failed",
+   "nurse": "Nurse",
+   "nurses": "Nurses",
+   "nurse-header-description": "Here You will find the list of nurses",
+   "no-nurses-found": "No nurses found",
+   "nurse-deleted-successfully": "Nurse deleted successfully",
+   "nurse-deletion-failed": "Nurse deletion failed"
 }
