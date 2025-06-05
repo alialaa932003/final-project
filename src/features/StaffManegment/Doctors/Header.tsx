@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import SearchInput from "@/features/common/SearchInput";
 import { useTranslation } from "react-i18next";
 import { FiPlus } from "react-icons/fi";
+import AddEditDoctorDialog from "./AddEditDoctorDialog";
 
 function Header() {
    const { t } = useTranslation(["global", "staff"]);
@@ -16,10 +17,14 @@ function Header() {
                description="Here You will find the list of appointments"
             />
             <MainHeader.Actions>
-               <Button className="flex items-center gap-2">
-                  <FiPlus className="text-2xl" />
-                  {t("global:add")} {t("staff:doctor")}
-               </Button>
+               <AddEditDoctorDialog
+                  triggerButton={
+                     <Button className="flex items-center gap-2">
+                        <FiPlus className="text-2xl" />
+                        {t("global:add")} {t("staff:doctor")}
+                     </Button>
+                  }
+               />
             </MainHeader.Actions>
          </MainHeader.TopSection>
 
