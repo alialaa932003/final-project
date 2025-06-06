@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
    Dialog,
@@ -25,6 +25,7 @@ import { createNurse } from "@/services/staff/nurses/createNurse";
 import { updateNurse } from "@/services/staff/nurses/updateNurse";
 import { useTranslation } from "react-i18next";
 import { Switch } from "@/components/ui/switch";
+import { toast } from "react-toastify";
 
 const DEFAULT_INITIAL_VALUES: NurseRequest = {
    first_name: "",
@@ -41,6 +42,7 @@ type AddEditNurseProps = {
 };
 
 function AddEditNurseDialog({ id, triggerButton }: AddEditNurseProps) {
+   const [open, setOpen] = useState(false);
    const { t } = useTranslation("staff");
    const { data: nurse, isLoading: isGettingNurse } = useCustomQuery(
       [QUERY_KEYS.DOCTORS, id],
@@ -72,14 +74,35 @@ function AddEditNurseDialog({ id, triggerButton }: AddEditNurseProps) {
 
    const handleSubmit = (values: NurseRequest) => {
       if (id) {
-         updateNurseMutate({ id, newData: values });
+         updateNurseMutate(
+            { id, newData: values },
+            {
+               onSuccess: () => {
+                  setOpen(false);
+                  toast.success("Nurse updated successfully");
+               },
+               onError: (error) => {
+                  console.error("Error updating nurse:", error);
+                  toast.error("Failed to update nurse");
+               },
+            },
+         );
       } else {
-         createNurseMutate(values);
+         createNurseMutate(values, {
+            onSuccess: () => {
+               setOpen(false);
+               toast.success("Nurse created successfully");
+            },
+            onError: (error) => {
+               console.error("Error updating nurse:", error);
+               toast.error("Failed to create nurse");
+            },
+         });
       }
    };
 
    return (
-      <Dialog>
+      <Dialog open={open} onOpenChange={setOpen}>
          <DialogTrigger asChild>{triggerButton}</DialogTrigger>
          <Formik
             initialValues={
@@ -155,16 +178,6 @@ function AddEditNurseDialog({ id, triggerButton }: AddEditNurseProps) {
                         disabled={isPending}
                      />
 
-                     <div className="flex items-center gap-2">
-                        <h3>Is active?</h3>
-                        <Switch
-                           checked={values.is_active}
-                           onCheckedChange={(checked) =>
-                              setFieldValue("is_active", checked)
-                           }
-                        />
-                     </div>
-
                      <SelectField
                         isUseSearchParam={false}
                         label="Clinic"
@@ -177,7 +190,18 @@ function AddEditNurseDialog({ id, triggerButton }: AddEditNurseProps) {
                         options={clinicOptions || []}
                         onChange={(value) => setFieldValue("clinic_id", value)}
                         disabled={isPending}
+                        containerClassName="mb-6"
                      />
+
+                     <div className="ms-1 flex items-center gap-2">
+                        <h3>Is active?</h3>
+                        <Switch
+                           checked={values.is_active}
+                           onCheckedChange={(checked) =>
+                              setFieldValue("is_active", checked)
+                           }
+                        />
+                     </div>
                   </Form>
 
                   <DialogFooter>
