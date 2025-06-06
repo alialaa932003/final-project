@@ -21,6 +21,7 @@ import SelectField from "@/components/fields/SelectField";
 import { getAllSpecializations } from "@/services/staff/specializations/getAllSpecializations";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
+import { doctorFormValidationSchema } from "./constants/doctorFormValidationSchema";
 
 const DEFAULT_INITIAL_VALUES: DoctorRequest = {
    first_name: "",
@@ -112,6 +113,7 @@ function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
             }
             onSubmit={handleSubmit}
             enableReinitialize
+            validationSchema={doctorFormValidationSchema}
          >
             {({ values, setFieldValue, submitForm }) => (
                <DialogContent className="sm:max-w-3xl">
