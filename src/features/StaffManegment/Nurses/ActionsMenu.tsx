@@ -2,12 +2,16 @@ import { Button } from "@/components/ui/button";
 import {
    DropdownMenu,
    DropdownMenuContent,
+   DropdownMenuItem,
    DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { BsThreeDots } from "react-icons/bs";
 import { useDeleteNurse } from "./hooks/useDeleteNurse";
 import { MdDelete, MdModeEdit } from "react-icons/md";
 import AddEditNurseDialog from "./AddEditNurseDialog";
+import ActionBtn from "@/components/ActionBtn";
+import { FaRegEdit } from "react-icons/fa";
+import { FaRegTrashCan } from "react-icons/fa6";
 
 type ActionsMenuProps = {
    id: number | string;
@@ -22,35 +26,30 @@ function ActionsMenu({ id }: ActionsMenuProps) {
 
    return (
       <DropdownMenu>
-         <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="sm">
-               <BsThreeDots className="size-7 text-secondary-500" />
-            </Button>
+         <DropdownMenuTrigger className="w-full outline-none">
+            <ActionBtn />
          </DropdownMenuTrigger>
          <DropdownMenuContent className="flex min-w-fit flex-col gap-2">
             <AddEditNurseDialog
                id={id}
                triggerButton={
                   <Button
-                     variant="secondary"
-                     size="sm"
-                     className="size-9"
-                     title="Update Doctor"
+                     variant="ghost"
+                     className="h-auto justify-between gap-2 rounded-sm !px-2 py-2 text-sm"
                   >
-                     <MdModeEdit className="size-5" />
+                     Edit
+                     <FaRegEdit />
                   </Button>
                }
             />
 
-            <Button
-               variant="destructive"
-               size="icon"
+            <DropdownMenuItem
+               className="text-red-500"
                onClick={handleDeleteDoctor}
-               className="size-9"
-               title="Delete Doctor"
             >
-               <MdDelete className="size-5 text-white" />
-            </Button>
+               Delete
+               <FaRegTrashCan />
+            </DropdownMenuItem>
          </DropdownMenuContent>
       </DropdownMenu>
    );
