@@ -1,31 +1,50 @@
-import NurseCard from "./NurseCard";
+import TableWrapper from "@/components/TableWrapper";
+import {
+   Table,
+   TableBody,
+   TableHead,
+   TableHeader,
+   TableRow,
+} from "@/components/ui/table";
 import WithLoadingAndError from "@/components/WithLoadingAndError";
 import { useTranslation } from "react-i18next";
-import TableWrapper from "@/components/TableWrapper";
 import { useGetAllNurses } from "./hooks/useGetAllNurses";
+import NurseRow from "./NurseRow";
 
 function NursesList() {
    const { t } = useTranslation("staff");
    const { data, isLoading, isError } = useGetAllNurses();
+   const nurses = data?.data.items || [];
 
    return (
       <WithLoadingAndError
          isLoading={isLoading}
-         hasError={isError}
+         hasError={isError || nurses.length === 0}
          errorText={t("no-nurses-found")}
       >
-         <TableWrapper
-            totalPages={data?.data.meta.last_page}
-            noContainerStyle
-            className="space-y-8"
-         >
-            <ul className="grid grid-cols-1 gap-[30px] md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4">
-               {data?.data.items.map((nurse) => (
-                  <li key={nurse.id}>
-                     <NurseCard data={nurse} />
-                  </li>
-               ))}
-            </ul>
+         <TableWrapper totalPages={data?.data.meta.last_page}>
+            <Table className="min-w-[70rem]">
+               <TableHeader>
+                  <TableRow>
+                     <TableHead className="w-[50px]">#</TableHead>
+                     <TableHead>Name</TableHead>
+                     <TableHead>Email</TableHead>
+                     <TableHead>Phone</TableHead>
+                     <TableHead>Clinic</TableHead>
+                     <TableHead>Is Active</TableHead>
+                     <TableHead className="w-[55px]">Actions</TableHead>
+                  </TableRow>
+               </TableHeader>
+               <TableBody>
+                  {nurses.map((nurse, index) => (
+                     <NurseRow
+                        nurse={nurse}
+                        key={nurse.id}
+                        rowNumber={index + 1}
+                     />
+                  ))}
+               </TableBody>
+            </Table>
          </TableWrapper>
       </WithLoadingAndError>
    );
