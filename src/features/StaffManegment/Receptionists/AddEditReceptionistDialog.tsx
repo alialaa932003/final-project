@@ -10,95 +10,85 @@ import {
    DialogTrigger,
 } from "@/components/ui/dialog";
 import { useOptimisticMutation } from "@/hooks/useOptimisticMutation";
-import { createDoctor } from "@/services/staff/doctors/createDoctor";
 import { QUERY_KEYS } from "@/constants";
-import { updateDoctor } from "@/services/staff/doctors/updateDoctor";
 import { Form, Formik } from "formik";
 import { useCustomQuery } from "@/hooks/useCustomQuery";
-import { getOneDoctors } from "@/services/staff/doctors/getOneDoctor";
 import InputField from "@/components/form/InputField";
-import SelectField from "@/components/fields/SelectField";
-import { getAllSpecializations } from "@/services/staff/specializations/getAllSpecializations";
-import { getOneNurse } from "@/services/staff/nurses/getOneNurse";
-import { getAllClinics } from "@/services/staff/clinics/getAllClinics";
-import { createNurse } from "@/services/staff/nurses/createNurse";
-import { updateNurse } from "@/services/staff/nurses/updateNurse";
 import { useTranslation } from "react-i18next";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "react-toastify";
-import { nurseFormValidationSchema } from "./constants/nurseFormValidationSchema";
+import { receptionistFormValidationSchema } from "./constants/receptionistFormValidationSchema";
+import { getOneReceptionist } from "@/services/staff/receptionists/getOneReceptionist";
+import { createReceptionist } from "@/services/staff/receptionists/createReceptionist";
+import { updateReceptionist } from "@/services/staff/receptionists/updateReceptionist";
 
-const DEFAULT_INITIAL_VALUES: NurseRequest = {
+const DEFAULT_INITIAL_VALUES: ReceptionistRequest = {
    first_name: "",
    last_name: "",
    email: "",
    phone: "",
-   clinic_id: -1,
    is_active: true,
 };
 
-type AddEditNurseProps = {
+type AddEditReceptionistsProps = {
    id?: number | string;
    triggerButton: ReactNode;
 };
 
-function AddEditNurseDialog({ id, triggerButton }: AddEditNurseProps) {
+function AddEditReceptionistsDialog({
+   id,
+   triggerButton,
+}: AddEditReceptionistsProps) {
    const [open, setOpen] = useState(false);
    const { t } = useTranslation("staff");
-   const { data: nurse, isLoading: isGettingNurse } = useCustomQuery(
-      [QUERY_KEYS.NURSE, id],
-      getOneNurse({ id }),
-      {
-         enabled: !!id,
-      },
-   );
-   const { data: clinics, isLoading: isGettingClinics } = useCustomQuery(
-      [QUERY_KEYS.SPECIALIZATIONS],
-      getAllClinics(),
-   );
-   const clinicOptions = clinics?.data.items.map((spec) => ({
-      label: spec.name,
-      value: spec.id,
-   }));
+   const { data: receptionist, isLoading: isGettingReceptionist } =
+      useCustomQuery(
+         [QUERY_KEYS.RECEPTIONIST, id],
+         getOneReceptionist({ id }),
+         {
+            enabled: !!id,
+         },
+      );
 
-   const { mutate: createNurseMutate, isPending: isCreatePending } =
+   const { mutate: createReceptionistMutate, isPending: isCreatePending } =
       useOptimisticMutation({
-         mutationFn: createNurse,
-         queryKey: [QUERY_KEYS.NURSES],
+         mutationFn: createReceptionist,
+         queryKey: [QUERY_KEYS.RECEPTIONISTS],
          mutationType: "add",
       });
-   const { mutate: updateNurseMutate, isPending: isUpdatePending } =
+   const { mutate: updateReceptionistMutate, isPending: isUpdatePending } =
       useOptimisticMutation({
-         mutationFn: updateNurse,
-         queryKey: [QUERY_KEYS.NURSES],
+         mutationFn: updateReceptionist,
+         queryKey: [QUERY_KEYS.RECEPTIONISTS],
          mutationType: "edit",
       });
-   const isPending = isCreatePending || isUpdatePending || isGettingNurse;
+   const isPending =
+      isCreatePending || isUpdatePending || isGettingReceptionist;
 
-   const handleSubmit = (values: NurseRequest) => {
+   const handleSubmit = (values: ReceptionistRequest) => {
       if (id) {
-         updateNurseMutate(
+         updateReceptionistMutate(
             { id, newData: values },
             {
                onSuccess: () => {
                   setOpen(false);
-                  toast.success("Nurse updated successfully");
+                  toast.success("Receptionists updated successfully");
                },
                onError: (error) => {
-                  console.error("Error updating nurse:", error);
-                  toast.error("Failed to update nurse");
+                  console.error("Error updating receptionists:", error);
+                  toast.error("Failed to update receptionists");
                },
             },
          );
       } else {
-         createNurseMutate(values, {
+         createReceptionistMutate(values, {
             onSuccess: () => {
                setOpen(false);
-               toast.success("Nurse created successfully");
+               toast.success("Receptionists created successfully");
             },
             onError: (error) => {
-               console.error("Error updating nurse:", error);
-               toast.error("Failed to create nurse");
+               console.error("Error updating receptionists:", error);
+               toast.error("Failed to create receptionists");
             },
          });
       }
@@ -112,27 +102,26 @@ function AddEditNurseDialog({ id, triggerButton }: AddEditNurseProps) {
                id
                   ? {
                        first_name:
-                          nurse?.data?.first_name ||
+                          receptionist?.data?.first_name ||
                           DEFAULT_INITIAL_VALUES.first_name,
                        last_name:
-                          nurse?.data?.last_name ||
+                          receptionist?.data?.last_name ||
                           DEFAULT_INITIAL_VALUES.last_name,
                        email:
-                          nurse?.data?.email || DEFAULT_INITIAL_VALUES.email,
+                          receptionist?.data?.email ||
+                          DEFAULT_INITIAL_VALUES.email,
                        phone:
-                          nurse?.data?.phone || DEFAULT_INITIAL_VALUES.phone,
-                       clinic_id:
-                          nurse?.data?.clinic.id ||
-                          DEFAULT_INITIAL_VALUES.clinic_id,
+                          receptionist?.data?.phone ||
+                          DEFAULT_INITIAL_VALUES.phone,
                        is_active:
-                          Boolean(nurse?.data?.is_active) ||
+                          Boolean(receptionist?.data?.is_active) ||
                           DEFAULT_INITIAL_VALUES.is_active,
                     }
                   : DEFAULT_INITIAL_VALUES
             }
             onSubmit={handleSubmit}
             enableReinitialize
-            validationSchema={nurseFormValidationSchema}
+            validationSchema={receptionistFormValidationSchema}
          >
             {({ values, setFieldValue, submitForm }) => (
                <DialogContent className="sm:max-w-3xl">
@@ -182,21 +171,6 @@ function AddEditNurseDialog({ id, triggerButton }: AddEditNurseProps) {
                         disabled={isPending}
                      />
 
-                     <SelectField
-                        isUseSearchParam={false}
-                        label="Clinic"
-                        placeholder="Select Clinic"
-                        value={
-                           values.clinic_id && values.clinic_id !== -1
-                              ? `${values.clinic_id}`
-                              : ""
-                        }
-                        options={clinicOptions || []}
-                        onChange={(value) => setFieldValue("clinic_id", value)}
-                        disabled={isPending}
-                        containerClassName="mb-6"
-                     />
-
                      <div className="ms-1 flex items-center gap-2">
                         <h3>Is active?</h3>
                         <Switch
@@ -220,4 +194,4 @@ function AddEditNurseDialog({ id, triggerButton }: AddEditNurseProps) {
    );
 }
 
-export default AddEditNurseDialog;
+export default AddEditReceptionistsDialog;

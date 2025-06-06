@@ -40,7 +40,7 @@ function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
    const [open, setOpen] = useState(false);
    const { t } = useTranslation("staff");
    const { data: doctor, isLoading: isGettingDoctor } = useCustomQuery(
-      [QUERY_KEYS.DOCTORS, id],
+      [QUERY_KEYS.DOCTOR, id],
       getOneDoctors({ id }),
       {
          enabled: !!id,

@@ -44,6 +44,10 @@ const Sidebar = ({ className }: { className?: string }) => {
                to: "/staff-management/nurses",
             },
             {
+               name: "Receptionists",
+               to: "/staff-management/receptionists",
+            },
+            {
                name: "Clinics",
                to: "/staff-management/clinics",
             },
