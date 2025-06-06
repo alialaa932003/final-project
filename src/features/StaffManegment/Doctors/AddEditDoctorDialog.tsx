@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
    Dialog,
@@ -20,6 +20,7 @@ import InputField from "@/components/form/InputField";
 import SelectField from "@/components/fields/SelectField";
 import { getAllSpecializations } from "@/services/staff/specializations/getAllSpecializations";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 
 const DEFAULT_INITIAL_VALUES: DoctorRequest = {
    first_name: "",
@@ -35,6 +36,7 @@ type AddEditDoctorProps = {
 };
 
 function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
+   const [open, setOpen] = useState(false);
    const { t } = useTranslation("staff");
    const { data: doctor, isLoading: isGettingDoctor } = useCustomQuery(
       [QUERY_KEYS.DOCTORS, id],
@@ -66,14 +68,35 @@ function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
 
    const handleSubmit = (values: DoctorRequest) => {
       if (id) {
-         updateDoctorMutate({ id, newData: values });
+         updateDoctorMutate(
+            { id, newData: values },
+            {
+               onSuccess: () => {
+                  setOpen(false);
+                  toast.success("Doctor updated successfully");
+               },
+               onError: (error) => {
+                  console.error("Error updating doctor:", error);
+                  toast.error("Failed to update doctor");
+               },
+            },
+         );
       } else {
-         createDoctorMutate(values);
+         createDoctorMutate(values, {
+            onSuccess: () => {
+               setOpen(false);
+               toast.success("Doctor created successfully");
+            },
+            onError: (error) => {
+               console.error("Error updating doctor:", error);
+               toast.error("Failed to create doctor");
+            },
+         });
       }
    };
 
    return (
-      <Dialog>
+      <Dialog open={open} onOpenChange={setOpen}>
          <DialogTrigger asChild>{triggerButton}</DialogTrigger>
          <Formik
             initialValues={
