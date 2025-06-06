@@ -26,6 +26,7 @@ import { updateNurse } from "@/services/staff/nurses/updateNurse";
 import { useTranslation } from "react-i18next";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "react-toastify";
+import { nurseFormValidationSchema } from "./constants/nurseFormValidationSchema";
 
 const DEFAULT_INITIAL_VALUES: NurseRequest = {
    first_name: "",
@@ -51,8 +52,10 @@ function AddEditNurseDialog({ id, triggerButton }: AddEditNurseProps) {
          enabled: !!id,
       },
    );
-   const { data: clinics, isLoading: isGettingSpecializations } =
-      useCustomQuery([QUERY_KEYS.SPECIALIZATIONS], getAllClinics());
+   const { data: clinics, isLoading: isGettingClinics } = useCustomQuery(
+      [QUERY_KEYS.SPECIALIZATIONS],
+      getAllClinics(),
+   );
    const clinicOptions = clinics?.data.items.map((spec) => ({
       label: spec.name,
       value: spec.id,
@@ -61,13 +64,13 @@ function AddEditNurseDialog({ id, triggerButton }: AddEditNurseProps) {
    const { mutate: createNurseMutate, isPending: isCreatePending } =
       useOptimisticMutation({
          mutationFn: createNurse,
-         queryKey: [QUERY_KEYS.DOCTORS],
+         queryKey: [QUERY_KEYS.NURSES],
          mutationType: "add",
       });
    const { mutate: updateNurseMutate, isPending: isUpdatePending } =
       useOptimisticMutation({
          mutationFn: updateNurse,
-         queryKey: [QUERY_KEYS.DOCTORS],
+         queryKey: [QUERY_KEYS.NURSES],
          mutationType: "edit",
       });
    const isPending = isCreatePending || isUpdatePending || isGettingNurse;
@@ -129,6 +132,7 @@ function AddEditNurseDialog({ id, triggerButton }: AddEditNurseProps) {
             }
             onSubmit={handleSubmit}
             enableReinitialize
+            validationSchema={nurseFormValidationSchema}
          >
             {({ values, setFieldValue, submitForm }) => (
                <DialogContent className="sm:max-w-3xl">
