@@ -5,9 +5,10 @@ export const LIMIT = 20;
 export const DEFAULT_LOCALE = "en";
 
 export const BACKEND_SERVICES_BASE_ROUTES = {
-   STAFF: "/staff/api/v1",
-   AUTH: "/auth",
-};
+   AUTH: "auth",
+   STAFF: "staff/api/v1",
+   PATIENT: "patient-profile/api",
+} as const;
 
 export const QUERY_KEYS = {
    DOCTOR: "doctor",
@@ -20,4 +21,6 @@ export const QUERY_KEYS = {
    CLINICS: "clinics",
    SPECIALIZATIONS: "specializations",
    SPECIALIZATION: "specialization",
-};
+   PATIENT: "patient",
+   PATIENTS: "patients",
+} as const;

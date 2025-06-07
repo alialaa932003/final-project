@@ -1,0 +1,14 @@
+import { BACKEND_SERVICES_BASE_ROUTES } from "@/constants";
+import { apiCall } from "@/services/apiCall";
+
+export const createMedicalRecord = async (data: MedicalRecordRequest) => {
+   const res = await apiCall<StaffApiResponse<MedicalRecord>>(
+      `${BACKEND_SERVICES_BASE_ROUTES.PATIENT}/MedicalRecords`,
+      {
+         method: "POST",
+         body: JSON.stringify(data),
+      },
+   );
+
+   return res;
+};
