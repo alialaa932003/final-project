@@ -14,6 +14,7 @@ import FullPageLoading from "@/components/FullPageLoading";
 import { useLogout } from "../Auth/useLogout";
 import { cn } from "@/lib/utils";
 import { LucideUsersRound } from "lucide-react";
+import { BsFillPersonVcardFill } from "react-icons/bs";
 
 const Sidebar = ({ className }: { className?: string }) => {
    const { logout, isPending } = useLogout();
@@ -40,6 +41,14 @@ const Sidebar = ({ className }: { className?: string }) => {
                to: "/staff-management/doctors",
             },
             {
+               name: "Nurses",
+               to: "/staff-management/nurses",
+            },
+            {
+               name: "Receptionists",
+               to: "/staff-management/receptionists",
+            },
+            {
                name: "Clinics",
                to: "/staff-management/clinics",
             },
@@ -48,6 +57,12 @@ const Sidebar = ({ className }: { className?: string }) => {
                to: "/staff-management/specializations",
             },
          ],
+      },
+      {
+         name: "Patients",
+         icon: <BsFillPersonVcardFill />,
+         to: `/patients`,
+         type: "single",
       },
    ];
    const { pathname } = useLocation();

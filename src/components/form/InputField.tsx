@@ -1,4 +1,4 @@
-import React from "react";
+import React, { HTMLInputTypeAttribute } from "react";
 import { ErrorMessage, Field, FieldProps } from "formik";
 import { Input } from "../ui/input";
 
@@ -7,7 +7,7 @@ interface InputFieldProps {
    label?: string;
    name: string;
    placeholder?: string;
-   type?: string;
+   type?: HTMLInputTypeAttribute;
    icon?: React.ReactNode;
    iconAction?: () => void;
    className?: string;

@@ -8,19 +8,19 @@ import {
 } from "@/components/ui/table";
 import WithLoadingAndError from "@/components/WithLoadingAndError";
 import { useTranslation } from "react-i18next";
-import { useGetAllNurses } from "./hooks/useGetAllNurses";
-import NurseRow from "./NurseRow";
+import { useGetAllReceptionists } from "./hooks/useGetAllReceptionists";
+import ReceptionistRow from "./ReceptionistRow";
 
-function NursesList() {
+function ReceptionistsList() {
    const { t } = useTranslation("staff");
-   const { data, isLoading, isError } = useGetAllNurses();
-   const nurses = data?.data.items || [];
+   const { data, isLoading, isError } = useGetAllReceptionists();
+   const receptionists = data?.data.items || [];
 
    return (
       <WithLoadingAndError
          isLoading={isLoading}
-         hasError={isError || nurses.length === 0}
-         errorText={t("no-nurses-found")}
+         hasError={isError || receptionists.length === 0}
+         errorText={t("no-receptionists-found")}
       >
          <TableWrapper totalPages={data?.data.meta.last_page}>
             <Table className="min-w-[70rem]">
@@ -30,16 +30,15 @@ function NursesList() {
                      <TableHead>Name</TableHead>
                      <TableHead>Email</TableHead>
                      <TableHead>Phone</TableHead>
-                     <TableHead>Clinic</TableHead>
                      <TableHead>Is Active</TableHead>
                      <TableHead className="w-[55px]">Actions</TableHead>
                   </TableRow>
                </TableHeader>
                <TableBody>
-                  {nurses.map((nurse, index) => (
-                     <NurseRow
-                        nurse={nurse}
-                        key={nurse.id}
+                  {receptionists.map((receptionist, index) => (
+                     <ReceptionistRow
+                        receptionist={receptionist}
+                        key={receptionist.id}
                         rowNumber={index + 1}
                      />
                   ))}
@@ -50,4 +49,4 @@ function NursesList() {
    );
 }
 
-export default NursesList;
+export default ReceptionistsList;

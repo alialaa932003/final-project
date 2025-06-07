@@ -8,38 +8,43 @@ import {
 } from "@/components/ui/table";
 import WithLoadingAndError from "@/components/WithLoadingAndError";
 import { useTranslation } from "react-i18next";
-import { useGetAllNurses } from "./hooks/useGetAllNurses";
-import NurseRow from "./NurseRow";
+import { useGetAllPatients } from "./hooks/useGetAllPatients";
+import PatientRow from "./PatientRow";
 
-function NursesList() {
-   const { t } = useTranslation("staff");
-   const { data, isLoading, isError } = useGetAllNurses();
-   const nurses = data?.data.items || [];
+function PatientsList() {
+   const { t } = useTranslation("patients");
+   const { data, isLoading, isError } = useGetAllPatients();
+   const patients = data?.data.items || [];
 
    return (
       <WithLoadingAndError
          isLoading={isLoading}
-         hasError={isError || nurses.length === 0}
-         errorText={t("no-nurses-found")}
+         hasError={isError || patients.length === 0}
+         errorText={t("no-patients-found")}
       >
          <TableWrapper totalPages={data?.data.meta.last_page}>
             <Table className="min-w-[70rem]">
                <TableHeader>
                   <TableRow>
                      <TableHead className="w-[50px]">#</TableHead>
+                     <TableHead>National ID</TableHead>
                      <TableHead>Name</TableHead>
                      <TableHead>Email</TableHead>
                      <TableHead>Phone</TableHead>
-                     <TableHead>Clinic</TableHead>
-                     <TableHead>Is Active</TableHead>
+                     <TableHead>Address</TableHead>
+                     <TableHead>Gender</TableHead>
+                     <TableHead>Blood Type</TableHead>
+                     <TableHead>Marital Status</TableHead>
+                     <TableHead>Age</TableHead>
+                     <TableHead>Date Of Birth</TableHead>
                      <TableHead className="w-[55px]">Actions</TableHead>
                   </TableRow>
                </TableHeader>
                <TableBody>
-                  {nurses.map((nurse, index) => (
-                     <NurseRow
-                        nurse={nurse}
-                        key={nurse.id}
+                  {patients.map((patient, index) => (
+                     <PatientRow
+                        patient={patient}
+                        key={patient.id}
                         rowNumber={index + 1}
                      />
                   ))}
@@ -50,4 +55,4 @@ function NursesList() {
    );
 }
 
-export default NursesList;
+export default PatientsList;

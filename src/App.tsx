@@ -18,6 +18,8 @@ import Clinics from "./pages/staff-management/clinics";
 import Login from "./pages/auth/login";
 import Specializations from "./pages/staff-management/specializations";
 import Nurses from "./pages/staff-management/nurses";
+import Receptionists from "./pages/staff-management/receptionists";
+import AllPatients from "./pages/patients/all-patients";
 
 function App() {
    const queryClient = new QueryClient({
@@ -66,15 +68,22 @@ function App() {
                                     path="doctors"
                                     element={<Doctors />}
                                  />
+                                 <Route path="nurses" element={<Nurses />} />
                                  <Route
-                                    index
-                                    path="nurses"
-                                    element={<Nurses />}
+                                    path="receptionists"
+                                    element={<Receptionists />}
                                  />
                                  <Route path="clinics" element={<Clinics />} />
                                  <Route
                                     path="specializations"
                                     element={<Specializations />}
+                                 />
+                              </Route>
+                              <Route path="/patients">
+                                 <Route index element={<AllPatients />} />
+                                 <Route
+                                    path="[id]"
+                                    element={<div>Patient</div>}
                                  />
                               </Route>
                               <Route path="/appointments">

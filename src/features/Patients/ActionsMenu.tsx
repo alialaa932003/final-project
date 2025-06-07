@@ -5,32 +5,24 @@ import {
    DropdownMenuItem,
    DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { BsThreeDots } from "react-icons/bs";
-import { useDeleteNurse } from "./hooks/useDeleteNurse";
-import { MdDelete, MdModeEdit } from "react-icons/md";
-import AddEditNurseDialog from "./AddEditNurseDialog";
+import AddEditPatientDialog from "./AddEditPatientDialog";
 import ActionBtn from "@/components/ActionBtn";
 import { FaRegEdit } from "react-icons/fa";
-import { FaRegTrashCan } from "react-icons/fa6";
+import { GrView } from "react-icons/gr";
+import { Link } from "react-router-dom";
 
 type ActionsMenuProps = {
    id: number | string;
 };
 
 function ActionsMenu({ id }: ActionsMenuProps) {
-   const { mutate } = useDeleteNurse();
-
-   const handleDeleteDoctor = () => {
-      mutate({ id });
-   };
-
    return (
       <DropdownMenu>
          <DropdownMenuTrigger className="w-full outline-none">
             <ActionBtn />
          </DropdownMenuTrigger>
          <DropdownMenuContent className="flex min-w-fit flex-col gap-2">
-            <AddEditNurseDialog
+            <AddEditPatientDialog
                id={id}
                triggerButton={
                   <Button
@@ -43,12 +35,11 @@ function ActionsMenu({ id }: ActionsMenuProps) {
                }
             />
 
-            <DropdownMenuItem
-               className="text-red-500"
-               onClick={handleDeleteDoctor}
-            >
-               Delete
-               <FaRegTrashCan />
+            <DropdownMenuItem asChild>
+               <Link to={`/patients/${id}`} className="w-full">
+                  View
+                  <GrView />
+               </Link>
             </DropdownMenuItem>
          </DropdownMenuContent>
       </DropdownMenu>

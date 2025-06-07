@@ -10,5 +10,11 @@
    "nurse-header-description": "هنا ستجد قائمة الممرضات",
    "no-nurses-found": "لم يتم العثور على ممرضات",
    "nurse-deleted-successfully": "تم حذف الممرض بنجاح",
-   "nurse-deletion-failed": "فشل حذف الممرض"
+   "nurse-deletion-failed": "فشل حذف الممرض",
+   "receptionist": "موظف استقبال",
+   "receptionists": "موظفو استقبال",
+   "receptionist-header-description": "هنا ستجد قائمة موظفي الاستقبال",
+   "no-receptionists-found": "لم يتم العثور على موظفي استقبال",
+   "receptionist-deleted-successfully": "تم حذف موظف الاستقبال بنجاح",
+   "receptionist-deletion-failed": "فشل حذف موظف الاستقبال"
 }

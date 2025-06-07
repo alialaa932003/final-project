@@ -18,6 +18,7 @@ import { HiMiniXMark } from "react-icons/hi2";
 import Status from "@/components/Status";
 import { useDeleteClinic } from "./hooks/useDeleteClinic";
 import AddEditClinicDialog from "./AddEditClinicDialog";
+import IsActiveBadge from "@/components/IsActiveBadge";
 interface Props {
    rowNumber: number;
    clinic: Clinic;
@@ -44,18 +45,7 @@ const ClinicRow = ({ rowNumber, clinic }: Props) => {
                {current_doctors}/{max_doctors}
             </TableCell>
             <TableCell>
-               <Status variant={is_active ? "green" : "red"}>
-                  <span className="w-10"> {is_active ? "Yes" : "No"}</span>
-                  {is_active ? (
-                     <span className="text-green-500">
-                        <GiCheckMark />
-                     </span>
-                  ) : (
-                     <span className="text-lg text-red-500">
-                        <HiMiniXMark />
-                     </span>
-                  )}
-               </Status>
+               <IsActiveBadge isActive={Boolean(is_active)} />
             </TableCell>
             <TableCell>
                <DropdownMenu>
@@ -95,13 +85,12 @@ const ClinicRow = ({ rowNumber, clinic }: Props) => {
                name={name}
             />
          </TableRow>
-          
-            <AddEditClinicDialog
-               id={id}
-               isOpen={isOpenEdit}
-               onOpenChange={setIsOpenEdit}
-            />
-         
+
+         <AddEditClinicDialog
+            id={id}
+            isOpen={isOpenEdit}
+            onOpenChange={setIsOpenEdit}
+         />
       </>
    );
 };
