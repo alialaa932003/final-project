@@ -11,6 +11,7 @@ import {
 import { Label } from "../ui/label";
 import { cn } from "@/lib/utils";
 import { useSearchParams } from "react-router-dom";
+import { ErrorMessage } from "formik";
 
 interface Props {
    options: { label: string; value: string | number }[];
@@ -23,6 +24,7 @@ interface Props {
    containerClassName?: ClassNameValue;
    labelClassName?: ClassNameValue;
    value?: string;
+   name?: string;
    isUseSearchParam?: boolean;
    label?: string;
    onChange?: (value: string) => void;
@@ -44,6 +46,7 @@ export default function SelectField({
    containerClassName,
    labelClassName,
    value,
+   name = "",
    onChange,
    disabled = false,
    placeholder = "",
@@ -73,7 +76,7 @@ export default function SelectField({
    }, [defaultValue]);
 
    return (
-      <div className={cn("space-y-1", containerClassName)}>
+      <div className={cn("relative mb-8 space-y-1", containerClassName)}>
          {label ? (
             <Label className={cn("text-foreground text-xs", labelClassName)}>
                {label}
@@ -118,6 +121,12 @@ export default function SelectField({
                </SelectGroup>
             </SelectContent>
          </Select>
+
+         <ErrorMessage
+            className="absolute top-full z-10 text-xs text-red-600"
+            component={"p"}
+            name={name}
+         />
       </div>
    );
 }
