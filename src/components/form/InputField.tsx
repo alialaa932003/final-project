@@ -1,6 +1,7 @@
 import React, { HTMLInputTypeAttribute } from "react";
 import { ErrorMessage, Field, FieldProps } from "formik";
 import { Input } from "../ui/input";
+import { cn } from "@/lib/utils";
 
 interface InputFieldProps {
    id?: string;
@@ -11,6 +12,7 @@ interface InputFieldProps {
    icon?: React.ReactNode;
    iconAction?: () => void;
    className?: string;
+   containerClassName?: string;
    disabled?: boolean;
    readonly?: boolean;
    iconPosition?: "start" | "end";
@@ -25,13 +27,14 @@ const InputField: React.FC<InputFieldProps> = ({
    icon,
    iconAction,
    className,
+   containerClassName,
    disabled = false,
    readonly = false,
    iconPosition = "end",
 }) => (
    <Field name={name}>
       {({ field }: FieldProps) => (
-         <div className="relative mb-5 w-full pb-1">
+         <div className={cn("relative mb-5 w-full pb-1", containerClassName)}>
             {label && (
                <label className="mb-2 block font-medium text-gray-600">
                   {label}
