@@ -12,6 +12,7 @@ export const useLogin = () => {
    const { mutate: login, isPending } = useCustomMutation(loginApi, {
       onSuccess: async (data) => {
          localStorage.setItem("token", data.data.token);
+         localStorage.setItem("refreshToken", data.data.refreshToken);
          toast.success(data.message);
          await queryClient.invalidateQueries({
             queryKey: ["current-user"],

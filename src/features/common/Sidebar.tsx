@@ -1,7 +1,12 @@
 import React from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { LuCalendarRange, LuLayoutDashboard } from "react-icons/lu";
-import { MdLogout } from "react-icons/md";
+import {
+   MdLogout,
+   MdOutlineAddBox,
+   MdOutlineTypeSpecimen,
+} from "react-icons/md";
+import { FaClinicMedical } from "react-icons/fa";
 
 import {
    Accordion,
@@ -25,12 +30,7 @@ const Sidebar = ({ className }: { className?: string }) => {
          to: `/dashboard`,
          type: "single",
       },
-      {
-         name: "Appointments",
-         icon: <LuCalendarRange />,
-         to: `/appointments`,
-         type: "single",
-      },
+
       {
          name: "Staff management",
          icon: <LucideUsersRound />,
@@ -48,20 +48,36 @@ const Sidebar = ({ className }: { className?: string }) => {
                name: "Receptionists",
                to: "/staff-management/receptionists",
             },
-            {
-               name: "Clinics",
-               to: "/staff-management/clinics",
-            },
-            {
-               name: "Specializations",
-               to: "/staff-management/specializations",
-            },
          ],
+      },
+      {
+         name: "Clinics",
+         icon: <FaClinicMedical />,
+         to: `/staff-management/clinics`,
+         type: "single",
+      },
+      {
+         name: "Specializations",
+         icon: <MdOutlineTypeSpecimen />,
+         to: `/staff-management/specializations`,
+         type: "single",
       },
       {
          name: "Patients",
          icon: <BsFillPersonVcardFill />,
          to: `/patients`,
+         type: "single",
+      },
+      {
+         name: "All Bookings",
+         icon: <LuCalendarRange />,
+         to: `/bookings`,
+         type: "single",
+      },
+      {
+         name: "Add Booking",
+         icon: <MdOutlineAddBox />,
+         to: `/bookings/add`,
          type: "single",
       },
    ];

@@ -19,5 +19,8 @@ export const login = async (data: Creadentials) => {
 export const logout = async () => {
    return apiCall<any>("auth/api/Account/logout", {
       method: "POST",
+      body: JSON.stringify({
+         refreshToken: localStorage.getItem("refreshToken"),
+      }),
    });
 };

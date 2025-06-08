@@ -1,6 +1,6 @@
 export const supportedLanguages = ["ar", "en"];
 
-export const API_URL = "http://164.92.241.46/";
+export const API_URL = "http://167.71.45.177/";
 export const LIMIT = 20;
 export const DEFAULT_LOCALE = "en";
 
@@ -8,6 +8,7 @@ export const BACKEND_SERVICES_BASE_ROUTES = {
    AUTH: "auth",
    STAFF: "staff/api/v1",
    PATIENT: "patient-profile/api",
+   BOOKING: "booking/api/v1",
 } as const;
 
 export const QUERY_KEYS = {
@@ -23,4 +24,6 @@ export const QUERY_KEYS = {
    SPECIALIZATION: "specialization",
    PATIENT: "patient",
    PATIENTS: "patients",
+   BOOKING: "booking",
+   BOOKINGS: "bookings",
 } as const;
