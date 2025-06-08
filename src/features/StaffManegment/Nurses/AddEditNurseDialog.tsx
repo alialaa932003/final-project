@@ -55,7 +55,7 @@ function AddEditNurseDialog({ id, triggerButton }: AddEditNurseProps) {
       },
    );
    const { data: clinics, isLoading: isGettingClinics } = useCustomQuery(
-      [QUERY_KEYS.SPECIALIZATIONS],
+      [QUERY_KEYS.CLINICS],
       getAllClinics(),
    );
    const clinicOptions = clinics?.data.items.map((clinic) => ({

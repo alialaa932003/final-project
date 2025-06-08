@@ -23,7 +23,7 @@ function DoctorRow({ doctor, rowNumber }: DoctorRowProps) {
             </Badge>
          </TableCell>
          <TableCell className="flex items-center justify-end gap-2">
-            <ActionsMenu id={doctor.id} />
+            <ActionsMenu id={doctor.id} doctorName={fullName} />
          </TableCell>
       </TableRow>
    );
