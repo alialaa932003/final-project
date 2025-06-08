@@ -12,12 +12,14 @@ import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { MdOutlineAddBox } from "react-icons/md";
+import ManageAvailabilities from "./ManageAvailabilities";
 
 type ActionsMenuProps = {
    id: string;
+   doctorName: string;
 };
 
-function ActionsMenu({ id }: ActionsMenuProps) {
+function ActionsMenu({ id, doctorName }: ActionsMenuProps) {
    const { mutate } = useDeleteDoctor();
 
    const handleDeleteDoctor = () => {
@@ -42,6 +44,8 @@ function ActionsMenu({ id }: ActionsMenuProps) {
                   </Button>
                }
             />
+
+            <ManageAvailabilities doctorId={id} doctorName={doctorName} />
 
             <DropdownMenuItem asChild>
                <Link to={`/bookings/add?doctorId=${id}`} className="w-full">
