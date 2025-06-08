@@ -19,7 +19,7 @@ import Nurses from "./pages/staff-management/nurses";
 import Receptionists from "./pages/staff-management/receptionists";
 import AllPatients from "./pages/patients/all-patients";
 import AllBookings from "./pages/bookings/all-bookings";
-import Login from "./pages/auth/Login";
+import Login from "./pages/auth/login";
 
 function App() {
    const queryClient = new QueryClient({
