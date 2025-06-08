@@ -4,5 +4,5 @@ interface NurseRequest {
    email: string;
    phone: string;
    is_active?: boolean;
-   clinic_id: number;
+   clinic_id: string;
 }

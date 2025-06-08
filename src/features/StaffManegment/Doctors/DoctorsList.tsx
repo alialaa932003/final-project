@@ -1,14 +1,20 @@
-import UserAvatar1 from "@/../public/images/user.jpg";
-import UserAvatar2 from "@/../public/images/user-2.png";
-import DoctorCard from "./DoctorCard";
 import WithLoadingAndError from "@/components/WithLoadingAndError";
 import { useTranslation } from "react-i18next";
 import TableWrapper from "@/components/TableWrapper";
 import { useGetAllDoctors } from "./hooks/useGetAllDoctors";
+import {
+   Table,
+   TableBody,
+   TableHead,
+   TableHeader,
+   TableRow,
+} from "@/components/ui/table";
+import DoctorRow from "./DoctorRow";
 
 function DoctorsList() {
    const { t } = useTranslation("staff");
    const { data, isLoading, isError } = useGetAllDoctors();
+   const doctors = data?.data.items || [];
 
    return (
       <WithLoadingAndError
@@ -21,13 +27,27 @@ function DoctorsList() {
             noContainerStyle
             className="space-y-8"
          >
-            <ul className="grid grid-cols-1 gap-[30px] md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 3xl:grid-cols-4">
-               {data?.data.items.map((doctor) => (
-                  <li key={doctor.id}>
-                     <DoctorCard data={doctor} />
-                  </li>
-               ))}
-            </ul>
+            <Table className="min-w-[70rem]">
+               <TableHeader>
+                  <TableRow>
+                     <TableHead className="w-[50px]">#</TableHead>
+                     <TableHead>Name</TableHead>
+                     <TableHead>Email</TableHead>
+                     <TableHead>Phone</TableHead>
+                     <TableHead>Specialization</TableHead>
+                     <TableHead className="w-[55px]">Actions</TableHead>
+                  </TableRow>
+               </TableHeader>
+               <TableBody>
+                  {doctors.map((doctor, index) => (
+                     <DoctorRow
+                        doctor={doctor}
+                        key={doctor.id}
+                        rowNumber={index + 1}
+                     />
+                  ))}
+               </TableBody>
+            </Table>
          </TableWrapper>
       </WithLoadingAndError>
    );

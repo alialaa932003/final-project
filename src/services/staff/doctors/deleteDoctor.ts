@@ -2,7 +2,7 @@ import { BACKEND_SERVICES_BASE_ROUTES } from "@/constants";
 import { apiCall } from "@/services/apiCall";
 
 type DeleteDoctorParams = {
-   id: number | string;
+   id: string;
 };
 
 export const deleteDoctor = async ({ id }: DeleteDoctorParams) => {

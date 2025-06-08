@@ -9,7 +9,7 @@ export const useDeleteClinic = () => {
    const search = searchParams.get("search") || "";
 
    const { mutate, isPending } = useOptimisticMutation({
-      mutationFn: ({ id }: { id: number }) => deleteClinic({ id }),
+      mutationFn: ({ id }: { id: string }) => deleteClinic({ id }),
       queryKey: [QUERY_KEYS.CLINICS, page, search],
       dataPath: ["data", "items"],
    });

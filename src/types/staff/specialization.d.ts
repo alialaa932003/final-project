@@ -1,5 +1,5 @@
 interface Specialization {
-   id: number;
+   id: string;
    name: string;
    description: string;
    color: SpecializationColor;
