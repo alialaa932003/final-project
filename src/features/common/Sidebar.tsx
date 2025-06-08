@@ -25,12 +25,7 @@ const Sidebar = ({ className }: { className?: string }) => {
          to: `/dashboard`,
          type: "single",
       },
-      {
-         name: "Appointments",
-         icon: <LuCalendarRange />,
-         to: `/appointments`,
-         type: "single",
-      },
+
       {
          name: "Staff management",
          icon: <LucideUsersRound />,
@@ -62,6 +57,12 @@ const Sidebar = ({ className }: { className?: string }) => {
          name: "Patients",
          icon: <BsFillPersonVcardFill />,
          to: `/patients`,
+         type: "single",
+      },
+      {
+         name: "Bookings",
+         icon: <LuCalendarRange />,
+         to: `/bookings`,
          type: "single",
       },
    ];

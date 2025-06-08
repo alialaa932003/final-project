@@ -8,6 +8,7 @@ export const BACKEND_SERVICES_BASE_ROUTES = {
    AUTH: "auth",
    STAFF: "staff/api/v1",
    PATIENT: "patient-profile/api",
+   BOOKING: "booking/api",
 } as const;
 
 export const QUERY_KEYS = {

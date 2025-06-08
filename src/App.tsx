@@ -13,13 +13,13 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import AuthLayout from "./components/layouts/AuthLayout";
 import Dashboard from "./pages/Dashboard";
 import Doctors from "./pages/staff-management/doctors";
-import AllAppointments from "./pages/appointments/AllAppointments";
 import Clinics from "./pages/staff-management/clinics";
-import Login from "./pages/auth/login";
 import Specializations from "./pages/staff-management/specializations";
 import Nurses from "./pages/staff-management/nurses";
 import Receptionists from "./pages/staff-management/receptionists";
 import AllPatients from "./pages/patients/all-patients";
+import AllBookings from "./pages/bookings/all-bookings";
+import Login from "./pages/auth/Login";
 
 function App() {
    const queryClient = new QueryClient({
@@ -86,8 +86,8 @@ function App() {
                                     element={<div>Patient</div>}
                                  />
                               </Route>
-                              <Route path="/appointments">
-                                 <Route index element={<AllAppointments />} />
+                              <Route path="/bookings">
+                                 <Route index element={<AllBookings />} />
                               </Route>
                            </Route>
                         </Route>
