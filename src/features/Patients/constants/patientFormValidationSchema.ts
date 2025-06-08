@@ -9,18 +9,19 @@ export const patientFormValidationSchema = Yup.object().shape({
    lastName: getNameValidationSchema(),
    email: getEmailValidationSchema(),
    phoneNumber: getPhoneNumberValidationSchema(),
-   dateOfBirth: Yup.date()
-      .required("Date of birth is required")
-      .max(new Date(), "Date of birth cannot be in the future"),
    address: Yup.string()
       .required("Address is required")
       .min(5, "Address must be at least 5 characters long")
       .max(100, "Address cannot exceed 100 characters"),
    nationalID: getNationalIdValidationSchema(),
    age: Yup.number()
+      .integer("Age must be an integer")
       .required("Age is required")
       .min(0, "Age cannot be negative")
       .max(120, "Age cannot exceed 120"),
+   dateOfBirth: Yup.date()
+      .required("Date of birth is required")
+      .max(new Date(), "Date of birth cannot be in the future"),
    bloodType: Yup.string()
       .oneOf(
          [
