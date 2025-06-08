@@ -2,12 +2,12 @@ import { BACKEND_SERVICES_BASE_ROUTES } from "@/constants";
 import { apiCall } from "@/services/apiCall";
 
 type DeleteBookingParams = {
-   id: number;
+   id: string;
 };
 
 export const deleteBooking = async ({ id }: DeleteBookingParams) => {
    const res = await apiCall<StaffApiResponse<Booking>>(
-      `${BACKEND_SERVICES_BASE_ROUTES.STAFF}/bookings/${id}`,
+      `${BACKEND_SERVICES_BASE_ROUTES.BOOKING}/bookings/${id}`,
       {
          method: "DELETE",
       },

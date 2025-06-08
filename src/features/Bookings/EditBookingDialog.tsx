@@ -21,14 +21,21 @@ import { useUpdateBooking } from "./hooks/useUpdateBooking";
 import { Switch } from "@/components/ui/switch";
 import { bookingFormValidation } from "./hooks/bookingFormValidation";
 import BarLoading from "@/components/BarLoading";
+import SelectSearchField from "@/components/form/SelectSearchField";
+import moment from "moment";
 
 type EditBookingProps = {
-   id?: number;
+   id: string;
    triggerButton?: ReactNode;
    isOpen: boolean;
    onOpenChange: (open: boolean) => void;
 };
-
+export const statusOptions: { value: BookingStatus; label: string }[] = [
+   { value: "cancelled", label: "Cancelled" },
+   { value: "completed", label: "Completed" },
+   { value: "no_show", label: "No Show" },
+   { value: "pending", label: "Pending" },
+];
 function EditBookingDialog({
    id,
    triggerButton,
@@ -41,10 +48,9 @@ function EditBookingDialog({
    });
    const booking = data?.data;
 
-   const { createBookingMutate, isCreatePending } = useCreateBooking();
    const { updateBookingMutate, isUpdatePending } = useUpdateBooking();
 
-   const isPending = isCreatePending || isUpdatePending || isGettingBooking;
+   const isPending = isUpdatePending || isGettingBooking;
 
    return (
       <Dialog open={isOpen} onOpenChange={onOpenChange}>
@@ -52,30 +58,33 @@ function EditBookingDialog({
          <Formik
             enableReinitialize
             initialValues={{
-               name: booking?.name || "",
-               description: booking?.description || "",
-               max_doctors: booking?.max_doctors || 0,
-               is_active: Boolean(booking?.is_active) || false,
+               status: statusOptions.find(
+                  (option) => option.value === booking?.status,
+               ),
+               date: moment(
+                  `${booking?.appointment_date} ${booking?.appointment_time}`,
+               ).format("YYYY-MM-DDTHH:mm"),
             }}
-            onSubmit={(values: BookingRequest, { resetForm }) => {
-               if (id) {
-                  updateBookingMutate(
-                     { id, newData: values },
-                     {
-                        onSuccess: () => {
-                           resetForm();
-                           onOpenChange(false);
-                        },
-                     },
-                  );
-               } else {
-                  createBookingMutate(values, {
+            onSubmit={(values, { resetForm }) => {
+               console.log(
+                  moment(
+                     `${booking?.appointment_date} ${booking?.appointment_time}`,
+                  ).format("YYYY-MM-DDTHH:mm"),
+               );
+               const newData = {
+                  status: values.status?.value as BookingStatus,
+                  appointment_date: moment(values.date).format("YYYY-MM-DD"),
+                  appointment_time: moment(values.date).format("HH:mm"),
+               };
+               updateBookingMutate(
+                  { id, newData },
+                  {
                      onSuccess: () => {
                         resetForm();
                         onOpenChange(false);
                      },
-                  });
-               }
+                  },
+               );
             }}
             validationSchema={bookingFormValidation}
          >
@@ -95,38 +104,22 @@ function EditBookingDialog({
 
                   <Form className="flex flex-col gap-4">
                      <InputField
-                        id="name"
-                        name="name"
-                        label="Booking name"
-                        placeholder="Enter the booking name"
+                        id="date"
+                        name="date"
+                        label="Booking Date"
+                        type="datetime-local"
+                        placeholder="Enter the booking date"
                         disabled={isPending}
-                        className="min-w-24"
+                        className="block min-w-24"
                      />
-                     <TextareaField
-                        id="description"
-                        name="description"
-                        label="Description"
-                        placeholder="Enter the booking description"
-                        disabled={isPending}
+                     <SelectSearchField
+                        placeholder="Select a status"
+                        label="Status"
+                        name="status"
+                        options={statusOptions}
+                        optionLabel="label"
+                        optionValue="value"
                      />
-                     <InputField
-                        id="max_doctors"
-                        name="max_doctors"
-                        label="Max doctors"
-                        type="number"
-                        placeholder="Enter the max doctors"
-                        disabled={isPending}
-                        className="min-w-24"
-                     />
-                     <div className="flex items-center gap-2">
-                        <h3>Is active?</h3>
-                        <Switch
-                           checked={values.is_active}
-                           onCheckedChange={(checked) =>
-                              setFieldValue("is_active", checked)
-                           }
-                        />
-                     </div>
                   </Form>
 
                   <DialogFooter>

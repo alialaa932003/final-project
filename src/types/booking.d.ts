@@ -1,10 +1,10 @@
 interface Booking {
-   id: number;
-   name: string;
-   description: string;
-   current_doctors: number;
-   max_doctors: number;
-   is_active: number;
-   created_at: string;
-   updated_at: string;
+   appointment_date: string;
+   appointment_time: string;
+   booked_at: string;
+   doctor: { id: string; name: string; specialization: string };
+   id: string;
+   patient_name: string | null;
+   status: BookingStatus;
+   type: string;
 }

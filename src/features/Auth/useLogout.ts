@@ -11,6 +11,7 @@ export const useLogout = () => {
          queryClient.clear();
          toast.success(data?.message);
          localStorage.removeItem("token");
+         localStorage.removeItem("refreshToken");
          navigate("/login");
       },
       onError: (err) => {

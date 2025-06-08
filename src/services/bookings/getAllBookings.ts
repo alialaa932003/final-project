@@ -16,7 +16,7 @@ export const getAllBookings =
       });
 
       const res = await apiCall<StaffApiResponseWithPagination<Booking[]>>(
-         `${BACKEND_SERVICES_BASE_ROUTES.STAFF}/bookings?${params}`,
+         `${BACKEND_SERVICES_BASE_ROUTES.BOOKING}/bookings?${params}`,
       );
 
       return res;

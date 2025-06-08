@@ -9,7 +9,7 @@ export const useDeleteBooking = () => {
    const search = searchParams.get("search") || "";
 
    const { mutate, isPending } = useOptimisticMutation({
-      mutationFn: ({ id }: { id: number }) => deleteBooking({ id }),
+      mutationFn: ({ id }: { id: string }) => deleteBooking({ id }),
       queryKey: [QUERY_KEYS.BOOKINGS, page, search],
       dataPath: ["data", "items"],
    });

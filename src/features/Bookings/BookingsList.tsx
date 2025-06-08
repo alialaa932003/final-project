@@ -25,10 +25,13 @@ const BookingsList = () => {
                <TableHeader>
                   <TableRow>
                      <TableHead className="w-[50px]">#</TableHead>
-                     <TableHead>Name</TableHead>
-                     <TableHead className="w-[350px]">Description</TableHead>
-                     <TableHead>Doctors Count</TableHead>
-                     <TableHead>Is Active</TableHead>
+                     <TableHead>Patient Name</TableHead>
+                     <TableHead>Doctor Name</TableHead>
+                     <TableHead>Doctor Specialization</TableHead>
+                     <TableHead>Status</TableHead>
+                     <TableHead>Type</TableHead>
+                     <TableHead>Date</TableHead>
+                     <TableHead>Time</TableHead>
                      <TableHead className="w-[55px]"> Actions</TableHead>
                   </TableRow>
                </TableHeader>

@@ -14,14 +14,21 @@ import { LIMIT } from "@/constants";
 import ConfirmDelete from "@/components/ConfirmDelete";
 import { useDeleteBooking } from "./hooks/useDeleteBooking";
 import EditBookingDialog from "./EditBookingDialog";
-import IsActiveBadge from "@/components/IsActiveBadge";
+import moment from "moment";
 interface Props {
    rowNumber: number;
    booking: Booking;
 }
 const BookingRow = ({ rowNumber, booking }: Props) => {
-   const { id, name, description, max_doctors, current_doctors, is_active } =
-      booking;
+   const {
+      id,
+      appointment_date,
+      appointment_time,
+      doctor,
+      patient_name,
+      status,
+      type,
+   } = booking;
    const [isOpenEdit, setIsOpenEdit] = useState(false);
    const rowIndex = useGetTableRowIndex(LIMIT, rowNumber);
    const [isConfirmDelete, setIsConfirmDelete] = useState(false);
@@ -31,18 +38,16 @@ const BookingRow = ({ rowNumber, booking }: Props) => {
       <>
          <TableRow>
             <TableCell>{rowIndex}</TableCell>
-            <TableCell>{name}</TableCell>
+            <TableCell>{patient_name || "______"}</TableCell>
+            <TableCell>{doctor.name}</TableCell>
+            <TableCell>{doctor.specialization}</TableCell>
+            <TableCell>{status}</TableCell>
+            <TableCell>{type}</TableCell>
             <TableCell>
-               {description.length > 50
-                  ? description.slice(0, 50) + "..."
-                  : description}
+               {moment(appointment_date).format("YYYY-MM-DD")}
             </TableCell>
-            <TableCell>
-               {current_doctors}/{max_doctors}
-            </TableCell>
-            <TableCell>
-               <IsActiveBadge isActive={Boolean(is_active)} />
-            </TableCell>
+            <TableCell>{appointment_time}</TableCell>
+
             <TableCell>
                <DropdownMenu>
                   <DropdownMenuTrigger className="w-full outline-none">
@@ -78,7 +83,7 @@ const BookingRow = ({ rowNumber, booking }: Props) => {
                isPending={false}
                openDelete={isConfirmDelete}
                setOpenDelete={setIsConfirmDelete}
-               name={name}
+               name={patient_name || "Booking"}
             />
          </TableRow>
 

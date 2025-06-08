@@ -6,7 +6,7 @@ export const useGetOneBooking = ({
    id,
    isOpen,
 }: {
-   id?: number;
+   id?: string;
    isOpen: boolean;
 }) => {
    const { data, isFetching } = useCustomQuery(
