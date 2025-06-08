@@ -27,18 +27,20 @@ import { useTranslation } from "react-i18next";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "react-toastify";
 import { nurseFormValidationSchema } from "./constants/nurseFormValidationSchema";
+import SideBySideInputsContainer from "@/components/SideBySideInputsContainer";
 
 const DEFAULT_INITIAL_VALUES: NurseRequest = {
    first_name: "",
    last_name: "",
    email: "",
    phone: "",
-   clinic_id: -1,
+   national_id: "",
+   clinic_id: "",
    is_active: true,
 };
 
 type AddEditNurseProps = {
-   id?: number | string;
+   id?: string;
    triggerButton: ReactNode;
 };
 
@@ -56,9 +58,9 @@ function AddEditNurseDialog({ id, triggerButton }: AddEditNurseProps) {
       [QUERY_KEYS.SPECIALIZATIONS],
       getAllClinics(),
    );
-   const clinicOptions = clinics?.data.items.map((spec) => ({
-      label: spec.name,
-      value: spec.id,
+   const clinicOptions = clinics?.data.items.map((clinic) => ({
+      label: clinic.name,
+      value: clinic.id,
    }));
 
    const { mutate: createNurseMutate, isPending: isCreatePending } =
@@ -121,6 +123,9 @@ function AddEditNurseDialog({ id, triggerButton }: AddEditNurseProps) {
                           nurse?.data?.email || DEFAULT_INITIAL_VALUES.email,
                        phone:
                           nurse?.data?.phone || DEFAULT_INITIAL_VALUES.phone,
+                       national_id:
+                          nurse?.data?.national_id ||
+                          DEFAULT_INITIAL_VALUES.national_id,
                        clinic_id:
                           nurse?.data?.clinic.id ||
                           DEFAULT_INITIAL_VALUES.clinic_id,
@@ -148,7 +153,7 @@ function AddEditNurseDialog({ id, triggerButton }: AddEditNurseProps) {
                   </DialogHeader>
 
                   <Form>
-                     <div className="flex gap-2 max-sm:flex-col">
+                     <SideBySideInputsContainer>
                         <InputField
                            id="first_name"
                            name="first_name"
@@ -165,7 +170,7 @@ function AddEditNurseDialog({ id, triggerButton }: AddEditNurseProps) {
                            disabled={isPending}
                            className="min-w-24"
                         />
-                     </div>
+                     </SideBySideInputsContainer>
 
                      <InputField
                         id="email"
@@ -174,24 +179,30 @@ function AddEditNurseDialog({ id, triggerButton }: AddEditNurseProps) {
                         placeholder="Enter email"
                         disabled={isPending}
                      />
-                     <InputField
-                        id="phone"
-                        name="phone"
-                        label="Phone"
-                        placeholder="Enter phone number"
-                        disabled={isPending}
-                     />
+
+                     <SideBySideInputsContainer>
+                        <InputField
+                           id="phone"
+                           name="phone"
+                           label="Phone"
+                           placeholder="Enter phone number"
+                           disabled={isPending}
+                        />
+                        <InputField
+                           id="national_id"
+                           name="national_id"
+                           label="National ID"
+                           placeholder="Enter national id number"
+                           disabled={isPending}
+                        />
+                     </SideBySideInputsContainer>
 
                      <SelectField
                         isUseSearchParam={false}
                         label="Clinic"
                         placeholder="Select Clinic"
-                        value={
-                           values.clinic_id && values.clinic_id !== -1
-                              ? `${values.clinic_id}`
-                              : ""
-                        }
-                        options={clinicOptions || []}
+                        value={values.clinic_id}
+                        options={clinicOptions}
                         onChange={(value) => setFieldValue("clinic_id", value)}
                         disabled={isPending}
                         containerClassName="mb-6"

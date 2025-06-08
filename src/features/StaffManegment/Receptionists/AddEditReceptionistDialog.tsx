@@ -21,17 +21,19 @@ import { receptionistFormValidationSchema } from "./constants/receptionistFormVa
 import { getOneReceptionist } from "@/services/staff/receptionists/getOneReceptionist";
 import { createReceptionist } from "@/services/staff/receptionists/createReceptionist";
 import { updateReceptionist } from "@/services/staff/receptionists/updateReceptionist";
+import SideBySideInputsContainer from "@/components/SideBySideInputsContainer";
 
 const DEFAULT_INITIAL_VALUES: ReceptionistRequest = {
    first_name: "",
    last_name: "",
    email: "",
    phone: "",
+   national_id: "",
    is_active: true,
 };
 
 type AddEditReceptionistsProps = {
-   id?: number | string;
+   id?: string;
    triggerButton: ReactNode;
 };
 
@@ -113,6 +115,9 @@ function AddEditReceptionistsDialog({
                        phone:
                           receptionist?.data?.phone ||
                           DEFAULT_INITIAL_VALUES.phone,
+                       national_id:
+                          receptionist?.data?.national_id ||
+                          DEFAULT_INITIAL_VALUES.national_id,
                        is_active:
                           Boolean(receptionist?.data?.is_active) ||
                           DEFAULT_INITIAL_VALUES.is_active,
@@ -137,7 +142,7 @@ function AddEditReceptionistsDialog({
                   </DialogHeader>
 
                   <Form>
-                     <div className="flex gap-2 max-sm:flex-col">
+                     <SideBySideInputsContainer>
                         <InputField
                            id="first_name"
                            name="first_name"
@@ -154,7 +159,7 @@ function AddEditReceptionistsDialog({
                            disabled={isPending}
                            className="min-w-24"
                         />
-                     </div>
+                     </SideBySideInputsContainer>
 
                      <InputField
                         id="email"
@@ -163,13 +168,23 @@ function AddEditReceptionistsDialog({
                         placeholder="Enter email"
                         disabled={isPending}
                      />
-                     <InputField
-                        id="phone"
-                        name="phone"
-                        label="Phone"
-                        placeholder="Enter phone number"
-                        disabled={isPending}
-                     />
+
+                     <SideBySideInputsContainer>
+                        <InputField
+                           id="phone"
+                           name="phone"
+                           label="Phone"
+                           placeholder="Enter phone number"
+                           disabled={isPending}
+                        />
+                        <InputField
+                           id="national_id"
+                           name="national_id"
+                           label="National ID"
+                           placeholder="Enter national id number"
+                           disabled={isPending}
+                        />
+                     </SideBySideInputsContainer>
 
                      <div className="ms-1 flex items-center gap-2">
                         <h3>Is active?</h3>

@@ -13,6 +13,7 @@ function DoctorRow({ doctor, rowNumber }: DoctorRowProps) {
    return (
       <TableRow>
          <TableCell>{rowNumber}</TableCell>
+         <TableCell>{doctor.national_id}</TableCell>
          <TableCell>{fullName}</TableCell>
          <TableCell>{doctor.email}</TableCell>
          <TableCell>{doctor.phone}</TableCell>

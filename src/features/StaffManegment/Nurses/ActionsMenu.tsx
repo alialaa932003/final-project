@@ -5,9 +5,7 @@ import {
    DropdownMenuItem,
    DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { BsThreeDots } from "react-icons/bs";
 import { useDeleteNurse } from "./hooks/useDeleteNurse";
-import { MdDelete, MdModeEdit } from "react-icons/md";
 import AddEditNurseDialog from "./AddEditNurseDialog";
 import ActionBtn from "@/components/ActionBtn";
 import { FaRegEdit } from "react-icons/fa";
@@ -20,7 +18,7 @@ type ActionsMenuProps = {
 function ActionsMenu({ id }: ActionsMenuProps) {
    const { mutate } = useDeleteNurse();
 
-   const handleDeleteDoctor = () => {
+   const handleDeleteNurse = () => {
       mutate({ id });
    };
 
@@ -35,7 +33,7 @@ function ActionsMenu({ id }: ActionsMenuProps) {
                triggerButton={
                   <Button
                      variant="ghost"
-                     className="h-auto justify-between gap-2 rounded-sm !px-2 py-2 text-sm"
+                     className="h-auto justify-between gap-2 rounded-sm !px-2 py-2 text-sm font-normal"
                   >
                      Edit
                      <FaRegEdit />
@@ -45,7 +43,7 @@ function ActionsMenu({ id }: ActionsMenuProps) {
 
             <DropdownMenuItem
                className="text-red-500"
-               onClick={handleDeleteDoctor}
+               onClick={handleDeleteNurse}
             >
                Delete
                <FaRegTrashCan />
