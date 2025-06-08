@@ -33,7 +33,7 @@ function ActionsMenu({ id }: ActionsMenuProps) {
                triggerButton={
                   <Button
                      variant="ghost"
-                     className="h-auto justify-between gap-2 rounded-sm !px-2 py-2 text-sm"
+                     className="h-auto justify-between gap-2 rounded-sm !px-2 py-2 text-sm font-normal"
                   >
                      Edit
                      <FaRegEdit />

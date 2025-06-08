@@ -10,6 +10,8 @@ import AddEditDoctorDialog from "./AddEditDoctorDialog";
 import ActionBtn from "@/components/ActionBtn";
 import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
+import { Link } from "react-router-dom";
+import { MdOutlineAddBox } from "react-icons/md";
 
 type ActionsMenuProps = {
    id: string;
@@ -24,7 +26,7 @@ function ActionsMenu({ id }: ActionsMenuProps) {
 
    return (
       <DropdownMenu>
-         <DropdownMenuTrigger asChild>
+         <DropdownMenuTrigger className="w-full outline-none">
             <ActionBtn />
          </DropdownMenuTrigger>
          <DropdownMenuContent className="flex min-w-fit flex-col gap-2">
@@ -33,13 +35,20 @@ function ActionsMenu({ id }: ActionsMenuProps) {
                triggerButton={
                   <Button
                      variant="ghost"
-                     className="h-auto justify-between gap-2 rounded-sm !px-2 py-2 text-sm"
+                     className="h-auto justify-between gap-2 rounded-sm !px-2 py-2 text-sm font-normal"
                   >
                      Edit
                      <FaRegEdit />
                   </Button>
                }
             />
+
+            <DropdownMenuItem asChild>
+               <Link to={`/bookings/add?doctorId=${id}`} className="w-full">
+                  Add Booking
+                  <MdOutlineAddBox />
+               </Link>
+            </DropdownMenuItem>
 
             <DropdownMenuItem
                className="text-red-500"

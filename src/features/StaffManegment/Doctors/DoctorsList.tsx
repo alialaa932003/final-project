@@ -31,6 +31,7 @@ function DoctorsList() {
                <TableHeader>
                   <TableRow>
                      <TableHead className="w-[50px]">#</TableHead>
+                     <TableHead>National ID</TableHead>
                      <TableHead>Name</TableHead>
                      <TableHead>Email</TableHead>
                      <TableHead>Phone</TableHead>

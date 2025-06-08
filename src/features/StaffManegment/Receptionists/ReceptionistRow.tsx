@@ -1,5 +1,4 @@
 import { TableCell, TableRow } from "@/components/ui/table";
-import { useTranslation } from "react-i18next";
 import ActionsMenu from "./ActionsMenu";
 import IsActiveBadge from "@/components/IsActiveBadge";
 
@@ -9,12 +8,12 @@ type ReceptionistRowProps = {
 };
 
 function ReceptionistRow({ receptionist, rowNumber }: ReceptionistRowProps) {
-   const { t } = useTranslation(["global", "staff"]);
    const fullName = `${receptionist.first_name} ${receptionist.last_name}`;
 
    return (
       <TableRow>
          <TableCell>{rowNumber}</TableCell>
+         <TableCell>{receptionist.national_id}</TableCell>
          <TableCell>{fullName}</TableCell>
          <TableCell>{receptionist.email}</TableCell>
          <TableCell>{receptionist.phone}</TableCell>

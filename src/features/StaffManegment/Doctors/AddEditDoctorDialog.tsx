@@ -22,17 +22,19 @@ import { getAllSpecializations } from "@/services/staff/specializations/getAllSp
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { doctorFormValidationSchema } from "./constants/doctorFormValidationSchema";
+import SideBySideInputsContainer from "@/components/SideBySideInputsContainer";
 
 const DEFAULT_INITIAL_VALUES: DoctorRequest = {
    first_name: "",
    last_name: "",
    email: "",
    phone: "",
-   specialization_id: -1,
+   national_id: "",
+   specialization_id: "",
 };
 
 type AddEditDoctorProps = {
-   id?: number | string;
+   id?: string;
    triggerButton: ReactNode;
 };
 
@@ -103,11 +105,22 @@ function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
             initialValues={
                id
                   ? {
-                       first_name: doctor?.data?.first_name || "",
-                       last_name: doctor?.data?.last_name || "",
-                       email: doctor?.data?.email || "",
-                       phone: doctor?.data?.phone || "",
-                       specialization_id: doctor?.data?.specialization.id || -1,
+                       first_name:
+                          doctor?.data?.first_name ||
+                          DEFAULT_INITIAL_VALUES.first_name,
+                       last_name:
+                          doctor?.data?.last_name ||
+                          DEFAULT_INITIAL_VALUES.last_name,
+                       email:
+                          doctor?.data?.email || DEFAULT_INITIAL_VALUES.email,
+                       phone:
+                          doctor?.data?.phone || DEFAULT_INITIAL_VALUES.phone,
+                       national_id:
+                          doctor?.data?.national_id ||
+                          DEFAULT_INITIAL_VALUES.national_id,
+                       specialization_id:
+                          doctor?.data?.specialization.id ||
+                          DEFAULT_INITIAL_VALUES.specialization_id,
                     }
                   : DEFAULT_INITIAL_VALUES
             }
@@ -129,7 +142,7 @@ function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
                   </DialogHeader>
 
                   <Form>
-                     <div className="flex gap-2 max-sm:flex-col">
+                     <SideBySideInputsContainer>
                         <InputField
                            id="first_name"
                            name="first_name"
@@ -146,7 +159,7 @@ function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
                            disabled={isPending}
                            className="min-w-24"
                         />
-                     </div>
+                     </SideBySideInputsContainer>
 
                      <InputField
                         id="email"
@@ -155,25 +168,30 @@ function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
                         placeholder="Enter email"
                         disabled={isPending}
                      />
-                     <InputField
-                        id="phone"
-                        name="phone"
-                        label="Phone"
-                        placeholder="Enter phone number"
-                        disabled={isPending}
-                     />
+
+                     <SideBySideInputsContainer>
+                        <InputField
+                           id="phone"
+                           name="phone"
+                           label="Phone"
+                           placeholder="Enter phone number"
+                           disabled={isPending}
+                        />
+                        <InputField
+                           id="national_id"
+                           name="national_id"
+                           label="National Id"
+                           placeholder="Enter national id number"
+                           disabled={isPending}
+                        />
+                     </SideBySideInputsContainer>
 
                      <SelectField
                         isUseSearchParam={false}
                         label="Specialization"
                         placeholder="Select specialization"
-                        value={
-                           values.specialization_id &&
-                           values.specialization_id !== -1
-                              ? `${values.specialization_id}`
-                              : ""
-                        }
-                        options={specializationOptions || []}
+                        value={values.specialization_id}
+                        options={specializationOptions}
                         onChange={(value) =>
                            setFieldValue("specialization_id", value)
                         }
