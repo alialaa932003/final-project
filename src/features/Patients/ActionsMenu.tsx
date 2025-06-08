@@ -12,7 +12,7 @@ import { GrView } from "react-icons/gr";
 import { Link } from "react-router-dom";
 
 type ActionsMenuProps = {
-   id: number | string;
+   id: string;
 };
 
 function ActionsMenu({ id }: ActionsMenuProps) {

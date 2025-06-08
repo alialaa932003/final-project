@@ -2,7 +2,7 @@ import { BACKEND_SERVICES_BASE_ROUTES } from "@/constants";
 import { apiCall } from "@/services/apiCall";
 
 type DeleteReceptionistParams = {
-   id: number | string;
+   id: string;
 };
 
 export const deleteReceptionist = async ({ id }: DeleteReceptionistParams) => {

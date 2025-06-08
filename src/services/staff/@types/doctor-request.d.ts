@@ -3,6 +3,6 @@ interface DoctorRequest {
    last_name: string;
    email: string;
    phone: string;
-   specialization_id: number;
+   specialization_id: string;
    // profile_picture?: File;
 }

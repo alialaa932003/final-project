@@ -9,7 +9,7 @@ export const useDeleteSpecialization = () => {
    const search = searchParams.get("search") || "";
 
    const { mutate, isPending } = useOptimisticMutation({
-      mutationFn: ({ id }: { id: number }) => deleteSpecialization({ id }),
+      mutationFn: ({ id }: { id: string }) => deleteSpecialization({ id }),
       queryKey: [QUERY_KEYS.SPECIALIZATIONS, page, search],
       dataPath: ["data", "items"],
    });

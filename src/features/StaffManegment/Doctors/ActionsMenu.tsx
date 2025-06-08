@@ -12,7 +12,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 
 type ActionsMenuProps = {
-   id: string | number;
+   id: string;
 };
 
 function ActionsMenu({ id }: ActionsMenuProps) {
