@@ -53,11 +53,15 @@ function ManageAvailabilities({
 
          <DialogContent className="max-h-[92dvh] sm:max-w-2xl">
             <DialogHeader className="py-1">
-               <div className="flex items-center justify-between">
+               <div className="flex items-center justify-between gap-2">
                   <DialogTitle>
                      Manage Availabilities for Doctor {doctorName}
                   </DialogTitle>
-                  <Button size="icon" onClick={handleOpenAddForm}>
+                  <Button
+                     size="icon"
+                     className="min-w-11"
+                     onClick={handleOpenAddForm}
+                  >
                      <FiPlus className="text-2xl" />
                   </Button>
                </div>
@@ -68,7 +72,7 @@ function ManageAvailabilities({
             </DialogHeader>
 
             <div
-               className={`${isOpenAddForm ? "h-[300px]" : "h-0"} overflow-hidden transition-[height] will-change-[height]`}
+               className={`${isOpenAddForm ? "h-[428px] sm:h-[300px]" : "h-0"} overflow-hidden transition-[height] will-change-[height]`}
             >
                <AddAvailabilityForm
                   doctorId={doctorId}
@@ -85,7 +89,7 @@ function ManageAvailabilities({
                hasError={isError}
                errorText="Failed to load availabilities"
             >
-               <ul className="mx-1 max-h-[40dvh] space-y-4 overflow-y-auto p-1">
+               <ul className="mx-1 space-y-4 overflow-y-auto p-1 sm:max-h-[40dvh]">
                   {data?.data?.items.map((availability) => (
                      <AvailabilityCardItem
                         key={availability.id}

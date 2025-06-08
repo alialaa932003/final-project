@@ -67,7 +67,7 @@ function AddAvailabilityForm({ doctorId, onClose }: AddAvailabilityFormProps) {
       >
          {({ values, setFieldValue, resetForm }) => (
             <Form className="p-2">
-               <SideBySideInputsContainer className="justify-between">
+               <SideBySideInputsContainer className="flex-wrap justify-between gap-4 max-sm:flex-row max-sm:justify-center">
                   <InputField
                      id="from"
                      name="from"
@@ -93,6 +93,7 @@ function AddAvailabilityForm({ doctorId, onClose }: AddAvailabilityFormProps) {
                      containerClassName="w-fit"
                   />
                </SideBySideInputsContainer>
+
                <SelectField
                   name="clinic_id"
                   isUseSearchParam={false}
@@ -102,6 +103,7 @@ function AddAvailabilityForm({ doctorId, onClose }: AddAvailabilityFormProps) {
                   options={clinicOptions}
                   onChange={(value) => setFieldValue("clinic_id", value)}
                   disabled={isGettingClinics}
+                  containerClassName="grow"
                />
 
                <div className="flex flex-wrap gap-4 [&>*]:grow">
