@@ -30,6 +30,7 @@ import { updatePatient } from "@/services/patient-related/patient/updatePatient"
 import { genderOptions } from "./constants/genderOptions";
 import { bloodTypeOptions } from "./constants/bloodTypeOptions";
 import { maritalStatusOptions } from "./constants/maritalStatusOptions";
+import SideBySideInputsContainer from "@/components/SideBySideInputsContainer";
 
 const DEFAULT_INITIAL_VALUES: PatientRequest = {
    firstName: "",
@@ -46,7 +47,7 @@ const DEFAULT_INITIAL_VALUES: PatientRequest = {
 };
 
 type AddEditNurseProps = {
-   id?: number | string;
+   id?: string;
    triggerButton: ReactNode;
 };
 
@@ -148,7 +149,7 @@ function AddEditPatientDialog({ id, triggerButton }: AddEditNurseProps) {
                   </DialogHeader>
 
                   <Form>
-                     <div className="flex gap-2 max-sm:flex-col">
+                     <SideBySideInputsContainer>
                         <InputField
                            id="firstName"
                            name="firstName"
@@ -165,7 +166,7 @@ function AddEditPatientDialog({ id, triggerButton }: AddEditNurseProps) {
                            disabled={isPending}
                            className="min-w-24"
                         />
-                     </div>
+                     </SideBySideInputsContainer>
 
                      <InputField
                         id="email"
@@ -174,64 +175,51 @@ function AddEditPatientDialog({ id, triggerButton }: AddEditNurseProps) {
                         placeholder="Enter email"
                         disabled={isPending}
                      />
-                     <InputField
-                        id="phoneNumber"
-                        name="phoneNumber"
-                        label="Phone"
-                        placeholder="Enter phone number"
-                        disabled={isPending}
-                     />
-                     <InputField
-                        id="nationalID"
-                        name="nationalID"
-                        label="National ID"
-                        placeholder="Enter National ID"
-                        disabled={isPending}
-                     />
-                     <InputField
-                        id="age"
-                        name="age"
-                        label="Age"
-                        placeholder="Enter Age"
-                        type="number"
-                        disabled={isPending}
-                     />
-                     <InputField
-                        id="address"
-                        name="address"
-                        label="Address"
-                        placeholder="Enter Address"
-                        disabled={isPending}
-                     />
-                     <InputField
-                        id="dateOfBirth"
-                        name="dateOfBirth"
-                        label="Date Of Birth"
-                        type="date"
-                        placeholder="Enter Date Of Birth"
-                        disabled={isPending}
-                     />
 
-                     <SelectField
-                        isUseSearchParam={false}
-                        label="Gender"
-                        placeholder="Select Gender"
-                        value={values.gender ? `${values.gender}` : ""}
-                        options={genderOptions || []}
-                        onChange={(value) => setFieldValue("gender", value)}
-                        disabled={isPending}
-                        containerClassName="mb-6"
-                     />
-                     <SelectField
-                        isUseSearchParam={false}
-                        label="Blood Type"
-                        placeholder="Select Blood Type"
-                        value={values.bloodType ? `${values.bloodType}` : ""}
-                        options={bloodTypeOptions || []}
-                        onChange={(value) => setFieldValue("bloodType", value)}
-                        disabled={isPending}
-                        containerClassName="mb-6"
-                     />
+                     <SideBySideInputsContainer>
+                        <InputField
+                           id="phoneNumber"
+                           name="phoneNumber"
+                           label="Phone"
+                           placeholder="Enter phone number"
+                           disabled={isPending}
+                        />
+                        <InputField
+                           id="nationalID"
+                           name="nationalID"
+                           label="National ID"
+                           placeholder="Enter National ID"
+                           disabled={isPending}
+                        />
+                        <InputField
+                           id="age"
+                           name="age"
+                           label="Age"
+                           placeholder="Enter Age"
+                           type="number"
+                           disabled={isPending}
+                        />
+                     </SideBySideInputsContainer>
+
+                     <SideBySideInputsContainer>
+                        <InputField
+                           id="address"
+                           name="address"
+                           label="Address"
+                           placeholder="Enter Address"
+                           disabled={isPending}
+                        />
+                        <InputField
+                           id="dateOfBirth"
+                           name="dateOfBirth"
+                           label="Date Of Birth"
+                           type="date"
+                           placeholder="Enter Date Of Birth"
+                           disabled={isPending}
+                           containerClassName="w-fit"
+                        />
+                     </SideBySideInputsContainer>
+
                      <SelectField
                         isUseSearchParam={false}
                         label="Marital Status"
@@ -246,6 +234,31 @@ function AddEditPatientDialog({ id, triggerButton }: AddEditNurseProps) {
                         disabled={isPending}
                         containerClassName="mb-6"
                      />
+
+                     <SideBySideInputsContainer>
+                        <SelectField
+                           isUseSearchParam={false}
+                           label="Gender"
+                           placeholder="Select Gender"
+                           value={values.gender ? `${values.gender}` : ""}
+                           options={genderOptions || []}
+                           onChange={(value) => setFieldValue("gender", value)}
+                           disabled={isPending}
+                           containerClassName="mb-6 grow"
+                        />
+                        <SelectField
+                           isUseSearchParam={false}
+                           label="Blood Type"
+                           placeholder="Select Blood Type"
+                           value={values.bloodType ? `${values.bloodType}` : ""}
+                           options={bloodTypeOptions || []}
+                           onChange={(value) =>
+                              setFieldValue("bloodType", value)
+                           }
+                           disabled={isPending}
+                           containerClassName="mb-6 grow"
+                        />
+                     </SideBySideInputsContainer>
                   </Form>
 
                   <DialogFooter>
