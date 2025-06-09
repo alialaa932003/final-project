@@ -7,7 +7,10 @@ function Doctors() {
    const { t } = useTranslation("staff");
 
    return (
-      <PageLayout pageName={t("doctors")} className="flex flex-col gap-7">
+      <PageLayout
+         pageName={t("doctors")}
+         className="flex animate-fade-in flex-col gap-7"
+      >
          <Header />
          <DoctorsList />
       </PageLayout>
