@@ -1,5 +1,5 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Outlet, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Navbar from "@/features/common/Navbar";
 import Sidebar from "@/features/common/Sidebar";
@@ -10,6 +10,12 @@ const DashboardLayout = () => {
    console.log(i18n.language);
    const [openResponsiveSidebar, setOpenRespomsiveSidebar] =
       React.useState(false);
+   const { pathname } = useLocation();
+   useEffect(() => {
+      if (openResponsiveSidebar) {
+         setOpenRespomsiveSidebar(false);
+      }
+   }, [pathname]);
 
    return (
       <>
