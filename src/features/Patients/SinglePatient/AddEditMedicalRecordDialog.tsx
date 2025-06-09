@@ -15,7 +15,6 @@ import { Form, Formik } from "formik";
 import { useCustomQuery } from "@/hooks/useCustomQuery";
 import InputField from "@/components/form/InputField";
 import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
 import { getOneMedicalRecord } from "@/services/patient-related/medical-record/getOneMedicalRecord";
 import { createMedicalRecord } from "@/services/patient-related/medical-record/createMedicalRecord";
 import { updateMedicalRecord } from "@/services/patient-related/medical-record/updateMedicalRecord";
