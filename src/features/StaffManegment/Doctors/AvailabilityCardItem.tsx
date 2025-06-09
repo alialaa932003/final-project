@@ -9,7 +9,7 @@ type AvailabilityCardItemProps = {
 function AvailabilityCardItem({ availability }: AvailabilityCardItemProps) {
    const preparedFrom = getDayjsFromTime(availability.from).format("HH:mm A");
    const preparedTo = getDayjsFromTime(availability.to).format("HH:mm A");
-   const preparedDate = dayjs(availability.date).format("DD/MM/YYYY");
+   const preparedDate = dayjs(availability.date).format("YYYY-MM-DD");
 
    return (
       <li className="rounded-xl bg-primary-500/90 px-8 py-6 text-white">
