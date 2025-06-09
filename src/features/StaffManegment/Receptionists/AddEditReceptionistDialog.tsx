@@ -74,11 +74,9 @@ function AddEditReceptionistsDialog({
             {
                onSuccess: () => {
                   setOpen(false);
-                  toast.success("Receptionists updated successfully");
                },
                onError: (error) => {
                   console.error("Error updating receptionists:", error);
-                  toast.error("Failed to update receptionists");
                },
             },
          );
@@ -86,11 +84,9 @@ function AddEditReceptionistsDialog({
          createReceptionistMutate(values, {
             onSuccess: () => {
                setOpen(false);
-               toast.success("Receptionists created successfully");
             },
             onError: (error) => {
                console.error("Error updating receptionists:", error);
-               toast.error("Failed to create receptionists");
             },
          });
       }

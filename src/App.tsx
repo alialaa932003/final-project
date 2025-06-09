@@ -21,6 +21,7 @@ import AllPatients from "./pages/patients/all-patients";
 import AllBookings from "./pages/bookings/all-bookings";
 import Login from "./pages/auth/login";
 import AddBooking from "./pages/bookings/add-booking";
+import SinglePatient from "./pages/patients/single-patient";
 
 function App() {
    const queryClient = new QueryClient({
@@ -119,7 +120,16 @@ function App() {
                                     </ProtectedRoute>
                                  }
                               />
-                              <Route path="[id]" element={<div>Patient</div>} />
+                              <Route
+                                 path=":patientId"
+                                 element={
+                                    <ProtectedRoute
+                                       allowedRoles={["admin", "doctor"]}
+                                    >
+                                       <SinglePatient />
+                                    </ProtectedRoute>
+                                 }
+                              />
                            </Route>
                            <Route path="/bookings">
                               <Route

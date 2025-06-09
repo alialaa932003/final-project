@@ -74,7 +74,7 @@ function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
          mutationType: "edit",
       });
    const isPending = isCreatePending || isUpdatePending || isGettingDoctor;
-      console.log(isGettingDoctor);
+   console.log(isGettingDoctor);
    const handleSubmit = (values: DoctorRequest) => {
       if (id) {
          updateDoctorMutate(
@@ -82,11 +82,9 @@ function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
             {
                onSuccess: () => {
                   setOpen(false);
-                  toast.success("Doctor updated successfully");
                },
                onError: (error) => {
                   console.error("Error updating doctor:", error);
-                  toast.error("Failed to update doctor");
                },
             },
          );
@@ -94,11 +92,9 @@ function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
          createDoctorMutate(values, {
             onSuccess: () => {
                setOpen(false);
-               toast.success("Doctor created successfully");
             },
             onError: (error) => {
                console.error("Error updating doctor:", error);
-               toast.error("Failed to create doctor");
             },
          });
       }

@@ -17,7 +17,7 @@ const TextareaField = ({
       <Field name={name}>
          {({ field }: { field: any }) => {
             return (
-               <div className="relative mb-3 w-full pb-1">
+               <div className="relative mb-5 w-full pb-1">
                   {label && (
                      <label
                         className="mb-3 block font-medium text-gray-400"

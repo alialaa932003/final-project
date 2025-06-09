@@ -13,15 +13,9 @@ import { useOptimisticMutation } from "@/hooks/useOptimisticMutation";
 import { QUERY_KEYS } from "@/constants";
 import { Form, Formik } from "formik";
 import { useCustomQuery } from "@/hooks/useCustomQuery";
-import { getOneDoctors } from "@/services/staff/doctors/getOneDoctor";
 import InputField from "@/components/form/InputField";
 import SelectField from "@/components/fields/SelectField";
-import { getOneNurse } from "@/services/staff/nurses/getOneNurse";
-import { getAllClinics } from "@/services/staff/clinics/getAllClinics";
-import { createNurse } from "@/services/staff/nurses/createNurse";
-import { updateNurse } from "@/services/staff/nurses/updateNurse";
 import { useTranslation } from "react-i18next";
-import { Switch } from "@/components/ui/switch";
 import { toast } from "react-toastify";
 import { patientFormValidationSchema } from "./constants/patientFormValidationSchema";
 import { getOnePatient } from "@/services/patient-related/patient/getOnePatient";
@@ -82,11 +76,9 @@ function AddEditPatientDialog({ id, triggerButton }: AddEditNurseProps) {
             {
                onSuccess: () => {
                   setOpen(false);
-                  toast.success("Patient updated successfully");
                },
                onError: (error) => {
                   console.error("Error updating patient:", error);
-                  toast.error("Failed to update patient");
                },
             },
          );
@@ -94,11 +86,9 @@ function AddEditPatientDialog({ id, triggerButton }: AddEditNurseProps) {
          createPatientMutate(values, {
             onSuccess: () => {
                setOpen(false);
-               toast.success("Patient created successfully");
             },
             onError: (error) => {
                console.error("Error updating patient:", error);
-               toast.error("Failed to create patient");
             },
          });
       }
@@ -123,9 +113,9 @@ function AddEditPatientDialog({ id, triggerButton }: AddEditNurseProps) {
                address: patient?.data.address || DEFAULT_INITIAL_VALUES.address,
                bloodType:
                   patient?.data.bloodType || DEFAULT_INITIAL_VALUES.bloodType,
-               dateOfBirth:
-                  patient?.data.dateOfBirth ||
-                  DEFAULT_INITIAL_VALUES.dateOfBirth,
+               dateOfBirth: patient?.data.dateOfBirth
+                  ? patient.data.dateOfBirth.split("T")[0]
+                  : DEFAULT_INITIAL_VALUES.dateOfBirth,
                gender: patient?.data.gender || DEFAULT_INITIAL_VALUES.gender,
                maritalStatus:
                   patient?.data.maritalStatus ||

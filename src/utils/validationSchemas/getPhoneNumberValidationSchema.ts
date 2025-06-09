@@ -7,7 +7,5 @@ export const getPhoneNumberValidationSchema = (isRequired: boolean = true) => {
       schema = schema.required("Phone number is required");
    }
 
-   return schema
-      .matches(/^\+?[0-9\s-]+$/, "Phone number must be a valid format")
-      .max(20, "Phone number cannot exceed 20 characters");
+   return schema.matches(/^\d{11}$/, "Phone number must be exactly 11 digits");
 };

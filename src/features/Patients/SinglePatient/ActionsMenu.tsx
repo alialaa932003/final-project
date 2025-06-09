@@ -5,31 +5,31 @@ import {
    DropdownMenuItem,
    DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import AddEditPatientDialog from "./AddEditPatientDialog";
 import ActionBtn from "@/components/ActionBtn";
 import { FaRegEdit } from "react-icons/fa";
 import { GrView } from "react-icons/gr";
 import { Link } from "react-router-dom";
-import AddEditMedicalRecordDialog from "./SinglePatient/AddEditMedicalRecordDialog";
-import { FiPlus } from "react-icons/fi";
+import AddEditMedicalRecordDialog from "./AddEditMedicalRecordDialog";
 
 type ActionsMenuProps = {
    id: string;
+   patientId: string;
 };
 
-function ActionsMenu({ id }: ActionsMenuProps) {
+function ActionsMenu({ id, patientId }: ActionsMenuProps) {
    return (
       <DropdownMenu>
          <DropdownMenuTrigger className="w-full outline-none">
             <ActionBtn />
          </DropdownMenuTrigger>
          <DropdownMenuContent className="flex min-w-fit flex-col gap-2">
-            <AddEditPatientDialog
+            <AddEditMedicalRecordDialog
                id={id}
+               patientId={patientId}
                triggerButton={
                   <Button
                      variant="ghost"
-                     className="h-auto justify-between gap-2 rounded-sm !px-2 py-2 text-sm font-normal"
+                     className="h-auto justify-between gap-2 rounded-sm !px-2 py-2 text-sm"
                   >
                      Edit
                      <FaRegEdit />
@@ -43,19 +43,6 @@ function ActionsMenu({ id }: ActionsMenuProps) {
                   <GrView />
                </Link>
             </DropdownMenuItem>
-
-            <AddEditMedicalRecordDialog
-               patientId={id}
-               triggerButton={
-                  <Button
-                     variant="ghost"
-                     className="h-auto justify-between gap-2 rounded-sm !px-2 py-2 text-sm font-normal"
-                  >
-                     Add Medical Record
-                     <FiPlus />
-                  </Button>
-               }
-            />
          </DropdownMenuContent>
       </DropdownMenu>
    );

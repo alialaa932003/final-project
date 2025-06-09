@@ -27,6 +27,8 @@ export const QUERY_KEYS = {
    SPECIALIZATION: "specialization",
    PATIENT: "patient",
    PATIENTS: "patients",
+   MEDICAL_RECORD: "medicalRecord",
+   MEDICAL_RECORDS: "medicalRecords",
    PATIENTS_LOOKUP: "patientsLookup",
    BOOKING: "booking",
    BOOKINGS: "bookings",
