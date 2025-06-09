@@ -16,7 +16,9 @@ export const getAllMedicalRecordForUser =
          searchTerm,
       });
 
-      const res = await apiCall<StaffApiResponse<MedicalRecord>>(
+      const res = await apiCall<
+         StaffApiResponseWithPagination<MedicalRecord[]>
+      >(
          `${BACKEND_SERVICES_BASE_ROUTES.PATIENT}/MedicalRecords/get-all-medical-records-for-patient-by-Id/${patientId}?${params}`,
       );
 

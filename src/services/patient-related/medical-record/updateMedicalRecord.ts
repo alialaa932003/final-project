@@ -3,7 +3,7 @@ import { apiCall } from "@/services/apiCall";
 
 type UpdateMedicalRecordParams = {
    id: string;
-   newData: Partial<MedicalRecordRequest>;
+   newData: MedicalRecordRequestWithPatientId;
 };
 
 export const updateMedicalRecord = async ({

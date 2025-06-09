@@ -20,6 +20,7 @@ import Receptionists from "./pages/staff-management/receptionists";
 import AllPatients from "./pages/patients/all-patients";
 import AllBookings from "./pages/bookings/all-bookings";
 import Login from "./pages/auth/login";
+import SinglePatient from "./pages/patients/single-patient";
 
 function App() {
    const queryClient = new QueryClient({
@@ -82,8 +83,8 @@ function App() {
                               <Route path="/patients">
                                  <Route index element={<AllPatients />} />
                                  <Route
-                                    path="[id]"
-                                    element={<div>Patient</div>}
+                                    path=":patientId"
+                                    element={<SinglePatient />}
                                  />
                               </Route>
                               <Route path="/bookings">

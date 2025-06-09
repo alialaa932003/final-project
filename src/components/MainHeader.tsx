@@ -32,8 +32,8 @@ const MainHeader = ({ children, className = "" }: AppointmentsHeaderProps) => {
 // Title section component
 const Title = ({ title, description, className = "" }: TitleSectionProps) => {
    return (
-      <div className={`flex-1 ${className}`}>
-         <h2 className="mb-2 text-2xl font-bold">{title}</h2>
+      <div className={`flex-1 space-y-2 ${className}`}>
+         <h2 className="text-2xl font-bold">{title}</h2>
          {description && <p className="text-sm text-gray-200">{description}</p>}
       </div>
    );

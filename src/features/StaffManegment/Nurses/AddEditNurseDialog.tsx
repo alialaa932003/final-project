@@ -10,15 +10,11 @@ import {
    DialogTrigger,
 } from "@/components/ui/dialog";
 import { useOptimisticMutation } from "@/hooks/useOptimisticMutation";
-import { createDoctor } from "@/services/staff/doctors/createDoctor";
 import { QUERY_KEYS } from "@/constants";
-import { updateDoctor } from "@/services/staff/doctors/updateDoctor";
 import { Form, Formik } from "formik";
 import { useCustomQuery } from "@/hooks/useCustomQuery";
-import { getOneDoctors } from "@/services/staff/doctors/getOneDoctor";
 import InputField from "@/components/form/InputField";
 import SelectField from "@/components/fields/SelectField";
-import { getAllSpecializations } from "@/services/staff/specializations/getAllSpecializations";
 import { getOneNurse } from "@/services/staff/nurses/getOneNurse";
 import { getAllClinics } from "@/services/staff/clinics/getAllClinics";
 import { createNurse } from "@/services/staff/nurses/createNurse";
