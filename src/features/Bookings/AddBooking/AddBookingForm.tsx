@@ -48,14 +48,11 @@ const AddBookingForm = () => {
          initialValues={{
             date: moment().format("YYYY-MM-DDTHH:mm"),
             type: typesOptions[0],
-            doctor: { id: searchParams.get("doctorId"), name: "" },
+            doctor: { id: searchParams.get("doctorId") || "", name: "" },
             patient: { id: "", fullName: "" },
          }}
          onSubmit={(values, { resetForm }) => {
-            const doctorId =
-               typeof values.doctor === "string"
-                  ? values.doctor
-                  : values.doctor.id;
+            const doctorId = values.doctor.id;
             console.log(values);
             const newValues = {
                type: values.type.value,

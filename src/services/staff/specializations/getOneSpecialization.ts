@@ -2,7 +2,7 @@ import { BACKEND_SERVICES_BASE_ROUTES } from "@/constants";
 import { apiCall } from "@/services/apiCall";
 
 type GetOneSpecializationParams = {
-   id?: number;
+   id?: string;
 };
 
 export const getOneSpecialization =
