@@ -20,7 +20,7 @@ import { useUpdateSpecialization } from "./hooks/useUpdateSpecialization";
 import SelectSearchField from "@/components/form/SelectSearchField";
 
 type AddEditSpecializationProps = {
-   id?: number;
+   id?: string;
    triggerButton?: ReactNode;
    isOpen: boolean;
    onOpenChange: (open: boolean) => void;
