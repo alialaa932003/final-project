@@ -24,7 +24,7 @@ import { clinicFormValidation } from "./hooks/clinicFormValidation";
 import BarLoading from "@/components/BarLoading";
 
 type AddEditClinicProps = {
-   id?: number;
+   id?: string;
    triggerButton?: ReactNode;
    isOpen: boolean;
    onOpenChange: (open: boolean) => void;

@@ -27,7 +27,7 @@ export default function Pagination({ pageCount }: Props) {
          }
          onPageChange={handlePageClick}
          pageRangeDisplayed={4}
-         marginPagesDisplayed={0}
+         marginPagesDisplayed={1}
          pageCount={pageCount}
          previousLabel={
             <button
@@ -38,7 +38,7 @@ export default function Pagination({ pageCount }: Props) {
          }
          // pageClassName="h-11 w-11 grid place-items-center rounded-xl cursor-pointer text-gray-800"
          pageLinkClassName=" text-lg w-12 h-12 flex justify-center items-center transition-all border border-primary-100  rounded-[1rem] bg-primary-50  dark:bg-[#5F666A] dark:text-white hover:bg-primary-500 hover:text-white dark:hover:bg-primary-500 dark:hover:text-white "
-         breakLabel={null}
+         breakLabel={"....."}
          containerClassName="flex w-full justify-end  items-center gap-1.5"
          activeLinkClassName="bg-primary-500 text-[#fff] dark:bg-primary-500"
          initialPage={currentPage - 1}

@@ -1,6 +1,6 @@
 import PageLayout from "@/components/layouts/PageLayout";
-import BookingsList from "@/features/Bookings/BookingsList";
-import BookingsListHeader from "@/features/Bookings/BookingsListHeader";
+import BookingsList from "@/features/Bookings/AllBookings/BookingsList";
+import BookingsListHeader from "@/features/Bookings/AllBookings/BookingsListHeader";
 import React from "react";
 
 const AllBookings = () => {
