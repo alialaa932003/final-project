@@ -99,7 +99,7 @@ const SelectSearchField = ({
             };
 
             return (
-               <div className="relative mb-3 w-full pb-2">
+               <div className="relative mb-5 w-full pb-2">
                   {label && (
                      <label className="mb-2 block font-medium text-gray-600">
                         {label}

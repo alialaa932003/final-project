@@ -7,8 +7,29 @@ import { useCreateBooking } from "../hooks/useCreateBooking";
 import BarLoading from "@/components/BarLoading";
 import { useGetAllPatientsLookup } from "../hooks/useGetAllPatientsLookup";
 import { useSearchParams } from "react-router-dom";
-
+import * as yup from "yup";
+import { Button } from "@/components/ui/button";
 const AddBookingForm = () => {
+   const schema = yup.object().shape({
+      date: yup.date().required("Booking date is required"),
+      type: yup.mixed().required("Booking type is required"),
+      doctor: yup
+         .object()
+         .test(
+            "has-value",
+            "Doctor is required",
+            (value: any) => value && value?.id,
+         )
+         .required("Doctor is required"),
+      patient: yup
+         .object()
+         .test(
+            "has-value",
+            "patient is required",
+            (value: any) => value && value?.id,
+         )
+         .required("patient is required"),
+   });
    const [searchParams] = useSearchParams();
    const { data: doctorsApi, isPending: isGettingDoctors } =
       useGetAllDoctorsLookup();
@@ -17,13 +38,7 @@ const AddBookingForm = () => {
    const { data: patientsApi, isPending: isGettingPatients } =
       useGetAllPatientsLookup();
 
-   const patientsOptions =
-      patientsApi?.data?.map((patient) => {
-         return {
-            id: patient.id,
-            name: `${patient.firstName} ${patient.lastName}`,
-         };
-      }) || [];
+   const patientsOptions = patientsApi?.data || [];
 
    const { createBookingMutate, isCreatePending } = useCreateBooking();
    const isLoading = isGettingDoctors || isGettingPatients || isCreatePending;
@@ -33,14 +48,15 @@ const AddBookingForm = () => {
          initialValues={{
             date: moment().format("YYYY-MM-DDTHH:mm"),
             type: typesOptions[0],
-            doctor: searchParams.get("doctorId") || { id: "", name: "" },
-            patient: { id: "", name: "" },
+            doctor: { id: searchParams.get("doctorId"), name: "" },
+            patient: { id: "", fullName: "" },
          }}
          onSubmit={(values, { resetForm }) => {
             const doctorId =
                typeof values.doctor === "string"
                   ? values.doctor
                   : values.doctor.id;
+            console.log(values);
             const newValues = {
                type: values.type.value,
                patient_id: values.patient.id,
@@ -54,7 +70,7 @@ const AddBookingForm = () => {
                },
             });
          }}
-         validationSchema={{}}
+         validationSchema={schema}
       >
          {({ values, setFieldValue, submitForm }) => (
             <Form className="flex flex-col gap-x-4">
@@ -81,8 +97,9 @@ const AddBookingForm = () => {
                   label="Patient"
                   name="patient"
                   options={patientsOptions}
-                  optionLabel="name"
+                  optionLabel="fullName"
                   optionValue="id"
+                  valueKey="id"
                />
                <SelectSearchField
                   placeholder="Select a doctor"
@@ -91,7 +108,9 @@ const AddBookingForm = () => {
                   options={doctorsOptions}
                   optionLabel="name"
                   optionValue="id"
+                  valueKey="id"
                />
+               <Button className="mt-6">Add Booking</Button>
             </Form>
          )}
       </Formik>
