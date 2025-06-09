@@ -58,10 +58,12 @@ function AddEditNurseDialog({ id, triggerButton }: AddEditNurseProps) {
       [QUERY_KEYS.CLINICS],
       getAllClinics(),
    );
-   const clinicOptions = clinics?.data.items.map((clinic) => ({
-      label: clinic.name,
-      value: clinic.id,
-   }));
+   const clinicOptions = isGettingClinics
+      ? []
+      : clinics?.data.items.map((clinic) => ({
+           label: clinic.name,
+           value: clinic.id,
+        }));
 
    const { mutate: createNurseMutate, isPending: isCreatePending } =
       useOptimisticMutation({
@@ -198,13 +200,14 @@ function AddEditNurseDialog({ id, triggerButton }: AddEditNurseProps) {
                      </SideBySideInputsContainer>
 
                      <SelectField
+                        name="clinic_id"
                         isUseSearchParam={false}
                         label="Clinic"
                         placeholder="Select Clinic"
                         value={values.clinic_id}
                         options={clinicOptions}
                         onChange={(value) => setFieldValue("clinic_id", value)}
-                        disabled={isPending}
+                        disabled={isPending || isGettingClinics}
                         containerClassName="mb-6"
                      />
 

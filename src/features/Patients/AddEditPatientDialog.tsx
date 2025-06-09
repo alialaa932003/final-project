@@ -221,6 +221,7 @@ function AddEditPatientDialog({ id, triggerButton }: AddEditNurseProps) {
                      </SideBySideInputsContainer>
 
                      <SelectField
+                        name="maritalStatus"
                         isUseSearchParam={false}
                         label="Marital Status"
                         placeholder="Select Marital Status"
@@ -237,6 +238,7 @@ function AddEditPatientDialog({ id, triggerButton }: AddEditNurseProps) {
 
                      <SideBySideInputsContainer>
                         <SelectField
+                           name="gender"
                            isUseSearchParam={false}
                            label="Gender"
                            placeholder="Select Gender"
@@ -247,6 +249,7 @@ function AddEditPatientDialog({ id, triggerButton }: AddEditNurseProps) {
                            containerClassName="mb-6 grow"
                         />
                         <SelectField
+                           name="bloodType"
                            isUseSearchParam={false}
                            label="Blood Type"
                            placeholder="Select Blood Type"

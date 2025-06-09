@@ -50,10 +50,16 @@ function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
    );
    const { data: specializations, isLoading: isGettingSpecializations } =
       useCustomQuery([QUERY_KEYS.SPECIALIZATIONS], getAllSpecializations());
-   const specializationOptions = specializations?.data.items.map((spec) => ({
-      label: spec.name,
-      value: spec.id,
-   }));
+
+   console.log("specializations", specializations);
+   const specializationOptions = isGettingSpecializations
+      ? []
+      : specializations?.data.items.map((spec) => ({
+           label: spec.name,
+           value: spec.id,
+        }));
+
+   console.log("specializationOptions", specializationOptions);
 
    const { mutate: createDoctorMutate, isPending: isCreatePending } =
       useOptimisticMutation({
@@ -187,6 +193,7 @@ function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
                      </SideBySideInputsContainer>
 
                      <SelectField
+                        name="specialization_id"
                         isUseSearchParam={false}
                         label="Specialization"
                         placeholder="Select specialization"
@@ -195,7 +202,7 @@ function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
                         onChange={(value) =>
                            setFieldValue("specialization_id", value)
                         }
-                        disabled={isPending}
+                        disabled={isPending || isGettingSpecializations}
                      />
                   </Form>
 
