@@ -20,8 +20,16 @@ import { useLogout } from "../Auth/useLogout";
 import { cn } from "@/lib/utils";
 import { LucideUsersRound } from "lucide-react";
 import { BsFillPersonVcardFill } from "react-icons/bs";
+import { useQueryClient } from "@tanstack/react-query";
+import { UserResponse } from "@/types/auth";
 
 const Sidebar = ({ className }: { className?: string }) => {
+   const queryClient = useQueryClient();
+   const data = queryClient.getQueryData<{ data: UserResponse }>([
+      "current-user",
+   ]);
+   const user = data?.data;
+   const currentUserRole = user?.role.toLocaleLowerCase() || "doctor";
    const { logout, isPending } = useLogout();
    const links = [
       {
@@ -29,6 +37,7 @@ const Sidebar = ({ className }: { className?: string }) => {
          icon: <LuLayoutDashboard />,
          to: `/dashboard`,
          type: "single",
+         allowedRoles: ["admin"],
       },
 
       {
@@ -39,14 +48,17 @@ const Sidebar = ({ className }: { className?: string }) => {
             {
                name: "Doctors",
                to: "/staff-management/doctors",
+               allowedRoles: ["admin"],
             },
             {
                name: "Nurses",
                to: "/staff-management/nurses",
+               allowedRoles: ["admin"],
             },
             {
                name: "Receptionists",
                to: "/staff-management/receptionists",
+               allowedRoles: ["admin"],
             },
          ],
       },
@@ -55,35 +67,65 @@ const Sidebar = ({ className }: { className?: string }) => {
          icon: <FaClinicMedical />,
          to: `/staff-management/clinics`,
          type: "single",
+         allowedRoles: ["admin"],
       },
       {
          name: "Specializations",
          icon: <MdOutlineTypeSpecimen />,
          to: `/staff-management/specializations`,
          type: "single",
+         allowedRoles: ["admin"],
       },
       {
          name: "Patients",
          icon: <BsFillPersonVcardFill />,
          to: `/patients`,
          type: "single",
+         allowedRoles: ["admin", "doctor", "receptionist"],
       },
       {
          name: "All Bookings",
          icon: <LuCalendarRange />,
          to: `/bookings`,
          type: "single",
+         allowedRoles: ["admin", "doctor", "receptionist"],
       },
       {
          name: "Add Booking",
          icon: <MdOutlineAddBox />,
          to: `/add-booking`,
          type: "single",
+         allowedRoles: ["admin", "doctor", "receptionist"],
       },
    ];
    const { pathname } = useLocation();
+
+   const filteredLinks = React.useMemo(() => {
+      return links
+         .map((link) => {
+            if (link.type === "multi" && link.items) {
+               const filteredItems = link.items.filter(
+                  (item) =>
+                     item.allowedRoles &&
+                     item.allowedRoles.includes(currentUserRole),
+               );
+               if (filteredItems.length > 0) {
+                  return { ...link, items: filteredItems };
+               }
+               return null; //  Or an empty object if you prefer to handle it differently
+            } else if (
+               link.allowedRoles &&
+               link.allowedRoles.includes(currentUserRole)
+            ) {
+               return link;
+            }
+            return null;
+         })
+         .filter(Boolean); // Remove null entries
+   }, [links, currentUserRole]);
+
    const [activeAccordion, setActiveAccordion] = React.useState(
-      `item-${links.findIndex((link) =>
+      `item-${filteredLinks.findIndex((link) =>
          link?.items?.some((route) => pathname.includes(route.to)),
       )}`,
    );
@@ -120,8 +162,14 @@ const Sidebar = ({ className }: { className?: string }) => {
                   setActiveAccordion(value);
                }}
             >
-               {links.map((link, index) => {
+               {filteredLinks.map((link, index) => {
+                  if (!link) return null; //  Should not happen due to .filter(Boolean) but good for type safety
+
                   if (link.type === "multi") {
+                     //  Ensure link.items exists and is not empty
+                     if (!link.items || link.items.length === 0) {
+                        return null;
+                     }
                      return (
                         <AccordionItem
                            className="border-0 border-transparent py-5"
@@ -146,10 +194,10 @@ const Sidebar = ({ className }: { className?: string }) => {
                            </AccordionTrigger>
                            <AccordionContent className="px-6 pb-0 pt-3">
                               <div className={`relative mt-2 flex flex-col`}>
-                                 {link?.items?.map((item, index) => {
+                                 {link?.items?.map((item, itemIndex) => {
                                     return (
                                        <NavLink
-                                          key={index}
+                                          key={itemIndex}
                                           to={item.to}
                                           className={
                                              "relative rounded-2xl px-2 py-4 text-sm text-white before:bg-gray-400 hover:opacity-60 [&.active]:bg-primary-700"
