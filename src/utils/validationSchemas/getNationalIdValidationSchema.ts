@@ -7,8 +7,5 @@ export const getNationalIdValidationSchema = (isRequired: boolean = true) => {
       schema = schema.required("National ID is required");
    }
 
-   return schema.matches(
-      /^\d{10,15}$/,
-      "National ID must be between 10 and 15 digits",
-   );
+   return schema.matches(/^\d{14}$/, "National ID must be exactly 14 digits");
 };
