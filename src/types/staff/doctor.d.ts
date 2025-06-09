@@ -13,3 +13,8 @@ interface Doctor {
 interface DoctorFullInfo extends Doctor {
    availabilities: Availability[];
 }
+
+interface DoctorLookup {
+   id: string;
+   name: string;
+}

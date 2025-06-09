@@ -20,6 +20,7 @@ import Receptionists from "./pages/staff-management/receptionists";
 import AllPatients from "./pages/patients/all-patients";
 import AllBookings from "./pages/bookings/all-bookings";
 import Login from "./pages/auth/login";
+import AddBooking from "./pages/bookings/add-booking";
 import SinglePatient from "./pages/patients/single-patient";
 
 function App() {
@@ -53,44 +54,105 @@ function App() {
                            <Route path="/login" element={<Login />} />
                         </Route>
                         <Route element={<DashboardLayout />}>
+                           <Route path="/dashboard">
+                              <Route
+                                 index
+                                 element={
+                                    <ProtectedRoute allowedRoles={["admin"]}>
+                                       <Dashboard />
+                                    </ProtectedRoute>
+                                 }
+                              />
+                           </Route>
+                           <Route path="/staff-management">
+                              <Route
+                                 index
+                                 path="doctors"
+                                 element={
+                                    <ProtectedRoute allowedRoles={["admin"]}>
+                                       <Doctors />
+                                    </ProtectedRoute>
+                                 }
+                              />
+                              <Route
+                                 path="nurses"
+                                 element={
+                                    <ProtectedRoute
+                                       allowedRoles={["admin", "doctor"]}
+                                    >
+                                       <Nurses />
+                                    </ProtectedRoute>
+                                 }
+                              />
+                              <Route
+                                 path="receptionists"
+                                 element={
+                                    <ProtectedRoute allowedRoles={["admin"]}>
+                                       <Receptionists />
+                                    </ProtectedRoute>
+                                 }
+                              />
+                              <Route
+                                 path="clinics"
+                                 element={
+                                    <ProtectedRoute allowedRoles={["admin"]}>
+                                       <Clinics />
+                                    </ProtectedRoute>
+                                 }
+                              />
+                              <Route
+                                 path="specializations"
+                                 element={
+                                    <ProtectedRoute allowedRoles={["admin"]}>
+                                       <Specializations />
+                                    </ProtectedRoute>
+                                 }
+                              />
+                           </Route>
+                           <Route path="/patients">
+                              <Route
+                                 index
+                                 element={
+                                    <ProtectedRoute
+                                       allowedRoles={["admin", "doctor"]}
+                                    >
+                                       <AllPatients />
+                                    </ProtectedRoute>
+                                 }
+                              />
+                              <Route
+                                 path=":patientId"
+                                 element={
+                                    <ProtectedRoute
+                                       allowedRoles={["admin", "doctor"]}
+                                    >
+                                       <SinglePatient />
+                                    </ProtectedRoute>
+                                 }
+                              />
+                           </Route>
+                           <Route path="/bookings">
+                              <Route
+                                 index
+                                 element={
+                                    <ProtectedRoute
+                                       allowedRoles={["admin", "receptionist"]}
+                                    >
+                                       <AllBookings />
+                                    </ProtectedRoute>
+                                 }
+                              />
+                           </Route>
                            <Route
+                              path="/add-booking"
                               element={
                                  <ProtectedRoute
-                                    allowedRoles={["super-admin"]}
-                                 />
+                                    allowedRoles={["admin", "receptionist"]}
+                                 >
+                                    <AddBooking />{" "}
+                                 </ProtectedRoute>
                               }
-                           >
-                              <Route path="/dashboard">
-                                 <Route index element={<Dashboard />} />
-                              </Route>
-                              <Route path="/staff-management">
-                                 <Route
-                                    index
-                                    path="doctors"
-                                    element={<Doctors />}
-                                 />
-                                 <Route path="nurses" element={<Nurses />} />
-                                 <Route
-                                    path="receptionists"
-                                    element={<Receptionists />}
-                                 />
-                                 <Route path="clinics" element={<Clinics />} />
-                                 <Route
-                                    path="specializations"
-                                    element={<Specializations />}
-                                 />
-                              </Route>
-                              <Route path="/patients">
-                                 <Route index element={<AllPatients />} />
-                                 <Route
-                                    path=":patientId"
-                                    element={<SinglePatient />}
-                                 />
-                              </Route>
-                              <Route path="/bookings">
-                                 <Route index element={<AllBookings />} />
-                              </Route>
-                           </Route>
+                           />
                         </Route>
                         <Route
                            path="/unauthorized"

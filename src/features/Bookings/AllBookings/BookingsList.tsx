@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/table";
 import WithLoadingAndError from "@/components/WithLoadingAndError";
 import BookingRow from "./BookingRow";
-import { useGetAllBookings } from "./hooks/useGetAllBookings";
+import { useGetAllBookings } from "../hooks/useGetAllBookings";
 
 const BookingsList = () => {
    const { data, isPending } = useGetAllBookings();

@@ -13,3 +13,8 @@ interface Patient {
    dateOfBirth: string;
    createdAt: string;
 }
+interface PatientLookup {
+   id: string;
+   firstName: string;
+   lastName: string;
+}

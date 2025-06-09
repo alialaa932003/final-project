@@ -4,9 +4,10 @@ import { UserResponse } from "@/types/auth";
 
 interface ProtectedRouteProps {
    allowedRoles: string[];
+   children: React.ReactNode;
 }
 
-const ProtectedRoute = ({ allowedRoles }: ProtectedRouteProps) => {
+const ProtectedRoute = ({ allowedRoles, children }: ProtectedRouteProps) => {
    const queryClient = useQueryClient();
    const data = queryClient.getQueryData<{ data: UserResponse }>([
       "current-user",
@@ -15,14 +16,10 @@ const ProtectedRoute = ({ allowedRoles }: ProtectedRouteProps) => {
    if (!user) {
       return <Navigate replace={true} to="/login" />;
    }
-   if (user.role.toLocaleLowerCase() !== "admin") {
+   if (!allowedRoles.includes(user.role.toLocaleLowerCase())) {
       return <Navigate replace={true} to="/unauthorized" />;
    }
-   return (
-      <div>
-         <Outlet />
-      </div>
-   );
+   return <div>{children}</div>;
 };
 
 export default ProtectedRoute;

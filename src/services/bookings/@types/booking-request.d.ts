@@ -1,7 +1,7 @@
 interface CreateBooking {
    appointment_time: string;
    appointment_date: string;
-   type: "examination" | "consultation";
+   type: BookingType;
    patient_id: string;
    doctor_id: string;
 }
@@ -12,3 +12,4 @@ interface EditBooking {
 }
 
 type BookingStatus = "completed" | "no_show" | "cancelled" | "pending";
+type BookingType = "examination" | "consultation";

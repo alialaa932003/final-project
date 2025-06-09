@@ -19,7 +19,7 @@ const BookingsListHeader = () => {
                   <Button
                      type="button"
                      onClick={() => {
-                        navigate("add");
+                        navigate("/add-booking");
                      }}
                      className="flex items-center gap-2"
                   >

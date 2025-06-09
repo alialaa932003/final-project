@@ -12,7 +12,7 @@ import ActionBtn from "@/components/ActionBtn";
 import { useGetTableRowIndex } from "@/hooks/useGetTableRowIndex";
 import { LIMIT } from "@/constants";
 import ConfirmDelete from "@/components/ConfirmDelete";
-import { useDeleteBooking } from "./hooks/useDeleteBooking";
+import { useDeleteBooking } from "../hooks/useDeleteBooking";
 import EditBookingDialog from "./EditBookingDialog";
 import moment from "moment";
 interface Props {
@@ -39,8 +39,8 @@ const BookingRow = ({ rowNumber, booking }: Props) => {
          <TableRow>
             <TableCell>{rowIndex}</TableCell>
             <TableCell>{patient_name || "______"}</TableCell>
-            <TableCell>{doctor.name}</TableCell>
-            <TableCell>{doctor.specialization}</TableCell>
+            <TableCell>{doctor?.name || "________"}</TableCell>
+            <TableCell>{doctor?.specialization || "_______"}</TableCell>
             <TableCell>{status}</TableCell>
             <TableCell>{type}</TableCell>
             <TableCell>
