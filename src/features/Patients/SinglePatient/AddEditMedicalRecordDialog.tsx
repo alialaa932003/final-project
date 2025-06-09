@@ -15,7 +15,6 @@ import { Form, Formik } from "formik";
 import { useCustomQuery } from "@/hooks/useCustomQuery";
 import InputField from "@/components/form/InputField";
 import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
 import { getOneMedicalRecord } from "@/services/patient-related/medical-record/getOneMedicalRecord";
 import { createMedicalRecord } from "@/services/patient-related/medical-record/createMedicalRecord";
 import { updateMedicalRecord } from "@/services/patient-related/medical-record/updateMedicalRecord";
@@ -23,6 +22,7 @@ import TextareaField from "@/components/form/TextareaField";
 import SelectSearchField from "@/components/form/SelectSearchField";
 import { medicalRecordFormValidationSchema } from "./constants/medicalRecordFormValidationSchema";
 import { getAllDoctorsLookup } from "@/services/bookings/getAllDoctorsLookup";
+import ConditionsSection from "./Conditions/ConditionsSection";
 
 type FormValues = Omit<MedicalRecordRequest, "cachedDoctorId"> & {
    cachedDoctorId: { value: string; label: string };
@@ -195,6 +195,16 @@ function AddEditMedicalRecordDialog({
                         options={doctorsOptions}
                         optionLabel="label"
                         optionValue="value"
+                     />
+                     <ConditionsSection
+                        conditions={values.conditions}
+                        onSubmit={(newCondition) => {
+                           console.log("New condition:", newCondition);
+                           setFieldValue("conditions", [
+                              ...values.conditions,
+                              newCondition,
+                           ]);
+                        }}
                      />
                   </Form>
 
