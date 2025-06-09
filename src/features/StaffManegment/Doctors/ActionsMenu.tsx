@@ -48,7 +48,7 @@ function ActionsMenu({ id, doctorName }: ActionsMenuProps) {
             <ManageAvailabilities doctorId={id} doctorName={doctorName} />
 
             <DropdownMenuItem asChild>
-               <Link to={`/bookings/add?doctorId=${id}`} className="w-full">
+               <Link to={`/add-booking?doctorId=${id}`} className="w-full">
                   Add Booking
                   <MdOutlineAddBox />
                </Link>
