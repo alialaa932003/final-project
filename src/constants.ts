@@ -1,6 +1,6 @@
 export const supportedLanguages = ["ar", "en"];
 
-export const API_URL = "http://167.71.45.177/";
+export const API_URL = "https://be.hospital1.life-record.buildora.app/";
 export const LIMIT = 20;
 export const DEFAULT_LOCALE = "en";
 
