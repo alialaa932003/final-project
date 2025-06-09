@@ -53,48 +53,96 @@ function App() {
                            <Route path="/login" element={<Login />} />
                         </Route>
                         <Route element={<DashboardLayout />}>
-                           <Route
-                              element={
-                                 <ProtectedRoute
-                                    allowedRoles={["super-admin"]}
-                                 />
-                              }
-                           >
-                              <Route path="/dashboard">
-                                 <Route index element={<Dashboard />} />
-                              </Route>
-                              <Route path="/staff-management">
-                                 <Route
-                                    index
-                                    path="doctors"
-                                    element={<Doctors />}
-                                 />
-                                 <Route path="nurses" element={<Nurses />} />
-                                 <Route
-                                    path="receptionists"
-                                    element={<Receptionists />}
-                                 />
-                                 <Route path="clinics" element={<Clinics />} />
-                                 <Route
-                                    path="specializations"
-                                    element={<Specializations />}
-                                 />
-                              </Route>
-                              <Route path="/patients">
-                                 <Route index element={<AllPatients />} />
-                                 <Route
-                                    path="[id]"
-                                    element={<div>Patient</div>}
-                                 />
-                              </Route>
-                              <Route path="/bookings">
-                                 <Route index element={<AllBookings />} />
-                              </Route>
+                           <Route path="/dashboard">
                               <Route
-                                 path="/add-booking"
-                                 element={<AddBooking />}
+                                 index
+                                 element={
+                                    <ProtectedRoute allowedRoles={["admin"]}>
+                                       <Dashboard />
+                                    </ProtectedRoute>
+                                 }
                               />
                            </Route>
+                           <Route path="/staff-management">
+                              <Route
+                                 index
+                                 path="doctors"
+                                 element={
+                                    <ProtectedRoute allowedRoles={["admin"]}>
+                                       <Doctors />
+                                    </ProtectedRoute>
+                                 }
+                              />
+                              <Route
+                                 path="nurses"
+                                 element={
+                                    <ProtectedRoute
+                                       allowedRoles={["admin", "doctor"]}
+                                    >
+                                       <Nurses />
+                                    </ProtectedRoute>
+                                 }
+                              />
+                              <Route
+                                 path="receptionists"
+                                 element={
+                                    <ProtectedRoute allowedRoles={["admin"]}>
+                                       <Receptionists />
+                                    </ProtectedRoute>
+                                 }
+                              />
+                              <Route
+                                 path="clinics"
+                                 element={
+                                    <ProtectedRoute allowedRoles={["admin"]}>
+                                       <Clinics />
+                                    </ProtectedRoute>
+                                 }
+                              />
+                              <Route
+                                 path="specializations"
+                                 element={
+                                    <ProtectedRoute allowedRoles={["admin"]}>
+                                       <Specializations />
+                                    </ProtectedRoute>
+                                 }
+                              />
+                           </Route>
+                           <Route path="/patients">
+                              <Route
+                                 index
+                                 element={
+                                    <ProtectedRoute
+                                       allowedRoles={["admin", "doctor"]}
+                                    >
+                                       <AllPatients />
+                                    </ProtectedRoute>
+                                 }
+                              />
+                              <Route path="[id]" element={<div>Patient</div>} />
+                           </Route>
+                           <Route path="/bookings">
+                              <Route
+                                 index
+                                 element={
+                                    <ProtectedRoute
+                                       allowedRoles={["admin", "receptionist"]}
+                                    >
+                                       <AllBookings />
+                                    </ProtectedRoute>
+                                 }
+                              />
+                           </Route>
+                           <Route
+                              path="/add-booking"
+                              element={
+                                 <ProtectedRoute
+                                    allowedRoles={["admin", "receptionist"]}
+                                 >
+                                    <AddBooking />{" "}
+                                 </ProtectedRoute>
+                              }
+                           />
                         </Route>
                         <Route
                            path="/unauthorized"

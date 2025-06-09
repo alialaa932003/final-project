@@ -74,7 +74,7 @@ function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
          mutationType: "edit",
       });
    const isPending = isCreatePending || isUpdatePending || isGettingDoctor;
-
+      console.log(isGettingDoctor);
    const handleSubmit = (values: DoctorRequest) => {
       if (id) {
          updateDoctorMutate(
