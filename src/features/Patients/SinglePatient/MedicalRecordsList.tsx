@@ -38,6 +38,7 @@ function MedicalRecordsList({ patientId }: MedicalRecordsListProps) {
                      <TableHead>Medications</TableHead>
                      <TableHead>Conditions</TableHead>
                      <TableHead>Observations</TableHead>
+                     <TableHead>Created At</TableHead>
                      <TableHead className="w-[55px]">Actions</TableHead>
                   </TableRow>
                </TableHeader>

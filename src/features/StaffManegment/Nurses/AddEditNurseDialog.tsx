@@ -82,11 +82,9 @@ function AddEditNurseDialog({ id, triggerButton }: AddEditNurseProps) {
             {
                onSuccess: () => {
                   setOpen(false);
-                  toast.success("Nurse updated successfully");
                },
                onError: (error) => {
                   console.error("Error updating nurse:", error);
-                  toast.error("Failed to update nurse");
                },
             },
          );
@@ -94,11 +92,9 @@ function AddEditNurseDialog({ id, triggerButton }: AddEditNurseProps) {
          createNurseMutate(values, {
             onSuccess: () => {
                setOpen(false);
-               toast.success("Nurse created successfully");
             },
             onError: (error) => {
                console.error("Error updating nurse:", error);
-               toast.error("Failed to create nurse");
             },
          });
       }

@@ -2,6 +2,7 @@ import { TableCell, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import ActionsMenu from "./ActionsMenu";
 import { GrView } from "react-icons/gr";
+import dayjs from "dayjs";
 
 type MedicalRecordRowProps = {
    medicalRecord: MedicalRecord;
@@ -35,6 +36,9 @@ function MedicalRecordRow({
             <Button>
                {medicalRecord.observations.length} <GrView />
             </Button>
+         </TableCell>
+         <TableCell>
+            {dayjs(medicalRecord.createdAt).format("YYYY-MM-DD | HH:mm A")}
          </TableCell>
          <TableCell className="flex items-center justify-end gap-2">
             <ActionsMenu id={medicalRecord.id} patientId={patientId} />

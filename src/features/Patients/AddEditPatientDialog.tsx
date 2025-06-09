@@ -76,11 +76,9 @@ function AddEditPatientDialog({ id, triggerButton }: AddEditNurseProps) {
             {
                onSuccess: () => {
                   setOpen(false);
-                  toast.success("Patient updated successfully");
                },
                onError: (error) => {
                   console.error("Error updating patient:", error);
-                  toast.error("Failed to update patient");
                },
             },
          );
@@ -88,11 +86,9 @@ function AddEditPatientDialog({ id, triggerButton }: AddEditNurseProps) {
          createPatientMutate(values, {
             onSuccess: () => {
                setOpen(false);
-               toast.success("Patient created successfully");
             },
             onError: (error) => {
                console.error("Error updating patient:", error);
-               toast.error("Failed to create patient");
             },
          });
       }

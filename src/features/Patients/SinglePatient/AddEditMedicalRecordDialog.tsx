@@ -20,14 +20,18 @@ import { getOneMedicalRecord } from "@/services/patient-related/medical-record/g
 import { createMedicalRecord } from "@/services/patient-related/medical-record/createMedicalRecord";
 import { updateMedicalRecord } from "@/services/patient-related/medical-record/updateMedicalRecord";
 import TextareaField from "@/components/form/TextareaField";
-import { getAllDoctors } from "@/services/staff/doctors/getAllDoctors";
 import SelectSearchField from "@/components/form/SelectSearchField";
 import { medicalRecordFormValidationSchema } from "./constants/medicalRecordFormValidationSchema";
+import { getAllDoctorsLookup } from "@/services/bookings/getAllDoctorsLookup";
 
-const DEFAULT_INITIAL_VALUES: MedicalRecordRequest = {
+type FormValues = Omit<MedicalRecordRequest, "cachedDoctorId"> & {
+   cachedDoctorId: { value: string; label: string };
+};
+
+const DEFAULT_INITIAL_VALUES: FormValues = {
    diagnosis: "",
    notes: "",
-   cachedDoctorId: "",
+   cachedDoctorId: { value: "", label: "" },
    conditions: [],
    medications: [],
    observations: [],
@@ -56,13 +60,13 @@ function AddEditMedicalRecordDialog({
       );
 
    const { data: doctors, isLoading: isGettingDoctors } = useCustomQuery(
-      [QUERY_KEYS.DOCTORS],
-      getAllDoctors(),
+      [QUERY_KEYS.DOCTORS_LOOKUP],
+      getAllDoctorsLookup(),
    );
    const doctorsOptions = isGettingDoctors
       ? []
-      : doctors?.data.items.map((doctor) => ({
-           label: `${doctor.first_name} ${doctor.last_name}`,
+      : doctors?.data.map((doctor) => ({
+           label: doctor.name,
            value: doctor.id,
         }));
 
@@ -81,32 +85,39 @@ function AddEditMedicalRecordDialog({
    const isPending =
       isCreatePending || isUpdatePending || isGettingMedicalRecord;
 
-   const handleSubmit = (values: MedicalRecordRequest) => {
+   const handleSubmit = (values: FormValues) => {
       if (id) {
          updateMedicalRecordMutate(
-            { id, newData: { patientId, ...values } },
+            {
+               id,
+               newData: {
+                  patientId,
+                  ...values,
+                  cachedDoctorId: values.cachedDoctorId.value,
+               },
+            },
             {
                onSuccess: () => {
                   setOpen(false);
-                  toast.success("Medical record updated successfully");
                },
                onError: (error) => {
                   console.error("Error updating medical record:", error);
-                  toast.error("Failed to update medical record");
                },
             },
          );
       } else {
          createMedicalRecordMutate(
-            { patientId, ...values },
+            {
+               patientId,
+               ...values,
+               cachedDoctorId: values.cachedDoctorId.value,
+            },
             {
                onSuccess: () => {
                   setOpen(false);
-                  toast.success("Medical record created successfully");
                },
                onError: (error) => {
                   console.error("Error updating medical record:", error);
-                  toast.error("Failed to create medical record");
                },
             },
          );
@@ -123,9 +134,16 @@ function AddEditMedicalRecordDialog({
                   DEFAULT_INITIAL_VALUES.diagnosis,
                notes:
                   medicalRecord?.data?.notes || DEFAULT_INITIAL_VALUES.notes,
-               cachedDoctorId:
-                  medicalRecord?.data?.cachedDoctorId ||
-                  DEFAULT_INITIAL_VALUES.cachedDoctorId,
+               cachedDoctorId: medicalRecord?.data?.cachedDoctorId
+                  ? {
+                       value: medicalRecord.data.cachedDoctorId,
+                       label:
+                          doctorsOptions.find(
+                             (doc) =>
+                                doc.value === medicalRecord.data.cachedDoctorId,
+                          )?.label || "",
+                    }
+                  : DEFAULT_INITIAL_VALUES.cachedDoctorId,
                conditions:
                   medicalRecord?.data?.conditions ||
                   DEFAULT_INITIAL_VALUES.conditions,
