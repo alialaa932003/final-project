@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import ActionsMenu from "./ActionsMenu";
 import { GrView } from "react-icons/gr";
 import dayjs from "dayjs";
+import ConditionsListDialog from "./Conditions/ConditionsListDialog";
 
 type MedicalRecordRowProps = {
    medicalRecord: MedicalRecord;
@@ -23,9 +24,14 @@ function MedicalRecordRow({
          <TableCell>{medicalRecord.patientId}</TableCell>
          <TableCell>{medicalRecord.cachedDoctorId}</TableCell>
          <TableCell>
-            <Button>
-               {medicalRecord.medications.length} <GrView />
-            </Button>
+            <ConditionsListDialog
+               conditions={medicalRecord.conditions}
+               triggerButton={
+                  <Button>
+                     {medicalRecord.conditions.length} <GrView />
+                  </Button>
+               }
+            />
          </TableCell>
          <TableCell>
             <Button>
