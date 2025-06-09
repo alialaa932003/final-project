@@ -32,4 +32,6 @@ export const QUERY_KEYS = {
    PATIENTS_LOOKUP: "patientsLookup",
    BOOKING: "booking",
    BOOKINGS: "bookings",
+   SAFF_ANALYTICS: "staffAnalytics",
+   PATIENTS_ANALYTICS: "patientsAnalytics",
 } as const;
