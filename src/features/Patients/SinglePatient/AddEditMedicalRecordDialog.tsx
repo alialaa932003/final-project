@@ -22,6 +22,7 @@ import TextareaField from "@/components/form/TextareaField";
 import SelectSearchField from "@/components/form/SelectSearchField";
 import { medicalRecordFormValidationSchema } from "./constants/medicalRecordFormValidationSchema";
 import { getAllDoctorsLookup } from "@/services/bookings/getAllDoctorsLookup";
+import ConditionsSection from "./Conditions/ConditionsSection";
 
 type FormValues = Omit<MedicalRecordRequest, "cachedDoctorId"> & {
    cachedDoctorId: { value: string; label: string };
@@ -194,6 +195,16 @@ function AddEditMedicalRecordDialog({
                         options={doctorsOptions}
                         optionLabel="label"
                         optionValue="value"
+                     />
+                     <ConditionsSection
+                        conditions={values.conditions}
+                        onSubmit={(newCondition) => {
+                           console.log("New condition:", newCondition);
+                           setFieldValue("conditions", [
+                              ...values.conditions,
+                              newCondition,
+                           ]);
+                        }}
                      />
                   </Form>
 
