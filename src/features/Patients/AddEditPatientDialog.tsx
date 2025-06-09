@@ -117,9 +117,9 @@ function AddEditPatientDialog({ id, triggerButton }: AddEditNurseProps) {
                address: patient?.data.address || DEFAULT_INITIAL_VALUES.address,
                bloodType:
                   patient?.data.bloodType || DEFAULT_INITIAL_VALUES.bloodType,
-               dateOfBirth:
-                  patient?.data.dateOfBirth ||
-                  DEFAULT_INITIAL_VALUES.dateOfBirth,
+               dateOfBirth: patient?.data.dateOfBirth
+                  ? patient.data.dateOfBirth.split("T")[0]
+                  : DEFAULT_INITIAL_VALUES.dateOfBirth,
                gender: patient?.data.gender || DEFAULT_INITIAL_VALUES.gender,
                maritalStatus:
                   patient?.data.maritalStatus ||
