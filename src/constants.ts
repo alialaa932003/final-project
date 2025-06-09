@@ -14,6 +14,7 @@ export const BACKEND_SERVICES_BASE_ROUTES = {
 export const QUERY_KEYS = {
    DOCTOR: "doctor",
    DOCTORS: "doctors",
+   DOCTORS_LOOKUP: "doctorsLookup",
    DOCTOR_AVAILABILITIES: "doctorAvailabilities",
    DOCTOR_AVAILABILITY: "doctorAvailability",
    NURSE: "nurse",
@@ -26,6 +27,7 @@ export const QUERY_KEYS = {
    SPECIALIZATION: "specialization",
    PATIENT: "patient",
    PATIENTS: "patients",
+   PATIENTS_LOOKUP: "patientsLookup",
    BOOKING: "booking",
    BOOKINGS: "bookings",
 } as const;

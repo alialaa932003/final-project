@@ -77,7 +77,7 @@ const Sidebar = ({ className }: { className?: string }) => {
       {
          name: "Add Booking",
          icon: <MdOutlineAddBox />,
-         to: `/bookings/add`,
+         to: `/add-booking`,
          type: "single",
       },
    ];

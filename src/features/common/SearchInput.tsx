@@ -4,15 +4,18 @@ import { Input } from "@/components/ui/input";
 import { IoIosSearch } from "react-icons/io";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
+import { cn } from "@/lib/utils";
 
 interface SearchInputProps {
    searchKey: string;
    placeholder?: string;
+   className?: string;
 }
 
 export default function SearchInput({
    searchKey,
    placeholder,
+   className,
 }: SearchInputProps) {
    const [searchParams, setSearchParams] = useSearchParams();
    const [searchValue, setSearchValue] = useState(
@@ -43,7 +46,10 @@ export default function SearchInput({
    };
 
    return (
-      <form className="relative w-full md:w-[640px]" onSubmit={handleSubmit}>
+      <form
+         className={cn("relative w-full md:w-[640px]", className)}
+         onSubmit={handleSubmit}
+      >
          <Input
             defaultValue={searchValue}
             onChange={handleSearchChange}

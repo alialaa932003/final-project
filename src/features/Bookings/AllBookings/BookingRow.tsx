@@ -12,7 +12,7 @@ import ActionBtn from "@/components/ActionBtn";
 import { useGetTableRowIndex } from "@/hooks/useGetTableRowIndex";
 import { LIMIT } from "@/constants";
 import ConfirmDelete from "@/components/ConfirmDelete";
-import { useDeleteBooking } from "./hooks/useDeleteBooking";
+import { useDeleteBooking } from "../hooks/useDeleteBooking";
 import EditBookingDialog from "./EditBookingDialog";
 import moment from "moment";
 interface Props {
