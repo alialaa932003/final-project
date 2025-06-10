@@ -4,15 +4,15 @@ import { apiCall } from "@/services/apiCall";
 
 type GetAllDoctorsParams = {
    page?: string;
-   searchTerm?: string;
+   search?: string;
 };
 
 export const getAllDoctors =
-   ({ page, searchTerm }: GetAllDoctorsParams = {}) =>
+   ({ page, search }: GetAllDoctorsParams = {}) =>
    async () => {
       const params = createQueryString({
          page,
-         searchTerm,
+         search,
       });
 
       const res = await apiCall<StaffApiResponseWithPagination<Doctor[]>>(

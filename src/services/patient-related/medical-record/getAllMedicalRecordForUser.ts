@@ -5,15 +5,15 @@ import { apiCall } from "@/services/apiCall";
 type GetAllMedicalRecordForUserParams = {
    patientId?: string;
    page?: string;
-   searchTerm?: string;
+   search?: string;
 };
 
 export const getAllMedicalRecordForUser =
-   ({ patientId, page, searchTerm }: GetAllMedicalRecordForUserParams = {}) =>
+   ({ patientId, page, search }: GetAllMedicalRecordForUserParams = {}) =>
    async () => {
       const params = createQueryString({
          page,
-         searchTerm,
+         search,
       });
 
       const res = await apiCall<

@@ -6,10 +6,10 @@ import { useSearchParams } from "react-router-dom";
 export const useGetAllReceptionists = () => {
    const searchParams = useSearchParams()[0];
    const page = searchParams.get("page") || "1";
-   const searchTerm = searchParams.get("search") || "";
+   const search = searchParams.get("search") || "";
    const queryResult = useCustomQuery(
-      [QUERY_KEYS.RECEPTIONISTS, page, searchTerm],
-      getAllReceptionists({ page, searchTerm }),
+      [QUERY_KEYS.RECEPTIONISTS, page, search],
+      getAllReceptionists({ page, search }),
    );
 
    return queryResult;
