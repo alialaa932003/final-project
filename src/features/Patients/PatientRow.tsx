@@ -25,7 +25,9 @@ function PatientRow({ patient, rowNumber }: PatientRowProps) {
          <TableCell>{patient.maritalStatus || "-"}</TableCell>
          <TableCell>{patient.age || "-"}</TableCell>
          <TableCell>
-            {dayjs(patient.dateOfBirth).format("YYYY-MM-DD") || "-"}
+            {patient.dateOfBirth
+               ? dayjs(patient.dateOfBirth).format("YYYY-MM-DD")
+               : "-"}
          </TableCell>
          <TableCell className="flex items-center justify-end gap-2">
             <ActionsMenu id={patient.id} />
