@@ -4,6 +4,8 @@ import ActionsMenu from "./ActionsMenu";
 import { GrView } from "react-icons/gr";
 import dayjs from "dayjs";
 import ConditionsListDialog from "./Conditions/ConditionsListDialog";
+import MedicationsListDialog from "./Medications/MedicationsListDialog";
+import ObservationsListDialog from "./Observations/ObservationsListDialog";
 
 type MedicalRecordRowProps = {
    medicalRecord: MedicalRecord;
@@ -34,14 +36,24 @@ function MedicalRecordRow({
             />
          </TableCell>
          <TableCell>
-            <Button>
-               {medicalRecord.conditions.length} <GrView />
-            </Button>
+            <MedicationsListDialog
+               medications={medicalRecord.medications}
+               triggerButton={
+                  <Button>
+                     {medicalRecord.medications.length} <GrView />
+                  </Button>
+               }
+            />
          </TableCell>
          <TableCell>
-            <Button>
-               {medicalRecord.observations.length} <GrView />
-            </Button>
+            <ObservationsListDialog
+               observations={medicalRecord.observations}
+               triggerButton={
+                  <Button>
+                     {medicalRecord.observations.length} <GrView />
+                  </Button>
+               }
+            />
          </TableCell>
          <TableCell>
             {dayjs(medicalRecord.createdAt).format("YYYY-MM-DD | HH:mm A")}

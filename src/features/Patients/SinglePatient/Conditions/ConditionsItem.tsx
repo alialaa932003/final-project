@@ -10,7 +10,7 @@ type ConditionsItemProps = {
 function ConditionsItem({ condition }: ConditionsItemProps) {
    return (
       <li className="rounded-xl bg-primary-500/90 px-8 py-6 text-white">
-         <div className="grid gap-4 px-1 sm:grid-cols-3">
+         <div className="grid gap-4 px-1">
             <InfoItem title="Code:" value={condition.code} />
          </div>
 

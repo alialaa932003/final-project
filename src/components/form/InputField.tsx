@@ -1,9 +1,13 @@
-import React, { HTMLInputTypeAttribute } from "react";
+import React, {
+   HTMLInputTypeAttribute,
+   InputHTMLAttributes,
+   RefAttributes,
+} from "react";
 import { ErrorMessage, Field, FieldProps } from "formik";
 import { Input } from "../ui/input";
 import { cn } from "@/lib/utils";
 
-interface InputFieldProps {
+interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
    id?: string;
    label?: string;
    name: string;
@@ -31,6 +35,7 @@ const InputField: React.FC<InputFieldProps> = ({
    disabled = false,
    readonly = false,
    iconPosition = "end",
+   ...props
 }) => (
    <Field name={name}>
       {({ field }: FieldProps) => (
@@ -51,6 +56,7 @@ const InputField: React.FC<InputFieldProps> = ({
                disabled={disabled}
                readOnly={readonly}
                iconPosition={iconPosition}
+               {...props}
             />
             <ErrorMessage
                className="absolute top-full z-10 text-xs text-red-600"

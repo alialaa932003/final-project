@@ -1,25 +1,29 @@
 import { useState } from "react";
 import { Separator } from "@/components/ui/separator";
-import ConditionsList from "./ConditionsList";
-import AddConditionForm, { FormValues } from "./AddConditionForm";
+import ConditionsList from "./ObservationsList";
+import AddObservationForm, { FormValues } from "./AddObservationForm";
 import { FiPlus } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
+import ObservationsList from "./ObservationsList";
 
-type ConditionsSectionProps = {
+type ObservationsSectionProps = {
    onSubmit: (values: FormValues) => void;
-   conditions: Condition[];
+   observations: Observation[];
 };
 
-function ConditionsSection({ conditions, onSubmit }: ConditionsSectionProps) {
+function ObservationsSection({
+   observations,
+   onSubmit,
+}: ObservationsSectionProps) {
    const [isOpenAddForm, setIsOpenAddForm] = useState(false);
 
    const handleOpenAddForm = () => setIsOpenAddForm(true);
    const handleCloseAddForm = () => setIsOpenAddForm(false);
 
    return (
-      <div className="space-y-4 py-2">
+      <div className={`space-y-4 py-2`}>
          <div className="flex items-center gap-2">
-            <h3 className="text-lg font-medium">Conditions</h3>
+            <h3 className="text-lg font-medium">Observations</h3>
             <Button
                type="button"
                size="icon"
@@ -33,19 +37,19 @@ function ConditionsSection({ conditions, onSubmit }: ConditionsSectionProps) {
          <div
             className={`${isOpenAddForm ? "h-[332px]" : "!mt-0 h-0"} overflow-hidden transition-[height] will-change-[height]`}
          >
-            <AddConditionForm
+            <AddObservationForm
                onClose={handleCloseAddForm}
                onSubmit={onSubmit}
             />
          </div>
 
          <Separator
-            className={`${isOpenAddForm ? "opacity-100" : "!mt-0 opacity-0"} transition-opacity`}
+            className={`${isOpenAddForm && observations.length > 0 ? "opacity-100" : "!mt-0 opacity-0"} transition-opacity`}
          />
 
-         <ConditionsList conditions={conditions} />
+         <ObservationsList observations={observations} />
       </div>
    );
 }
 
-export default ConditionsSection;
+export default ObservationsSection;

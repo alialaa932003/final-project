@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Separator } from "@/components/ui/separator";
-import AddConditionForm, { FormValues } from "./AddConditionForm";
+import AddMedicationForm, { FormValues } from "./AddMedicationForm";
 import { FiPlus } from "react-icons/fi";
 import { Button } from "@/components/ui/button";
 import MedicationsList from "./MedicationsList";
@@ -20,9 +20,9 @@ function MedicationsSection({
    const handleCloseAddForm = () => setIsOpenAddForm(false);
 
    return (
-      <div className="space-y-4 py-2">
+      <div className={`space-y-4 py-2 ${medications.length > 0 ? "mb-4" : ""}`}>
          <div className="flex items-center gap-2">
-            <h3 className="text-lg font-medium">Conditions</h3>
+            <h3 className="text-lg font-medium">Medications</h3>
             <Button
                type="button"
                size="icon"
@@ -36,14 +36,14 @@ function MedicationsSection({
          <div
             className={`${isOpenAddForm ? "h-[332px]" : "!mt-0 h-0"} overflow-hidden transition-[height] will-change-[height]`}
          >
-            <AddConditionForm
+            <AddMedicationForm
                onClose={handleCloseAddForm}
                onSubmit={onSubmit}
             />
          </div>
 
          <Separator
-            className={`${isOpenAddForm ? "opacity-100" : "!mt-0 opacity-0"} transition-opacity`}
+            className={`${isOpenAddForm && medications.length > 0 ? "opacity-100" : "!mt-0 opacity-0"} transition-opacity`}
          />
 
          <MedicationsList medications={medications} />
