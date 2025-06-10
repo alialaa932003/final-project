@@ -7,34 +7,34 @@ import {
    DialogTrigger,
 } from "@/components/ui/dialog";
 import { ReactNode } from "react";
-import ConditionsList from "./ConditionsList";
+import MedicationsList from "./MedicationsList";
 
-type ConditionsListDialogProps = {
+type MedicationsListDialogProps = {
    triggerButton: ReactNode;
-   conditions: Condition[];
+   medications: Medication[];
 };
 
-function ConditionsListDialog({
+function MedicationsListDialog({
    triggerButton,
-   conditions,
-}: ConditionsListDialogProps) {
+   medications,
+}: MedicationsListDialogProps) {
    return (
       <Dialog>
          <DialogTrigger asChild>{triggerButton}</DialogTrigger>
 
          <DialogContent className="sm:max-w-2xl">
             <DialogHeader>
-               <DialogTitle>Conditions</DialogTitle>
+               <DialogTitle>Medications</DialogTitle>
                <DialogDescription hidden>
-                  This dialog displays a list of conditions associated with the
+                  This dialog displays a list of medications associated with the
                   patient.
                </DialogDescription>
             </DialogHeader>
 
-            <ConditionsList conditions={conditions} />
+            <MedicationsList medications={medications} />
          </DialogContent>
       </Dialog>
    );
 }
 
-export default ConditionsListDialog;
+export default MedicationsListDialog;

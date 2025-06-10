@@ -1,15 +1,14 @@
 import { Form, Formik, FormikHelpers } from "formik";
 import InputField from "@/components/form/InputField";
 import { Button } from "@/components/ui/button";
-import TextareaField from "@/components/form/TextareaField";
-import { conditionFormValidationSchema } from "./constants/conditionFormValidationSchema";
+import { medicationFormValidationSchema } from "./constants/medicationFormValidationSchema";
 import SideBySideInputsContainer from "@/components/SideBySideInputsContainer";
 
 export type FormValues = {
    name: string;
    dosage: string;
    frequency: string;
-   durationInDays?: number;
+   durationInDays: number;
 };
 
 const DEFAULT_INITIAL_VALUES: FormValues = {
@@ -38,7 +37,7 @@ function AddMedicationForm({ onSubmit, onClose }: AddMedicationFormProps) {
       <Formik
          initialValues={DEFAULT_INITIAL_VALUES}
          onSubmit={handleSubmit}
-         validationSchema={conditionFormValidationSchema}
+         validationSchema={medicationFormValidationSchema}
       >
          {({ resetForm, submitForm }) => (
             <Form className="p-2">
@@ -62,6 +61,8 @@ function AddMedicationForm({ onSubmit, onClose }: AddMedicationFormProps) {
                      name="durationInDays"
                      label="Duration In Days"
                      placeholder="Enter Duration In Days"
+                     type="number"
+                     step={1}
                   />
                   <InputField
                      id="frequency"
@@ -82,7 +83,9 @@ function AddMedicationForm({ onSubmit, onClose }: AddMedicationFormProps) {
                   >
                      Cancel
                   </Button>
-                  <Button onClick={submitForm}>Add</Button>
+                  <Button type="button" onClick={submitForm}>
+                     Add
+                  </Button>
                </div>
             </Form>
          )}

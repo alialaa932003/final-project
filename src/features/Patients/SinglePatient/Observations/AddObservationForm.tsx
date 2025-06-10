@@ -2,24 +2,27 @@ import { Form, Formik, FormikHelpers } from "formik";
 import InputField from "@/components/form/InputField";
 import { Button } from "@/components/ui/button";
 import TextareaField from "@/components/form/TextareaField";
-import { conditionFormValidationSchema } from "./constants/conditionFormValidationSchema";
+import SideBySideInputsContainer from "@/components/SideBySideInputsContainer";
+import { observationFormValidationSchema } from "./constants/observationFormValidationSchema";
 
 export type FormValues = {
-   code: string;
-   description: string;
+   testName: string;
+   value: string;
+   unit: string;
 };
 
 const DEFAULT_INITIAL_VALUES: FormValues = {
-   code: "",
-   description: "",
+   testName: "",
+   value: "",
+   unit: "",
 };
 
-type AddConditionFormProps = {
+type AddObservationFormProps = {
    onSubmit: (values: FormValues) => void;
    onClose: () => void;
 };
 
-function AddConditionForm({ onSubmit, onClose }: AddConditionFormProps) {
+function AddObservationForm({ onSubmit, onClose }: AddObservationFormProps) {
    const handleSubmit = (
       values: FormValues,
       { resetForm }: FormikHelpers<FormValues>,
@@ -33,22 +36,31 @@ function AddConditionForm({ onSubmit, onClose }: AddConditionFormProps) {
       <Formik
          initialValues={DEFAULT_INITIAL_VALUES}
          onSubmit={handleSubmit}
-         validationSchema={conditionFormValidationSchema}
+         validationSchema={observationFormValidationSchema}
       >
          {({ resetForm, submitForm }) => (
             <Form className="p-2">
                <InputField
-                  id="code"
-                  name="code"
-                  label="Code"
-                  placeholder="Enter Condition Code"
+                  id="testName"
+                  name="testName"
+                  label="Test Name"
+                  placeholder="Enter Test Name"
                />
-               <TextareaField
-                  id="description"
-                  name="description"
-                  label="Description"
-                  placeholder="Enter Condition Description"
-               />
+
+               <SideBySideInputsContainer>
+                  <InputField
+                     id="value"
+                     name="value"
+                     label="Test Value"
+                     placeholder="Enter Test Value"
+                  />
+                  <InputField
+                     id="unit"
+                     name="unit"
+                     label="Test Unit"
+                     placeholder="Enter Test Unit"
+                  />
+               </SideBySideInputsContainer>
 
                <div className="flex flex-wrap gap-4 [&>*]:grow">
                   <Button
@@ -71,4 +83,4 @@ function AddConditionForm({ onSubmit, onClose }: AddConditionFormProps) {
    );
 }
 
-export default AddConditionForm;
+export default AddObservationForm;

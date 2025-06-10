@@ -17,7 +17,7 @@ function ConditionsSection({ conditions, onSubmit }: ConditionsSectionProps) {
    const handleCloseAddForm = () => setIsOpenAddForm(false);
 
    return (
-      <div className="space-y-4 py-2">
+      <div className={`space-y-4 py-2 ${conditions.length > 0 ? "mb-4" : ""}`}>
          <div className="flex items-center gap-2">
             <h3 className="text-lg font-medium">Conditions</h3>
             <Button
@@ -40,7 +40,7 @@ function ConditionsSection({ conditions, onSubmit }: ConditionsSectionProps) {
          </div>
 
          <Separator
-            className={`${isOpenAddForm ? "opacity-100" : "!mt-0 opacity-0"} transition-opacity`}
+            className={`${isOpenAddForm && conditions.length > 0 ? "opacity-100" : "!mt-0 opacity-0"} transition-opacity`}
          />
 
          <ConditionsList conditions={conditions} />

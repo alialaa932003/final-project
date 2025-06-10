@@ -23,6 +23,9 @@ import SelectSearchField from "@/components/form/SelectSearchField";
 import { medicalRecordFormValidationSchema } from "./constants/medicalRecordFormValidationSchema";
 import { getAllDoctorsLookup } from "@/services/bookings/getAllDoctorsLookup";
 import ConditionsSection from "./Conditions/ConditionsSection";
+import MedicationsSection from "./Medications/MedicationsSection";
+import { Separator } from "@/components/ui/separator";
+import ObservationsSection from "./Observations/ObservationsSection";
 
 type FormValues = Omit<MedicalRecordRequest, "cachedDoctorId"> & {
    cachedDoctorId: { value: string; label: string };
@@ -86,6 +89,8 @@ function AddEditMedicalRecordDialog({
       isCreatePending || isUpdatePending || isGettingMedicalRecord;
 
    const handleSubmit = (values: FormValues) => {
+      console.log("Submitting values:", values);
+
       if (id) {
          updateMedicalRecordMutate(
             {
@@ -199,10 +204,29 @@ function AddEditMedicalRecordDialog({
                      <ConditionsSection
                         conditions={values.conditions}
                         onSubmit={(newCondition) => {
-                           console.log("New condition:", newCondition);
                            setFieldValue("conditions", [
                               ...values.conditions,
                               newCondition,
+                           ]);
+                        }}
+                     />
+                     <Separator className="mb-4" />
+                     <MedicationsSection
+                        medications={values.medications}
+                        onSubmit={(newMedication) => {
+                           setFieldValue("medications", [
+                              ...values.medications,
+                              newMedication,
+                           ]);
+                        }}
+                     />
+                     <Separator className="mb-4" />
+                     <ObservationsSection
+                        observations={values.observations}
+                        onSubmit={(newObservation) => {
+                           setFieldValue("observations", [
+                              ...values.observations,
+                              newObservation,
                            ]);
                         }}
                      />
