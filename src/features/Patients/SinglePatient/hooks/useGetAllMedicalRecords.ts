@@ -7,10 +7,10 @@ import { useSearchParams } from "react-router-dom";
 export const useGetAllMedicalRecords = (patientId: string) => {
    const searchParams = useSearchParams()[0];
    const page = searchParams.get("page") || "1";
-   const searchTerm = searchParams.get("search") || "";
+   const search = searchParams.get("search") || "";
    const queryResult = useCustomQuery(
-      [QUERY_KEYS.MEDICAL_RECORDS, page, searchTerm],
-      getAllMedicalRecordForUser({ patientId, page, searchTerm }),
+      [QUERY_KEYS.MEDICAL_RECORDS, page, search],
+      getAllMedicalRecordForUser({ patientId, page, search }),
    );
 
    return queryResult;

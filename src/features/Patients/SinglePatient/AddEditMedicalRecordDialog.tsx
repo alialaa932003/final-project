@@ -52,7 +52,7 @@ function AddEditMedicalRecordDialog({
    triggerButton,
 }: AddEditNurseProps) {
    const [open, setOpen] = useState(false);
-   const { t } = useTranslation("patient");
+   const { t } = useTranslation(["global", "patient"]);
    const { data: medicalRecord, isLoading: isGettingMedicalRecord } =
       useCustomQuery(
          [QUERY_KEYS.MEDICAL_RECORD, id],
@@ -167,7 +167,8 @@ function AddEditMedicalRecordDialog({
                <DialogContent className="sm:max-w-3xl">
                   <DialogHeader>
                      <DialogTitle>
-                        {id ? t("edit") : t("add")} {t("medical_record")}
+                        {id ? t("global:edit") : t("global:add")} Medical
+                        Records
                      </DialogTitle>
                      <DialogDescription>
                         {id

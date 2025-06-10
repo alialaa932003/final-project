@@ -14,7 +14,7 @@ function MedicalRecordsHeader({ patientId }: MedicalRecordsHeaderProps) {
    return (
       <MainHeader>
          <MainHeader.TopSection>
-            <MainHeader.Title title={t("patients:medical_records")} />
+            <MainHeader.Title title="Medical Records" />
             <MainHeader.Actions>
                <AddEditMedicalRecordDialog
                   patientId={patientId}
