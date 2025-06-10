@@ -52,6 +52,7 @@ function AddConditionForm({ onSubmit, onClose }: AddConditionFormProps) {
 
                <div className="flex flex-wrap gap-4 [&>*]:grow">
                   <Button
+                     type="button"
                      variant="destructive"
                      onClick={() => {
                         onClose();
