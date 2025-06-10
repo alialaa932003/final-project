@@ -21,10 +21,12 @@ function PatientRow({ patient, rowNumber }: PatientRowProps) {
          <TableCell>{patient.phoneNumber}</TableCell>
          <TableCell>{patient.address}</TableCell>
          <TableCell>{patient.gender || "-"}</TableCell>
-         <TableCell>{patient.bloodType?.replace("_", " ") || "-"}</TableCell>
+         <TableCell className="whitespace-nowrap">
+            {patient.bloodType?.replace("_", " ") || "-"}
+         </TableCell>
          <TableCell>{patient.maritalStatus || "-"}</TableCell>
          <TableCell>{patient.age || "-"}</TableCell>
-         <TableCell>
+         <TableCell className="whitespace-nowrap">
             {patient.dateOfBirth
                ? dayjs(patient.dateOfBirth).format("YYYY-MM-DD")
                : "-"}
