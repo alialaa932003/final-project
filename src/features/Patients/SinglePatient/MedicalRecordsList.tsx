@@ -24,7 +24,7 @@ function MedicalRecordsList({ patientId }: MedicalRecordsListProps) {
       <WithLoadingAndError
          isLoading={isLoading}
          hasError={isError || medicalRecords.length === 0}
-         errorText={t("no-patients-found")}
+         errorText="No Patients Found"
       >
          <TableWrapper totalPages={data?.data.meta.last_page}>
             <Table className="min-w-[70rem]">

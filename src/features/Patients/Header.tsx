@@ -14,7 +14,8 @@ function Header() {
          <MainHeader.TopSection>
             <MainHeader.Title
                title={t("patients:patients")}
-               description={t("patients:patient-header-description")}
+               // description={t("patients:patient-header-description")}
+               description="Manage all patients in the system, including their medical records."
             />
             <MainHeader.Actions>
                <AddEditPatientDialog
