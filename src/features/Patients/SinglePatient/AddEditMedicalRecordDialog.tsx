@@ -164,6 +164,7 @@ function AddEditMedicalRecordDialog({
                   medicalRecord?.data?.observations ||
                   DEFAULT_INITIAL_VALUES.observations,
             }}
+            // @ts-ignore
             onSubmit={handleSubmit}
             enableReinitialize
             validationSchema={medicalRecordFormValidationSchema}

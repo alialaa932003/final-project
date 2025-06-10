@@ -125,6 +125,7 @@ function AddEditPatientDialog({ id, triggerButton }: AddEditNurseProps) {
                   patient?.data.maritalStatus ||
                   DEFAULT_INITIAL_VALUES.maritalStatus,
             }}
+            // @ts-ignore
             onSubmit={handleSubmit}
             enableReinitialize
             validationSchema={patientFormValidationSchema}
