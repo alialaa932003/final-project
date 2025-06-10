@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { useOptimisticMutation } from "@/hooks/useOptimisticMutation";
 import { QUERY_KEYS } from "@/constants";
-import { Form, Formik } from "formik";
+import { Form, Formik, FormikHelpers } from "formik";
 import { useCustomQuery } from "@/hooks/useCustomQuery";
 import InputField from "@/components/form/InputField";
 import { useTranslation } from "react-i18next";
@@ -67,13 +67,17 @@ function AddEditReceptionistsDialog({
    const isPending =
       isCreatePending || isUpdatePending || isGettingReceptionist;
 
-   const handleSubmit = (values: ReceptionistRequest) => {
+   const handleSubmit = (
+      values: ReceptionistRequest,
+      { resetForm }: FormikHelpers<ReceptionistRequest>,
+   ) => {
       if (id) {
          updateReceptionistMutate(
             { id, newData: values },
             {
                onSuccess: () => {
                   setOpen(false);
+                  resetForm();
                },
                onError: (error) => {
                   console.error("Error updating receptionists:", error);
@@ -84,6 +88,7 @@ function AddEditReceptionistsDialog({
          createReceptionistMutate(values, {
             onSuccess: () => {
                setOpen(false);
+               resetForm();
             },
             onError: (error) => {
                console.error("Error updating receptionists:", error);

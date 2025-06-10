@@ -13,7 +13,7 @@ import { useOptimisticMutation } from "@/hooks/useOptimisticMutation";
 import { createDoctor } from "@/services/staff/doctors/createDoctor";
 import { QUERY_KEYS } from "@/constants";
 import { updateDoctor } from "@/services/staff/doctors/updateDoctor";
-import { Form, Formik } from "formik";
+import { Form, Formik, FormikHelpers } from "formik";
 import { useCustomQuery } from "@/hooks/useCustomQuery";
 import { getOneDoctors } from "@/services/staff/doctors/getOneDoctor";
 import InputField from "@/components/form/InputField";
@@ -75,13 +75,17 @@ function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
       });
    const isPending = isCreatePending || isUpdatePending || isGettingDoctor;
    console.log(isGettingDoctor);
-   const handleSubmit = (values: DoctorRequest) => {
+   const handleSubmit = (
+      values: DoctorRequest,
+      { resetForm }: FormikHelpers<DoctorRequest>,
+   ) => {
       if (id) {
          updateDoctorMutate(
             { id, newData: values },
             {
                onSuccess: () => {
                   setOpen(false);
+                  resetForm();
                },
                onError: (error) => {
                   console.error("Error updating doctor:", error);
@@ -92,6 +96,7 @@ function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
          createDoctorMutate(values, {
             onSuccess: () => {
                setOpen(false);
+               resetForm();
             },
             onError: (error) => {
                console.error("Error updating doctor:", error);

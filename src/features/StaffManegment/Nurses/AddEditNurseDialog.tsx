@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { useOptimisticMutation } from "@/hooks/useOptimisticMutation";
 import { QUERY_KEYS } from "@/constants";
-import { Form, Formik } from "formik";
+import { Form, Formik, FormikHelpers } from "formik";
 import { useCustomQuery } from "@/hooks/useCustomQuery";
 import InputField from "@/components/form/InputField";
 import SelectField from "@/components/fields/SelectField";
@@ -75,13 +75,17 @@ function AddEditNurseDialog({ id, triggerButton }: AddEditNurseProps) {
       });
    const isPending = isCreatePending || isUpdatePending || isGettingNurse;
 
-   const handleSubmit = (values: NurseRequest) => {
+   const handleSubmit = (
+      values: NurseRequest,
+      { resetForm }: FormikHelpers<NurseRequest>,
+   ) => {
       if (id) {
          updateNurseMutate(
             { id, newData: values },
             {
                onSuccess: () => {
                   setOpen(false);
+                  resetForm();
                },
                onError: (error) => {
                   console.error("Error updating nurse:", error);
@@ -92,6 +96,7 @@ function AddEditNurseDialog({ id, triggerButton }: AddEditNurseProps) {
          createNurseMutate(values, {
             onSuccess: () => {
                setOpen(false);
+               resetForm();
             },
             onError: (error) => {
                console.error("Error updating nurse:", error);

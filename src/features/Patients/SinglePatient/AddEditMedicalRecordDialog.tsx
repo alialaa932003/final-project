@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { useOptimisticMutation } from "@/hooks/useOptimisticMutation";
 import { QUERY_KEYS } from "@/constants";
-import { Form, Formik } from "formik";
+import { Form, Formik, FormikHelpers } from "formik";
 import { useCustomQuery } from "@/hooks/useCustomQuery";
 import InputField from "@/components/form/InputField";
 import { useTranslation } from "react-i18next";
@@ -88,7 +88,10 @@ function AddEditMedicalRecordDialog({
    const isPending =
       isCreatePending || isUpdatePending || isGettingMedicalRecord;
 
-   const handleSubmit = (values: FormValues) => {
+   const handleSubmit = (
+      values: FormValues,
+      { resetForm }: FormikHelpers<FormValues>,
+   ) => {
       console.log("Submitting values:", values);
 
       if (id) {
@@ -104,6 +107,7 @@ function AddEditMedicalRecordDialog({
             {
                onSuccess: () => {
                   setOpen(false);
+                  resetForm();
                },
                onError: (error) => {
                   console.error("Error updating medical record:", error);
@@ -120,6 +124,7 @@ function AddEditMedicalRecordDialog({
             {
                onSuccess: () => {
                   setOpen(false);
+                  resetForm();
                },
                onError: (error) => {
                   console.error("Error updating medical record:", error);

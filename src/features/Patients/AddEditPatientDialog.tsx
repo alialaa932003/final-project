@@ -11,12 +11,11 @@ import {
 } from "@/components/ui/dialog";
 import { useOptimisticMutation } from "@/hooks/useOptimisticMutation";
 import { QUERY_KEYS } from "@/constants";
-import { Form, Formik } from "formik";
+import { Form, Formik, FormikHandlers, FormikHelpers } from "formik";
 import { useCustomQuery } from "@/hooks/useCustomQuery";
 import InputField from "@/components/form/InputField";
 import SelectField from "@/components/fields/SelectField";
 import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
 import { patientFormValidationSchema } from "./constants/patientFormValidationSchema";
 import { getOnePatient } from "@/services/patient-related/patient/getOnePatient";
 import { createPatient } from "@/services/patient-related/patient/createPatient";
@@ -69,13 +68,17 @@ function AddEditPatientDialog({ id, triggerButton }: AddEditNurseProps) {
       });
    const isPending = isCreatePending || isUpdatePending || isGettingPatient;
 
-   const handleSubmit = (values: PatientRequest) => {
+   const handleSubmit = (
+      values: PatientRequest,
+      { resetForm }: FormikHelpers<PatientRequest>,
+   ) => {
       if (id) {
          updatePatientMutate(
             { id, newData: values },
             {
                onSuccess: () => {
                   setOpen(false);
+                  resetForm();
                },
                onError: (error) => {
                   console.error("Error updating patient:", error);
@@ -86,6 +89,7 @@ function AddEditPatientDialog({ id, triggerButton }: AddEditNurseProps) {
          createPatientMutate(values, {
             onSuccess: () => {
                setOpen(false);
+               resetForm();
             },
             onError: (error) => {
                console.error("Error updating patient:", error);
