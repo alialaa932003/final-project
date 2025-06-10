@@ -12,7 +12,7 @@ export const getOneMedicalRecord =
          throw new Error("MedicalRecord ID is required");
       }
 
-      const res = await apiCall<StaffApiResponse<MedicalRecord>>(
+      const res = await apiCall<PatientApiResponse<MedicalRecord>>(
          `${BACKEND_SERVICES_BASE_ROUTES.PATIENT}/MedicalRecords/${id}`,
       );
 

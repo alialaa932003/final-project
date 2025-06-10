@@ -22,7 +22,7 @@ function PatientsList() {
          hasError={isError || patients.length === 0}
          errorText={t("no-patients-found")}
       >
-         <TableWrapper totalPages={data?.data.meta.last_page}>
+         <TableWrapper totalPages={data?.data.meta.lastPage}>
             <Table className="min-w-[70rem]">
                <TableHeader>
                   <TableRow>

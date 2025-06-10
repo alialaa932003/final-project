@@ -26,7 +26,7 @@ function MedicalRecordsList({ patientId }: MedicalRecordsListProps) {
          hasError={isError || medicalRecords.length === 0}
          errorText="No medical records found for this patient."
       >
-         <TableWrapper totalPages={data?.data.meta.last_page}>
+         <TableWrapper totalPages={data?.data.meta.lastPage}>
             <Table className="min-w-[70rem]">
                <TableHeader>
                   <TableRow>

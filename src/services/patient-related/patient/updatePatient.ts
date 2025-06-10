@@ -7,7 +7,7 @@ type UpdatePatientParams = {
 };
 
 export const updatePatient = async ({ id, newData }: UpdatePatientParams) => {
-   const res = await apiCall<StaffApiResponse<Patient>>(
+   const res = await apiCall<PatientApiResponse<Patient>>(
       `${BACKEND_SERVICES_BASE_ROUTES.PATIENT}/Patient`,
       {
          method: "PUT",

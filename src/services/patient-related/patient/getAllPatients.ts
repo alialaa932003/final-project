@@ -15,7 +15,7 @@ export const getAllPatients =
          search,
       });
 
-      const res = await apiCall<StaffApiResponseWithPagination<Patient[]>>(
+      const res = await apiCall<PatientApiResponseWithPagination<Patient[]>>(
          `${BACKEND_SERVICES_BASE_ROUTES.PATIENT}/Patient/get-all-patients?${params}`,
       );
 

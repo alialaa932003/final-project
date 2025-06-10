@@ -12,7 +12,7 @@ export const getOnePatient =
          throw new Error("Patient ID is required");
       }
 
-      const res = await apiCall<StaffApiResponse<Patient>>(
+      const res = await apiCall<PatientApiResponse<Patient>>(
          `${BACKEND_SERVICES_BASE_ROUTES.PATIENT}/Patient/${id}`,
          {
             headers: {
