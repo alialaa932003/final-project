@@ -158,6 +158,7 @@ function AddEditDoctorDialog({ id, triggerButton }: AddEditDoctorProps) {
                            disabled={isPending}
                            className="min-w-24"
                         />
+                        
                         <InputField
                            id="last_name"
                            name="last_name"
