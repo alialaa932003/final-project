@@ -21,6 +21,7 @@ function ConditionsSection({ conditions, onSubmit }: ConditionsSectionProps) {
          <div className="flex items-center gap-2">
             <h3 className="text-lg font-medium">Conditions</h3>
             <Button
+               type="button"
                size="icon"
                className="size-8 min-w-8"
                onClick={handleOpenAddForm}
