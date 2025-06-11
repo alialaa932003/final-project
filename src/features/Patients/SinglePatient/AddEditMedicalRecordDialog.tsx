@@ -27,14 +27,9 @@ import MedicationsSection from "./Medications/MedicationsSection";
 import { Separator } from "@/components/ui/separator";
 import ObservationsSection from "./Observations/ObservationsSection";
 
-type FormValues = Omit<MedicalRecordRequest, "cachedDoctorId"> & {
-   cachedDoctorId: { value: string; label: string };
-};
-
-const DEFAULT_INITIAL_VALUES: FormValues = {
+const DEFAULT_INITIAL_VALUES: MedicalRecordRequest = {
    diagnosis: "",
    notes: "",
-   cachedDoctorId: { value: "", label: "" },
    conditions: [],
    medications: [],
    observations: [],
@@ -62,17 +57,6 @@ function AddEditMedicalRecordDialog({
          },
       );
 
-   const { data: doctors, isLoading: isGettingDoctors } = useCustomQuery(
-      [QUERY_KEYS.DOCTORS_LOOKUP],
-      getAllDoctorsLookup(),
-   );
-   const doctorsOptions = isGettingDoctors
-      ? []
-      : doctors?.data.map((doctor) => ({
-           label: doctor.name,
-           value: doctor.id,
-        }));
-
    const { mutate: createMedicalRecordMutate, isPending: isCreatePending } =
       useOptimisticMutation({
          mutationFn: createMedicalRecord,
@@ -89,8 +73,8 @@ function AddEditMedicalRecordDialog({
       isCreatePending || isUpdatePending || isGettingMedicalRecord;
 
    const handleSubmit = (
-      values: FormValues,
-      { resetForm }: FormikHelpers<FormValues>,
+      values: MedicalRecordRequest,
+      { resetForm }: FormikHelpers<MedicalRecordRequest>,
    ) => {
       console.log("Submitting values:", values);
 
@@ -101,7 +85,6 @@ function AddEditMedicalRecordDialog({
                newData: {
                   patientId,
                   ...values,
-                  cachedDoctorId: values.cachedDoctorId.value,
                },
             },
             {
@@ -119,7 +102,6 @@ function AddEditMedicalRecordDialog({
             {
                patientId,
                ...values,
-               cachedDoctorId: values.cachedDoctorId.value,
             },
             {
                onSuccess: () => {
@@ -144,16 +126,6 @@ function AddEditMedicalRecordDialog({
                   DEFAULT_INITIAL_VALUES.diagnosis,
                notes:
                   medicalRecord?.data?.notes || DEFAULT_INITIAL_VALUES.notes,
-               cachedDoctorId: medicalRecord?.data?.cachedDoctorId
-                  ? {
-                       value: medicalRecord.data.cachedDoctorId,
-                       label:
-                          doctorsOptions.find(
-                             (doc) =>
-                                doc.value === medicalRecord.data.cachedDoctorId,
-                          )?.label || "",
-                    }
-                  : DEFAULT_INITIAL_VALUES.cachedDoctorId,
                conditions:
                   medicalRecord?.data?.conditions ||
                   DEFAULT_INITIAL_VALUES.conditions,
@@ -200,14 +172,7 @@ function AddEditMedicalRecordDialog({
                         disabled={isPending}
                         className="min-w-24"
                      />
-                     <SelectSearchField
-                        placeholder="Select a doctor"
-                        label="Doctor"
-                        name="cachedDoctorId"
-                        options={doctorsOptions}
-                        optionLabel="label"
-                        optionValue="value"
-                     />
+                     <Separator className="mb-4" />
                      <ConditionsSection
                         conditions={values.conditions}
                         onSubmit={(newCondition) => {
