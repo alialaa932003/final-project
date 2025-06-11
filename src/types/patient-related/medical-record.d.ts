@@ -4,7 +4,6 @@ interface MedicalRecord {
    notes: string;
    createdAt: string;
    patientId: string;
-   cachedDoctorId: string;
    medications: Medication[];
    conditions: Condition[];
    observations: Observation[];

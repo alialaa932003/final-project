@@ -25,6 +25,7 @@ function NoData({
          )}
       >
          <div className={cn("mb-4 text-gray-300", iconClassName)}>{icon}</div>
+
          <p className={cn("m-0 text-base text-gray-600", textClassName)}>
             {text}
          </p>
