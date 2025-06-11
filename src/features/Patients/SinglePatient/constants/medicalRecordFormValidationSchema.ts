@@ -10,9 +10,4 @@ export const medicalRecordFormValidationSchema = Yup.object().shape({
       .required("Notes are required")
       .min(5, "Notes must be at least 5 characters long")
       .max(500, "Notes must not exceed 500 characters"),
-
-   cachedDoctorId: Yup.object().shape({
-      value: Yup.string().required("Doctor is required"),
-      label: Yup.string().required("Doctor label is required"),
-   }),
 });

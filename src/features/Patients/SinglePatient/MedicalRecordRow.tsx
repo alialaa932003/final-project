@@ -24,7 +24,6 @@ function MedicalRecordRow({
          <TableCell>{medicalRecord.diagnosis}</TableCell>
          <TableCell>{medicalRecord.notes}</TableCell>
          <TableCell>{medicalRecord.patientId}</TableCell>
-         <TableCell>{medicalRecord.cachedDoctorId}</TableCell>
          <TableCell>
             <ConditionsListDialog
                conditions={medicalRecord.conditions}

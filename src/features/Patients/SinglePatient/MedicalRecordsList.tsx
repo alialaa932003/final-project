@@ -34,7 +34,6 @@ function MedicalRecordsList({ patientId }: MedicalRecordsListProps) {
                      <TableHead>Diagnosis</TableHead>
                      <TableHead>Notes</TableHead>
                      <TableHead>PatientId</TableHead>
-                     <TableHead>DoctorId</TableHead>
                      <TableHead>Medications</TableHead>
                      <TableHead>Conditions</TableHead>
                      <TableHead>Observations</TableHead>
