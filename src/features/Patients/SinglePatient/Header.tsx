@@ -2,8 +2,8 @@ import MainHeader from "@/components/MainHeader";
 import { useTranslation } from "react-i18next";
 import AddEditPatientDialog from "../AddEditPatientDialog";
 import { Button } from "@/components/ui/button";
-import { FaRegEdit } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { FaExternalLinkAlt, FaRegEdit } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 
 type HeaderProps = {
@@ -29,6 +29,18 @@ function Header({ id, patientName }: HeaderProps) {
                <MainHeader.Title title={patientName} />
             </div>
             <MainHeader.Actions>
+               <Link
+                  to={"https://ai.life-record.buildora.app/"}
+                  target="_blank"
+               >
+                  <Button
+                     variant={"outline"}
+                     className="flex items-center gap-2"
+                  >
+                     <FaExternalLinkAlt className="text-lg" />
+                     AI Platform
+                  </Button>
+               </Link>
                <AddEditPatientDialog
                   id={id}
                   triggerButton={

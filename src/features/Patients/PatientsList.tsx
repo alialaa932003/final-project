@@ -14,6 +14,7 @@ import PatientRow from "./PatientRow";
 function PatientsList() {
    const { t } = useTranslation("patients");
    const { data, isLoading, isError } = useGetAllPatients();
+
    const patients = data?.data.items || [];
 
    return (
