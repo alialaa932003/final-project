@@ -5,6 +5,9 @@ import SearchInput from "@/features/common/SearchInput";
 import { useTranslation } from "react-i18next";
 import { FiPlus } from "react-icons/fi";
 import AddEditPatientDialog from "./AddEditPatientDialog";
+import { FaLink } from "react-icons/fa6";
+import { Link } from "react-router-dom";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
 function Header() {
    const { t } = useTranslation(["global", "patients"]);
@@ -18,6 +21,18 @@ function Header() {
                description="Manage all patients in the system, including their medical records."
             />
             <MainHeader.Actions>
+               <Link
+                  to={"https://ai.life-record.buildora.app/"}
+                  target="_blank"
+               >
+                  <Button
+                     variant={"outline"}
+                     className="flex items-center gap-2"
+                  >
+                     <FaExternalLinkAlt className="text-lg" />
+                     AI Platform
+                  </Button>
+               </Link>
                <AddEditPatientDialog
                   triggerButton={
                      <Button className="flex items-center gap-2">
